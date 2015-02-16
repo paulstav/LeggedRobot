@@ -1,0 +1,532 @@
+###############################################################################
+#
+# IAR ELF Linker V7.20.2.7424/W32 for ARM                 12/Feb/2015  15:11:04
+# Copyright 2007-2014 IAR Systems AB.
+#
+#    Output file  =  
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\Exe\imu.out
+#    Map file     =  
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\List\imu.map
+#    Command line =  
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\Obj\ADIS16375.o
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\driverlib\ewarm\Exe\driverlib.a
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\Obj\imu.o
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\Obj\locator.o
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\Obj\lwiplib.o
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\Obj\pinout.o
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\Obj\spi.o
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\Obj\startup_ewarm.o
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\Obj\uartstdio.o
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\Obj\ustdlib.o
+#        --redirect _Printf=_PrintfFull --redirect _Scanf=_ScanfFull -o
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\Exe\imu.out
+#        --map
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\List\imu.map
+#        --config
+#        C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\imu.icf
+#        --semihosting --entry __iar_program_start --vfe
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A1":  place at start of [0x00000000-0x000fffff] { ro section .intvec };
+"P1":  place in [from 0x00000000 to 0x000fffff] { ro };
+"P2":  place in [from 0x20000000 to 0x2003ffff] { rw, block HEAP };
+
+  Section            Kind        Address     Size  Object
+  -------            ----        -------     ----  ------
+"A1":                                       0x200
+  .intvec            const    0x00000000    0x200  startup_ewarm.o [1]
+                            - 0x00000200    0x200
+
+"P1":                                      0x4cec
+  .text              ro code  0x00000200   0x2ffc  lwiplib.o [1]
+  .text              ro code  0x000031fc     0x76  ABImemcpy_unaligned.o [6]
+  .text              ro code  0x00003272     0x2e  copy_init3.o [6]
+  .text              ro code  0x000032a0     0x66  ABImemset.o [6]
+  .text              ro code  0x00003306     0x22  zero_init3.o [6]
+  .text              ro code  0x00003328     0x62  memcmp_unaligned.o [6]
+  .text              ro code  0x0000338c    0x252  emac.o [4]
+  .text              ro code  0x000035e0     0x84  interrupt.o [4]
+  .text              ro code  0x00003664    0x5cc  imu.o [1]
+  .text              ro code  0x00003c30    0x4bc  sysctl.o [4]
+  .text              ro code  0x000040ec      0x8  cpu.o [4]
+  .text              ro code  0x000040f4    0x348  ustdlib.o [1]
+  .text              ro code  0x0000443c    0x2dc  uartstdio.o [1]
+  .text              ro code  0x00004718    0x244  gpio.o [4]
+  .text              ro code  0x0000495c     0xa2  pwm.o [4]
+  .text              ro code  0x00004a00    0x228  pinout.o [1]
+  .text              ro code  0x00004c28     0x20  qei.o [4]
+  .text              ro code  0x00004c48     0x8a  timer.o [4]
+  .text              ro code  0x00004cd4     0x28  data_init.o [6]
+  .iar.init_table    const    0x00004cfc     0x24  - Linker created -
+  .rodata            const    0x00004d20     0x20  imu.o [1]
+  .text              ro code  0x00004d40     0x1e  startup_ewarm.o [1]
+  .text              ro code  0x00004d5e      0xc  cstartup_M.o [6]
+  .text              ro code  0x00004d6c     0x1a  fpinit_M.o [5]
+  .text              ro code  0x00004d88     0x1a  cmain.o [6]
+  .text              ro code  0x00004da2      0x4  low_level_init.o [3]
+  .text              ro code  0x00004da6      0x4  exit.o [3]
+  .text              ro code  0x00004dac      0xa  cexit.o [6]
+  .text              ro code  0x00004db8     0x14  exit.o [7]
+  .rodata            const    0x00004dcc     0x14  imu.o [1]
+  .rodata            const    0x00004de0     0x14  imu.o [1]
+  .rodata            const    0x00004df4     0x14  imu.o [1]
+  .rodata            const    0x00004e08     0x14  imu.o [1]
+  .rodata            const    0x00004e1c     0x14  uartstdio.o [1]
+  .rodata            const    0x00004e30     0x14  ustdlib.o [1]
+  .rodata            const    0x00004e44     0x10  imu.o [1]
+  .rodata            const    0x00004e54      0xc  imu.o [1]
+  .rodata            const    0x00004e60      0xc  lwiplib.o [1]
+  .rodata            const    0x00004e6c      0xc  lwiplib.o [1]
+  .rodata            const    0x00004e78      0xc  uartstdio.o [1]
+  .rodata            const    0x00004e84      0xc  uartstdio.o [1]
+  .rodata            const    0x00004e90      0x8  lwiplib.o [1]
+  .rodata            const    0x00004e98      0x8  lwiplib.o [1]
+  .rodata            const    0x00004ea0      0x8  uartstdio.o [1]
+  .rodata            const    0x00004ea8      0x8  ustdlib.o [1]
+  .rodata            const    0x00004eb0      0x4  lwiplib.o [1]
+  .rodata            const    0x00004eb4      0x4  uartstdio.o [1]
+  .rodata            const    0x00004eb8      0x4  ustdlib.o [1]
+  .rodata            const    0x00004ebc      0x0  zero_init3.o [6]
+  .rodata            const    0x00004ebc      0x0  copy_init3.o [6]
+  Initializer bytes  ro data  0x00004ebc     0x30  <for P2 s0>
+                            - 0x00004eec   0x4cec
+
+"P2":                                     0x19074
+  P2 s0                       0x20000000     0x30  <Init block>
+    .data            inited   0x20000000     0x10  lwiplib.o [1]
+    .data            inited   0x20000010     0x10  lwiplib.o [1]
+    .data            inited   0x20000020      0xc  lwiplib.o [1]
+    .data            inited   0x2000002c      0x2  lwiplib.o [1]
+  .bss               zero     0x20000030  0x1001c  lwiplib.o [1]
+  .bss               zero     0x2001004c   0x68f4  lwiplib.o [1]
+  .bss               zero     0x20016940    0x360  lwiplib.o [1]
+  .bss               zero     0x20016ca0    0x120  lwiplib.o [1]
+  .bss               zero     0x20016dc0     0xd8  lwiplib.o [1]
+  .bss               zero     0x20016e98     0xc8  lwiplib.o [1]
+  .bss               zero     0x20016f60     0x44  imu.o [1]
+  .bss               zero     0x20016fa4     0x30  lwiplib.o [1]
+  .bss               zero     0x20016fd4     0x14  lwiplib.o [1]
+  .bss               zero     0x20016fe8      0x4  imu.o [1]
+  .bss               zero     0x20016fec      0x4  imu.o [1]
+  .bss               zero     0x20016ff0      0x4  imu.o [1]
+  .bss               zero     0x20016ff4      0x4  imu.o [1]
+  .bss               zero     0x20016ff8      0x4  imu.o [1]
+  .bss               zero     0x20016ffc      0x4  imu.o [1]
+  .bss               zero     0x20017000      0x4  imu.o [1]
+  .bss               zero     0x20017004      0x4  imu.o [1]
+  .bss               zero     0x20017008      0x4  imu.o [1]
+  .bss               zero     0x2001700c      0x4  lwiplib.o [1]
+  .bss               zero     0x20017010      0x4  lwiplib.o [1]
+  .bss               zero     0x20017014      0x4  lwiplib.o [1]
+  .bss               zero     0x20017018      0x4  lwiplib.o [1]
+  .bss               zero     0x2001701c      0x4  lwiplib.o [1]
+  .bss               zero     0x20017020      0x4  lwiplib.o [1]
+  .bss               zero     0x20017024      0x4  lwiplib.o [1]
+  .bss               zero     0x20017028      0x4  lwiplib.o [1]
+  .bss               zero     0x2001702c      0x4  lwiplib.o [1]
+  .bss               zero     0x20017030      0x4  lwiplib.o [1]
+  .bss               zero     0x20017034      0x4  lwiplib.o [1]
+  .bss               zero     0x20017038      0x4  lwiplib.o [1]
+  .bss               zero     0x2001703c      0x4  lwiplib.o [1]
+  .bss               zero     0x20017040      0x4  lwiplib.o [1]
+  .bss               zero     0x20017044      0x4  lwiplib.o [1]
+  .bss               zero     0x20017048      0x4  lwiplib.o [1]
+  .bss               zero     0x2001704c      0x4  lwiplib.o [1]
+  .bss               zero     0x20017050      0x4  lwiplib.o [1]
+  .bss               zero     0x20017054      0x4  lwiplib.o [1]
+  .bss               zero     0x20017058      0x4  lwiplib.o [1]
+  .bss               zero     0x2001705c      0x4  lwiplib.o [1]
+  .bss               zero     0x20017060      0x4  lwiplib.o [1]
+  .bss               zero     0x20017064      0x4  lwiplib.o [1]
+  .bss               zero     0x20017068      0x4  uartstdio.o [1]
+  .bss               zero     0x2001706c      0x2  lwiplib.o [1]
+  .bss               zero     0x2001706e      0x1  imu.o [1]
+  .bss               zero     0x2001706f      0x1  imu.o [1]
+  .bss               zero     0x20017070      0x1  imu.o [1]
+  .bss               zero     0x20017071      0x1  imu.o [1]
+  .bss               zero     0x20017072      0x1  lwiplib.o [1]
+  .bss               zero     0x20017073      0x1  lwiplib.o [1]
+  .noinit            uninit   0x20017074   0x2000  startup_ewarm.o [1]
+                            - 0x20019074  0x19074
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address     Size
+          -------     ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x17044:
+          0x20000030  0x17044
+
+Copy (__iar_copy_init3)
+    1 source range, total size 0x30 (104% of destination):
+          0x00004ebc     0x30
+    1 destination range, total size 0x2e:
+          0x20000000     0x2e
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                 ro code  ro data  rw data
+    ------                 -------  -------  -------
+C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\Obj: [1]
+    imu.o                    1 484      140      108
+    lwiplib.o               12 284       90   94 210
+    pinout.o                   552
+    startup_ewarm.o             30      512    8 192
+    uartstdio.o                732       56        4
+    ustdlib.o                  840       32
+    ------------------------------------------------
+    Total:                  15 922      830  102 514
+
+command line: [2]
+    ------------------------------------------------
+    Total:
+
+dl7M_tln.a: [3]
+    exit.o                       4
+    low_level_init.o             4
+    ------------------------------------------------
+    Total:                       8
+
+driverlib.a: [4]
+    cpu.o                        8
+    emac.o                     594
+    gpio.o                     580
+    interrupt.o                132
+    pwm.o                      162
+    qei.o                       32
+    sysctl.o                 1 212
+    timer.o                    138
+    ------------------------------------------------
+    Total:                   2 858
+
+m7M_tlv.a: [5]
+    fpinit_M.o                  26
+    ------------------------------------------------
+    Total:                      26
+
+rt7M_tl.a: [6]
+    ABImemcpy_unaligned.o      118
+    ABImemset.o                102
+    cexit.o                     10
+    cmain.o                     26
+    copy_init3.o                46
+    cstartup_M.o                12
+    data_init.o                 40
+    memcmp_unaligned.o          98
+    zero_init3.o                34
+    ------------------------------------------------
+    Total:                     486
+
+shb_l.a: [7]
+    exit.o                      20
+    ------------------------------------------------
+    Total:                      20
+
+    Gaps                        16
+    Linker created                       38
+----------------------------------------------------
+    Grand Total:            19 336      868  102 514
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                      Address     Size  Type      Object
+-----                      -------     ----  ----      ------
+?main                   0x00004d89           Code  Gb  cmain.o [6]
+CPUcpsie                0x000040ed      0x8  Code  Gb  cpu.o [4]
+ConfigureUART           0x00003737     0x5a  Code  Gb  imu.o [1]
+DisplayIPAddress        0x00003665     0x2a  Code  Gb  imu.o [1]
+EMACAddrGet             0x00003457     0x1e  Code  Gb  emac.o [4]
+EMACConfigGet           0x00003427     0x30  Code  Gb  emac.o [4]
+EMACConfigSet           0x000033fb     0x2c  Code  Gb  emac.o [4]
+EMACFrameFilterSet      0x00003475      0x8  Code  Gb  emac.o [4]
+EMACIntClear            0x00003521     0x36  Code  Gb  emac.o [4]
+EMACIntEnable           0x000034b7     0x3e  Code  Gb  emac.o [4]
+EMACIntStatus           0x000034f5     0x2c  Code  Gb  emac.o [4]
+EMACPHYConfigSet        0x000033a1     0x5a  Code  Gb  emac.o [4]
+EMACPHYRead             0x00003581     0x2c  Code  Gb  emac.o [4]
+EMACPHYWrite            0x00003557     0x2a  Code  Gb  emac.o [4]
+EMACReset               0x0000338d     0x14  Code  Gb  emac.o [4]
+EMACRxDMADescriptorListSet
+                        0x00003485      0x6  Code  Gb  emac.o [4]
+EMACRxEnable            0x000034a9      0xe  Code  Gb  emac.o [4]
+EMACTimestampIntStatus  0x000035cf      0x8  Code  Gb  emac.o [4]
+EMACTxDMADescriptorListSet
+                        0x0000348b      0x8  Code  Gb  emac.o [4]
+EMACTxDMAPollDemand     0x0000347d      0x8  Code  Gb  emac.o [4]
+EMACTxEnable            0x00003493     0x16  Code  Gb  emac.o [4]
+FaultISR                0x00004d5b      0x2  Code  Lc  startup_ewarm.o [1]
+GPIODirModeSet          0x00004719     0x28  Code  Gb  gpio.o [4]
+GPIOPadConfigSet        0x00004741     0xfe  Code  Gb  gpio.o [4]
+GPIOPinConfigure        0x00004891     0x38  Code  Gb  gpio.o [4]
+GPIOPinTypeEthernetLED  0x0000485d      0x4  Code  Gb  gpio.o [4]
+GPIOPinTypePWM          0x00004861     0x14  Code  Gb  gpio.o [4]
+GPIOPinTypeQEI          0x00004875     0x14  Code  Gb  gpio.o [4]
+InitDMADescriptors      0x000027ed    0x17a  Code  Gb  lwiplib.o [1]
+IntDefaultHandler       0x00004d5d      0x2  Code  Lc  startup_ewarm.o [1]
+IntEnable               0x000035f1     0x56  Code  Gb  interrupt.o [4]
+IntMasterEnable         0x000035e1      0x8  Code  Gb  interrupt.o [4]
+NmiSR                   0x00004d59      0x2  Code  Lc  startup_ewarm.o [1]
+PWMGenConfigure         0x0000495d     0x2c  Code  Gb  pwm.o [4]
+PWMGenDisable           0x000049b9      0x6  Code  Gb  pwm.o [4]
+PWMGenEnable            0x000049b3      0x6  Code  Gb  pwm.o [4]
+PWMGenPeriodGet         0x0000499d     0x16  Code  Gb  pwm.o [4]
+PWMGenPeriodSet         0x00004989     0x14  Code  Gb  pwm.o [4]
+PWMOutputState          0x000049ed     0x12  Code  Gb  pwm.o [4]
+PWMPulseWidthSet        0x000049bf     0x1e  Code  Gb  pwm.o [4]
+PinoutSet               0x00004a01    0x1b4  Code  Gb  pinout.o [1]
+QEIConfigure            0x00004c33      0xe  Code  Gb  qei.o [4]
+QEIEnable               0x00004c29      0xa  Code  Gb  qei.o [4]
+QEIPositionGet          0x00004c41      0x4  Code  Gb  qei.o [4]
+QEIPositionSet          0x00004c45      0x4  Code  Gb  qei.o [4]
+Region$$Table$$Base     0x00004cfc            --   Gb  - Linker created -
+Region$$Table$$Limit    0x00004d20            --   Gb  - Linker created -
+ResetISR                0x00004d41     0x14  Code  Gb  startup_ewarm.o [1]
+Rpcb                    0x20016ff0      0x4  Data  Gb  imu.o [1]
+SetPWMDuty              0x000037d7     0x68  Code  Gb  imu.o [1]
+SetupPWM                0x00003791     0x46  Code  Gb  imu.o [1]
+SysCtlClockFreqSet      0x00003cdd    0x1f6  Code  Gb  sysctl.o [4]
+SysCtlDelay             0x00003ccd      0x8  Code  Gb  sysctl.o [4]
+SysCtlMOSCConfigSet     0x00003cd5      0x8  Code  Gb  sysctl.o [4]
+SysCtlPWMClockSet       0x00003edf      0xa  Code  Gb  sysctl.o [4]
+SysCtlPeripheralEnable  0x00003cb1      0x8  Code  Gb  sysctl.o [4]
+SysCtlPeripheralReady   0x00003c51      0x8  Code  Gb  sysctl.o [4]
+SysCtlPeripheralReset   0x00003c71     0x40  Code  Gb  sysctl.o [4]
+SysTickIntHandler       0x0000372d      0xa  Code  Gb  imu.o [1]
+Timer0IntHandler        0x0000383f     0x1c  Code  Gb  imu.o [1]
+TimerConfigure          0x00004c55     0x52  Code  Gb  timer.o [4]
+TimerEnable             0x00004c49      0xc  Code  Gb  timer.o [4]
+TimerIntEnable          0x00004cc9      0x4  Code  Gb  timer.o [4]
+TimerLoadSet            0x00004cb9     0x10  Code  Gb  timer.o [4]
+UARTStdioConfig         0x0000443d     0x56  Code  Gb  uartstdio.o [1]
+UARTprintf              0x00004701     0x18  Code  Gb  uartstdio.o [1]
+UARTvprintf             0x000044cb    0x214  Code  Gb  uartstdio.o [1]
+UARTwrite               0x00004493     0x38  Code  Gb  uartstdio.o [1]
+_SysCtlMemTimingGet     0x00003c31     0x20  Code  Lc  sysctl.o [4]
+__aeabi_memset          0x000032a1           Code  Gb  ABImemset.o [6]
+__as_entries_start      0xffffffff            --   Gb  command line/config [2]
+__as_table_start        0xffffffff            --   Gb  command line/config [2]
+__cmain                 0x00004d89           Code  Gb  cmain.o [6]
+__exit                  0x00004db9     0x14  Code  Gb  exit.o [7]
+__iar_Memset            0x000032a1           Code  Gb  ABImemset.o [6]
+__iar_Memset_word       0x000032a9           Code  Gb  ABImemset.o [6]
+__iar_copy_init3        0x00003273     0x2e  Code  Gb  copy_init3.o [6]
+__iar_data_init3        0x00004cd5     0x28  Code  Gb  data_init.o [6]
+__iar_init_vfp          0x00004d6d           Code  Gb  fpinit_M.o [5]
+__iar_program_start     0x00004d5f           Code  Gb  cstartup_M.o [6]
+__iar_unaligned___aeabi_memcpy
+                        0x000031fd           Code  Gb  ABImemcpy_unaligned.o [6]
+__iar_unaligned___aeabi_memcpy4
+                        0x0000321d           Code  Gb  ABImemcpy_unaligned.o [6]
+__iar_unaligned___aeabi_memcpy8
+                        0x0000321d           Code  Gb  ABImemcpy_unaligned.o [6]
+__iar_unaligned_memcmp  0x00003329           Code  Gb  memcmp_unaligned.o [6]
+__iar_zero_init3        0x00003307     0x22  Code  Gb  zero_init3.o [6]
+__low_level_init        0x00004da3      0x4  Code  Gb  low_level_init.o [3]
+__vector_table          0x00000000    0x200  Data  Gb  startup_ewarm.o [1]
+_call_main              0x00004d95           Code  Gb  cmain.o [6]
+_exit                   0x00004dad           Code  Gb  cexit.o [6]
+_main                   0x00004d9f           Code  Gb  cmain.o [6]
+arp_table               0x20016e98     0xc8  Data  Lc  lwiplib.o [1]
+arp_timer               0x00000eaf     0x18  Code  Lc  lwiplib.o [1]
+board_ip                0x20016ff8      0x4  Data  Gb  imu.o [1]
+controller_ip           0x20016ff4      0x4  Data  Gb  imu.o [1]
+current_header          0x20017034      0x4  Data  Gb  lwiplib.o [1]
+current_iphdr_dest      0x2001703c      0x4  Data  Gb  lwiplib.o [1]
+current_iphdr_src       0x20017038      0x4  Data  Gb  lwiplib.o [1]
+current_netif           0x20017030      0x4  Data  Gb  lwiplib.o [1]
+device_gateway          0x20017004      0x4  Data  Gb  imu.o [1]
+device_ip               0x20016ffc      0x4  Data  Gb  imu.o [1]
+device_subnet           0x20017000      0x4  Data  Gb  imu.o [1]
+etharp_arp_input        0x00001ffd    0x1c6  Code  Lc  lwiplib.o [1]
+etharp_cached_entry     0x20017073      0x1  Data  Lc  lwiplib.o [1]
+etharp_find_entry       0x00001d17    0x1b4  Code  Lc  lwiplib.o [1]
+etharp_free_entry       0x00001c2f     0x42  Code  Lc  lwiplib.o [1]
+etharp_output           0x0000224d    0x174  Code  Gb  lwiplib.o [1]
+etharp_output_to_arp_index
+                        0x000021d1     0x72  Code  Lc  lwiplib.o [1]
+etharp_query            0x000023cd    0x1b6  Code  Gb  lwiplib.o [1]
+etharp_raw              0x00002583    0x120  Code  Lc  lwiplib.o [1]
+etharp_request          0x000026a3     0x2e  Code  Gb  lwiplib.o [1]
+etharp_send_ip          0x00001ecb     0x3e  Code  Lc  lwiplib.o [1]
+etharp_tmr              0x00001c71     0xa6  Code  Gb  lwiplib.o [1]
+etharp_update_arp_entry
+                        0x00001f09     0xf4  Code  Lc  lwiplib.o [1]
+ethbroadcast            0x00004e90      0x8  Data  Gb  lwiplib.o [1]
+ethernet_input          0x000026d1     0xec  Code  Gb  lwiplib.o [1]
+ethzero                 0x00004e98      0x8  Data  Gb  lwiplib.o [1]
+exit                    0x00004da7      0x4  Code  Gb  exit.o [3]
+g_RxDescList            0x20000010     0x10  Data  Gb  lwiplib.o [1]
+g_StellarisIFData       0x20000020      0xc  Data  Lc  lwiplib.o [1]
+g_TxDescList            0x20000000     0x10  Data  Gb  lwiplib.o [1]
+g_pRxDescriptors        0x20016ca0    0x120  Data  Gb  lwiplib.o [1]
+g_pTxDescriptors        0x20016940    0x360  Data  Gb  lwiplib.o [1]
+g_pcHex                 0x00004eb4      0x4  Data  Lc  uartstdio.o [1]
+g_pcHex                 0x00004eb8      0x4  Data  Lc  ustdlib.o [1]
+g_pfnTimerHandler       0x20017048      0x4  Data  Gb  lwiplib.o [1]
+g_pppui32XTALtoVCO      0x00003f94    0x120  Data  Lc  sysctl.o [4]
+g_pui32EnRegs           0x00003650     0x14  Data  Lc  interrupt.o [4]
+g_pui32GPIOBaseAddrs    0x000048cc     0x90  Data  Lc  gpio.o [4]
+g_pui32VCOFrequencies   0x000040e4      0x8  Data  Lc  sysctl.o [4]
+g_pui32Xtals            0x00003f28     0x6c  Data  Lc  sysctl.o [4]
+g_sNetIF                0x20016fa4     0x30  Data  Lc  lwiplib.o [1]
+g_sXTALtoMEMTIM         0x000040b4     0x30  Data  Lc  sysctl.o [4]
+g_ui32ARPTimer          0x20017054      0x4  Data  Lc  lwiplib.o [1]
+g_ui32AbnormalInts      0x20017044      0x4  Data  Gb  lwiplib.o [1]
+g_ui32Base              0x20017068      0x4  Data  Lc  uartstdio.o [1]
+g_ui32GWAddr            0x20017064      0x4  Data  Lc  lwiplib.o [1]
+g_ui32HostTimer         0x20017050      0x4  Data  Lc  lwiplib.o [1]
+g_ui32IPAddr            0x2001705c      0x4  Data  Lc  lwiplib.o [1]
+g_ui32IPAddress         0x20016fe8      0x4  Data  Gb  imu.o [1]
+g_ui32IPMode            0x20017058      0x4  Data  Lc  lwiplib.o [1]
+g_ui32LocalTimer        0x2001704c      0x4  Data  Gb  lwiplib.o [1]
+g_ui32NetMask           0x20017060      0x4  Data  Lc  lwiplib.o [1]
+g_ui32NormalInts        0x20017040      0x4  Data  Gb  lwiplib.o [1]
+g_ui32SysClock          0x20016fec      0x4  Data  Gb  imu.o [1]
+g_ui32UARTBase          0x00004e78      0xc  Data  Lc  uartstdio.o [1]
+g_ui32UARTPeriph        0x00004e84      0xc  Data  Lc  uartstdio.o [1]
+gotIP                   0x2001706e      0x1  Data  Gb  imu.o [1]
+icmp_dest_unreach       0x00001683     0x14  Code  Gb  lwiplib.o [1]
+icmp_input              0x00001483    0x200  Code  Gb  lwiplib.o [1]
+icmp_send_response      0x00001697     0x9a  Code  Lc  lwiplib.o [1]
+inet_chksum             0x000017a5     0x16  Code  Gb  lwiplib.o [1]
+inet_chksum_pbuf        0x000017bb     0x5e  Code  Gb  lwiplib.o [1]
+ip4_addr_isbroadcast    0x00001bdf     0x50  Code  Gb  lwiplib.o [1]
+ip_addr_any             0x00004eb0      0x4  Data  Gb  lwiplib.o [1]
+ip_id                   0x2001706c      0x2  Data  Lc  lwiplib.o [1]
+ip_input                0x00001885    0x20e  Code  Gb  lwiplib.o [1]
+ip_output               0x00001b8d     0x52  Code  Gb  lwiplib.o [1]
+ip_output_if            0x00001aa1     0xea  Code  Gb  lwiplib.o [1]
+ip_route                0x00001819     0x60  Code  Gb  lwiplib.o [1]
+lfree                   0x20017014      0x4  Data  Lc  lwiplib.o [1]
+lwIPEthernetIntHandler  0x0000312b     0x50  Code  Gb  lwiplib.o [1]
+lwIPHostTimerHandler    0x0000368f     0x9e  Code  Gb  imu.o [1]
+lwIPInit                0x00003045     0xce  Code  Gb  lwiplib.o [1]
+lwIPLocalIPAddrGet      0x0000317b      0x6  Code  Gb  lwiplib.o [1]
+lwIPPrivateInit         0x00002fd5     0x66  Code  Lc  lwiplib.o [1]
+lwIPServiceTimers       0x00002f95     0x3c  Code  Lc  lwiplib.o [1]
+lwIPTimer               0x00003113     0x18  Code  Gb  lwiplib.o [1]
+lwip_htonl              0x0000021b     0x18  Code  Gb  lwiplib.o [1]
+lwip_htons              0x00000201      0xc  Code  Gb  lwiplib.o [1]
+lwip_init               0x00000233     0x1c  Code  Gb  lwiplib.o [1]
+lwip_ntohs              0x0000020d      0xe  Code  Gb  lwiplib.o [1]
+lwip_standard_chksum    0x0000173d     0x68  Code  Lc  lwiplib.o [1]
+lwip_stats              0x20016dc0     0xd8  Data  Gb  lwiplib.o [1]
+main                    0x00003861    0x25e  Code  Gb  imu.o [1]
+mem_free                0x00000349     0x7a  Code  Gb  lwiplib.o [1]
+mem_init                0x000002db     0x6e  Code  Gb  lwiplib.o [1]
+mem_malloc              0x00000539    0x160  Code  Gb  lwiplib.o [1]
+mem_trim                0x000003c3    0x176  Code  Gb  lwiplib.o [1]
+memp_free               0x00000801     0x4c  Code  Gb  lwiplib.o [1]
+memp_init               0x00000699     0xb2  Code  Gb  lwiplib.o [1]
+memp_malloc             0x0000074b     0xb6  Code  Gb  lwiplib.o [1]
+memp_memory             0x2001004c   0x68f4  Data  Lc  lwiplib.o [1]
+memp_num                0x00004e6c      0xc  Data  Lc  lwiplib.o [1]
+memp_sizes              0x00004e60      0xc  Data  Lc  lwiplib.o [1]
+memp_tab                0x20016fd4     0x14  Data  Lc  lwiplib.o [1]
+netif_add               0x0000084f     0x76  Code  Gb  lwiplib.o [1]
+netif_default           0x2001701c      0x4  Data  Gb  lwiplib.o [1]
+netif_init              0x0000084d      0x2  Code  Gb  lwiplib.o [1]
+netif_list              0x20017018      0x4  Data  Gb  lwiplib.o [1]
+netif_num               0x20017072      0x1  Data  Lc  lwiplib.o [1]
+netif_set_addr          0x000008c5     0x24  Code  Gb  lwiplib.o [1]
+netif_set_default       0x00000913      0x8  Code  Gb  lwiplib.o [1]
+netif_set_gw            0x000008f7      0xe  Code  Gb  lwiplib.o [1]
+netif_set_ipaddr        0x000008e9      0xe  Code  Gb  lwiplib.o [1]
+netif_set_link_down     0x00000995     0x16  Code  Gb  lwiplib.o [1]
+netif_set_link_up       0x00000963     0x32  Code  Gb  lwiplib.o [1]
+netif_set_netmask       0x00000905      0xe  Code  Gb  lwiplib.o [1]
+netif_set_up            0x00000931     0x32  Code  Gb  lwiplib.o [1]
+next_timeout            0x20017024      0x4  Data  Lc  lwiplib.o [1]
+pData                   0x20016f60     0x44  Data  Gb  imu.o [1]
+pbuf_alloc              0x000009ab    0x190  Code  Gb  lwiplib.o [1]
+pbuf_cat                0x00000cf3     0x2e  Code  Gb  lwiplib.o [1]
+pbuf_chain              0x00000d21     0x16  Code  Gb  lwiplib.o [1]
+pbuf_clen               0x00000cc1     0x14  Code  Gb  lwiplib.o [1]
+pbuf_copy               0x00000d37     0xd2  Code  Gb  lwiplib.o [1]
+pbuf_free               0x00000c41     0x80  Code  Gb  lwiplib.o [1]
+pbuf_header             0x00000ba9     0x98  Code  Gb  lwiplib.o [1]
+pbuf_realloc            0x00000b3b     0x6e  Code  Gb  lwiplib.o [1]
+pbuf_ref                0x00000cd5     0x1e  Code  Gb  lwiplib.o [1]
+plug_holes              0x0000024f     0x8c  Code  Lc  lwiplib.o [1]
+pui32Stack              0x20017074   0x2000  Data  Lc  startup_ewarm.o [1]
+pwmValue                0x20017071      0x1  Data  Gb  imu.o [1]
+ram                     0x2001700c      0x4  Data  Lc  lwiplib.o [1]
+ram_end                 0x20017010      0x4  Data  Lc  lwiplib.o [1]
+ram_heap                0x20000030  0x1001c  Data  Gb  lwiplib.o [1]
+raw_input               0x00000e09     0x98  Code  Gb  lwiplib.o [1]
+raw_pcbs                0x20017020      0x4  Data  Lc  lwiplib.o [1]
+sendEncoder             0x2001706f      0x1  Data  Gb  imu.o [1]
+setPWMvalue             0x20017070      0x1  Data  Gb  imu.o [1]
+stats_init              0x00000ead      0x2  Code  Gb  lwiplib.o [1]
+sys_arch_protect        0x000027c5      0xe  Code  Gb  lwiplib.o [1]
+sys_arch_unprotect      0x000027d3     0x14  Code  Gb  lwiplib.o [1]
+sys_now                 0x000027bd      0x8  Code  Gb  lwiplib.o [1]
+sys_timeout             0x00000eed     0xba  Code  Gb  lwiplib.o [1]
+sys_timeouts_init       0x00000ecd     0x1c  Code  Gb  lwiplib.o [1]
+timeouts_last_time      0x20017028      0x4  Data  Lc  lwiplib.o [1]
+timerEncoder            0x20017008      0x4  Data  Gb  imu.o [1]
+tivaif_check_pbuf       0x00002a41     0x58  Code  Lc  lwiplib.o [1]
+tivaif_hwinit           0x00002967     0xda  Code  Lc  lwiplib.o [1]
+tivaif_init             0x00002e91     0x36  Code  Gb  lwiplib.o [1]
+tivaif_interrupt        0x00002f4d     0x48  Code  Gb  lwiplib.o [1]
+tivaif_process_phy_interrupt
+                        0x00002ec7     0x86  Code  Gb  lwiplib.o [1]
+tivaif_process_transmit
+                        0x00002c1f     0x7e  Code  Lc  lwiplib.o [1]
+tivaif_receive          0x00002c9d    0x1f4  Code  Lc  lwiplib.o [1]
+tivaif_transmit         0x00002a99    0x186  Code  Lc  lwiplib.o [1]
+udp_bind                0x000013c3     0x96  Code  Gb  lwiplib.o [1]
+udp_init                0x00000fb1      0x2  Code  Gb  lwiplib.o [1]
+udp_init_r              0x00003abf     0x2a  Code  Gb  imu.o [1]
+udp_input               0x00001015    0x256  Code  Gb  lwiplib.o [1]
+udp_new                 0x0000145f     0x24  Code  Gb  lwiplib.o [1]
+udp_new_port            0x00000fb3     0x5c  Code  Lc  lwiplib.o [1]
+udp_pcbs                0x2001702c      0x4  Data  Gb  lwiplib.o [1]
+udp_port                0x2000002c      0x2  Data  Lc  lwiplib.o [1]
+udp_receive_data        0x00003aed     0x34  Code  Gb  imu.o [1]
+udp_recv                0x00001459      0x6  Code  Gb  lwiplib.o [1]
+udp_send_data           0x00003b21     0x42  Code  Gb  imu.o [1]
+udp_sendto              0x0000126b     0x4a  Code  Gb  lwiplib.o [1]
+udp_sendto_if           0x000012b5    0x10e  Code  Gb  lwiplib.o [1]
+usprintf                0x00004411     0x24  Code  Gb  ustdlib.o [1]
+ustrncpy                0x000040f5     0x2c  Code  Gb  ustdlib.o [1]
+uvsnprintf              0x00004121    0x2f0  Code  Gb  ustdlib.o [1]
+
+
+[1] = C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\ewarm\Obj
+[2] = command line
+[3] = dl7M_tln.a
+[4] = driverlib.a
+[5] = m7M_tlv.a
+[6] = rt7M_tl.a
+[7] = shb_l.a
+
+   19 336 bytes of readonly  code memory
+      868 bytes of readonly  data memory
+  102 514 bytes of readwrite data memory
+
+Errors: none
+Warnings: none

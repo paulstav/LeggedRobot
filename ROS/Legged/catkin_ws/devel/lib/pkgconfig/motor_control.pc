@@ -1,0 +1,8 @@
+prefix=/home/legged/Legged/catkin_ws/devel
+
+Name: motor_control
+Description: Description of motor_control
+Version: 1.0.0
+Cflags: -I/home/legged/Legged/catkin_ws/devel/include
+Libs: -L/home/legged/Legged/catkin_ws/devel/lib 
+Requires: message_runtime

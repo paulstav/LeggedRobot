@@ -1,0 +1,2 @@
+motor_control
+-DCATKIN_DEVEL_PREFIX=/home/legged/Legged/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/legged/Legged/catkin_ws/install -G Unix Makefiles
