@@ -479,12 +479,12 @@ main(void)
     {
       if(setPWMvalue == true)
       {
-        UARTprintf("Setting pwm to %d\n",pwmValue);
+        //UARTprintf("Setting pwm to %d\n",pwmValue);
         SetPWMDuty(pwmValue);
         setPWMvalue = false;
-        sendUDP[0] = 0x41;
+        /*sendUDP[0] = 0x41;
         sendUDP[1] = pwmValue;
-        udp_send_data((void*)sendUDP,2);
+        udp_send_data((void*)sendUDP,2);*/
       }
       
       if(sendEncoder == true)

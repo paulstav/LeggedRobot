@@ -17,6 +17,9 @@
 
 #define ASYNC
 
+#define PORT_BRD 2013
+#define BRD_IP "147.102.100.130"
+
 #include "ros/ros.h"
 #include "motor_control/Encoder.h"
 #include "motor_control/PWM.h"
@@ -27,6 +30,10 @@ bool gotMsg = false;
 int sock;
 uint32_t encoderPos = 0;
 int msgs = 0;
+struct sockaddr_in si_pwm;
+ssize_t SendPWMBytes = 2;
+char SendBufferPWM[6];
+int broad, slen=sizeof(si_pwm);
 
 void error(char *s)
 {
@@ -89,6 +96,9 @@ int enable_asynch(int sock)
 
 void pwmCallback(const motor_control::PWM::ConstPtr& msg)
 {
+	SendBufferPWM[1] = (int8_t)msg->pwm_duty;
+	if (sendto(broad, SendBufferPWM, SendPWMBytes, 0, (struct sockaddr *)&si_pwm, slen)==-1)
+		error("sendto()");
 	msgs++;
 	if(msgs == 5000)
 	{
@@ -104,6 +114,21 @@ int main(int argc, char **argv)
   char buf[BUFLEN], strout[28];
   
   msg_count = 0;
+  memset(SendBufferPWM, 0, 6);
+  
+  if ((broad=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP))==-1)
+       error("socket");
+	   
+  memset((char *) &si_pwm, 0, sizeof(si_pwm));
+  si_pwm.sin_family = AF_INET;
+  si_pwm.sin_port = htons(PORT_BRD);
+   
+  if (inet_aton(BRD_IP, &si_pwm.sin_addr)==0) {
+       error("inet_aton() failed\n");
+       exit(1);
+  }
+  
+  SendBufferPWM[0] = 0x31;
 
   ros::init(argc, argv, "motor_controller");
   ros::NodeHandle n;
