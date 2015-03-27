@@ -109,9 +109,6 @@ include_directories(
 add_executable(motor_controller src/motor_controller.cpp)
 target_link_libraries(motor_controller ${catkin_LIBRARIES})
 add_dependencies(motor_controller motor_control_generate_messages_cpp)
-add_executable(motor_pid src/motor_pid.cpp)
-target_link_libraries(motor_pid ${catkin_LIBRARIES})
-add_dependencies(motor_pid motor_control_generate_messages_cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes

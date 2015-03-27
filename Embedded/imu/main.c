@@ -392,21 +392,21 @@ main(void)
     device_ip = 0x93666482;
     IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x82);
 #elif defined(BOARD_FR)
-    // 147.102.100.130
-    device_ip = 0x93666482;
-    IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x82);
-#elif defined(BOARD_BL)
     // 147.102.100.131
     device_ip = 0x93666482;
     IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x83);
-#elif defined(BOARD_BR)
+#elif defined(BOARD_BL)
     // 147.102.100.132
     device_ip = 0x93666482;
     IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x84);
-#else
+#elif defined(BOARD_BR)
     // 147.102.100.133
     device_ip = 0x93666482;
     IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x85);
+#else
+    // 147.102.100.130
+    device_ip = 0x93666482;
+    IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x82);
 #endif
 
     // 255.255.255.0

@@ -5,8 +5,8 @@
 
 
 #include "ros/ros.h"
-#include "motor_control/Encoder.h"
-#include "motor_control/PWM.h"
+#include "motor_control/FL_Encoder.h"
+#include "motor_control/FL_PWM.h"
 
 #include <sstream>
 
@@ -18,7 +18,7 @@ double moveVelocity;
 int32_t desiredPos;
 int msgs = 0;
 bool sendMsg = false;
-motor_control::PWM pwm_msg;
+motor_control::FL_PWM pwm_msg;
 
 void InitErrors()
 {
@@ -60,7 +60,7 @@ int8_t PID_controller (double P_Gain, double I_Gain, double D_Gain, double satur
 	return output;
 }
 
-void encoderCallback(const motor_control::Encoder::ConstPtr& msg)
+void encoderCallback(const motor_control::FL_Encoder::ConstPtr& msg)
 {
  //ROS_INFO("I heard: [%u]", msg->encoder);
  //msgs++;
@@ -76,7 +76,7 @@ void encoderCallback(const motor_control::Encoder::ConstPtr& msg)
 int main(int argc, char **argv)
 {
   int i, msg_count;
-  motor_control::Encoder encoder_msg;
+  motor_control::FL_Encoder encoder_msg;
   moveVelocity = SATURATION_POS;
   desiredPos = 102000;
   
@@ -84,13 +84,13 @@ int main(int argc, char **argv)
   
   InitErrors();
 
-  ros::init(argc, argv, "motor_pid");
+  ros::init(argc, argv, "FL_motor_pid");
   ros::NodeHandle n;
-  ros::Publisher motor_pid_pub = n.advertise<motor_control::PWM>("pwm_feedback", 1000);
-  ros::Subscriber motor_controller_sub = n.subscribe("encoder_feedback", 1000, encoderCallback);
+  ros::Publisher motor_pid_pub = n.advertise<motor_control::FL_PWM>("FL_pwm_feedback", 1000);
+  ros::Subscriber motor_controller_sub = n.subscribe("FL_encoder_feedback", 1000, encoderCallback);
   ros::Rate loop_rate(12000);
   
-  ROS_INFO("Staring communication with Motor Controller node.");
+  ROS_INFO("Staring communication with FL Motor Controller node.");
   while (ros::ok())
   {
 	if(sendMsg)
