@@ -169,6 +169,7 @@
         <option>
           <name>CCDefines</name>
           <state>ewarm</state>
+          <state>UART_BUFFERED</state>
           <state>PART_TM4C1294NCPDT</state>
           <state>TARGET_IS_TM4C129_RA0</state>
         </option>
@@ -291,7 +292,7 @@
         </option>
         <option>
           <name>PreInclude</name>
-          <state></state>
+          <state>C:\ti\TivaWare_C_Series-2.1.0.12573\examples\boards\ek-tm4c1294xl\imu\main.h</state>
         </option>
         <option>
           <name>CompilerMisraOverride</name>
@@ -968,25 +969,10 @@
   <group>
     <name>Source</name>
     <file>
-      <name>$PROJ_DIR$\ADIS16364.c</name>
-      <excluded>
-        <configuration>Debug</configuration>
-      </excluded>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\ADIS16364.h</name>
-      <excluded>
-        <configuration>Debug</configuration>
-      </excluded>
-    </file>
-    <file>
       <name>$PROJ_DIR$\ADIS16375.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\ADIS16375.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\imu.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\utils\locator.c</name>
@@ -996,6 +982,12 @@
     </file>
     <file>
       <name>$PROJ_DIR$\lwipopts.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\main.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\main.h</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\drivers\pinout.c</name>

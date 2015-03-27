@@ -36,7 +36,7 @@ uint8_t SpiTransfer(uint8_t _byte)
 	return (uint8_t) rbyte;
 }
 
-uint16_t SpiTransfer16(uint16_t _byte)
+int16_t SpiTransfer16(int16_t _byte)
 {
 	uint32_t rbyte = 0;
         
@@ -54,7 +54,7 @@ uint16_t SpiTransfer16(uint16_t _byte)
 
 	MAP_SSIDataGet(IMU_SPI_SSI_BASE, &rbyte);
 
-	return (uint8_t) rbyte;
+	return (int16_t) rbyte;
 }
 
 
@@ -103,24 +103,38 @@ void init_spi16()
   unsigned long tmpC = 0;
   
   MAP_SysCtlPeripheralEnable(IMU_SPI_PERIPH);
+  
+  MAP_SysCtlPeripheralEnable(IMU_SPI_PORT_PERIPH);
 
   //SysCtlPeripheralReset(IMU_SPI_PERIPH);
 
   MAP_SysCtlPeripheralEnable(IMU_CS_PERIPH);
+  
+  MAP_SysCtlPeripheralEnable(IMU_RST_PERIPH);
 
   //SysCtlPeripheralReset(IMU_CS_PERIPH);
+  
+  // CS Setup
+  MAP_GPIOPinTypeGPIOOutput(IMU_CS_PORT_BASE, IMU_CS_PIN);
+  MAP_GPIOPadConfigSet(IMU_CS_PORT_BASE, IMU_CS_PIN, GPIO_STRENGTH_8MA,
+                                GPIO_PIN_TYPE_STD_WPU);
+  MAP_GPIOPinWrite(IMU_CS_PORT_BASE, IMU_CS_PIN, IMU_CS_PIN);
+  
+  MAP_GPIOPadConfigSet(IMU_SPI_PORT_BASE, IMU_SPI_CLK_PIN, GPIO_STRENGTH_8MA,
+                                GPIO_PIN_TYPE_STD_WPD);
+  
+  // RST Setup
+  MAP_GPIOPinTypeGPIOOutput(IMU_RST_PORT_BASE, IMU_RST_PIN);
+  MAP_GPIOPadConfigSet(IMU_RST_PORT_BASE, IMU_RST_PIN, GPIO_STRENGTH_8MA,
+                                GPIO_PIN_TYPE_STD_WPU);
+  MAP_GPIOPinWrite(IMU_RST_PORT_BASE, IMU_RST_PIN, IMU_RST_PIN);
+ 
 
   GPIOPinConfigure(IMU_SPI_CLK_MUX);
   GPIOPinConfigure(IMU_SPI_RX_MUX);
   GPIOPinConfigure(IMU_SPI_TX_MUX);
 
-
-
   MAP_GPIOPinTypeSSI(IMU_SPI_PORT_BASE, IMU_SPI_TX_PIN | IMU_SPI_RX_PIN | IMU_SPI_CLK_PIN);
-  MAP_GPIOPinTypeGPIOOutput(IMU_CS_PORT_BASE, IMU_CS_PIN);
-  MAP_GPIOPadConfigSet(IMU_CS_PORT_BASE, IMU_CS_PIN, GPIO_STRENGTH_8MA,
-                                GPIO_PIN_TYPE_STD_WPD);
-  MAP_GPIOPinWrite(IMU_CS_PORT_BASE, IMU_CS_PIN, IMU_CS_PIN);
 
   //MAP_SysCtlPeripheralReset(IMU_SPI_PERIPH);
 
@@ -140,38 +154,18 @@ void init_spi16()
 void IMU_CS(uint8_t HighLow)
 {
 	if(!HighLow)
-		MAP_GPIOPinWrite(IMU_CS_PORT_BASE, IMU_CS_PIN, ~IMU_CS_PIN);
+		MAP_GPIOPinWrite(IMU_CS_PORT_BASE, IMU_CS_PIN, 0);
 	else
 		MAP_GPIOPinWrite(IMU_CS_PORT_BASE, IMU_CS_PIN, IMU_CS_PIN);
 }
 
-
-/*
-void SpiPut(uint8_t _byte)
+void IMU_RST(uint8_t HighLow)
 {
-	//uint32_t rbyte = 0;
-
-	SSIDataPut(IMU_SPI_SSI_BASE, _byte);
-
-	while(SSIBusy(IMU_SPI_SSI_BASE))
-	{
-		SysCtlDelay(1);
-	}
+	if(!HighLow)
+		MAP_GPIOPinWrite(IMU_RST_PORT_BASE, IMU_RST_PIN, 0);
+	else
+		MAP_GPIOPinWrite(IMU_RST_PORT_BASE, IMU_RST_PIN, IMU_RST_PIN);
 }
-
-uint8_t SpiGet()
-{
-	uint32_t rbyte = 0;
-	SSIDataGet(IMU_SPI_SSI_BASE, &rbyte);
-
-	while(SSIBusy(IMU_SPI_SSI_BASE))
-	{
-	SysCtlDelay(1);
-	}
-
-	return (uint8_t) rbyte;
-}
-*/
 
 
 

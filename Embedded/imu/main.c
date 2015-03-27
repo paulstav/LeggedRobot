@@ -26,7 +26,6 @@
 #include "driverlib/qei.h"
 #include "driverlib/timer.h"
 
-
 #include "ADIS16375.h"
 #include "spi.h"
 
@@ -68,6 +67,7 @@ __error__(char *pcFilename, uint32_t ui32Line)
 }
 #endif
 
+#ifdef ENABLE_ETHERNET
 struct udp_pcb * udp_init_s(void);
 struct udp_pcb * udp_init_r(void);
 void udp_send_data(void* sbuf, u16_t len);
@@ -79,15 +79,19 @@ volatile uint8_t gotIP = 0;
 unsigned long device_ip,device_subnet,device_gateway;
 struct pbuf *pi;
 char pData[68];
+#endif
+
 bool sendEncoder, setPWMvalue;
-uint32_t timerEncoder = 0;
 int8_t pwmValue;
 
-//*****************************************************************************
-//
-// Display an lwIP type IP Address.
-//
-//*****************************************************************************
+#ifdef ENABLE_IMU    
+ADIS16375 myIMU;
+uint8_t imuDataReady = 0;
+int16_t accel_x, accel_y, accel_z, gyro_x, gyro_y, gyro_z, temp_out;
+double dval_x, dval_y, dval_z, temp;
+#endif
+
+#ifdef ENABLE_ETHERNET
 void
 DisplayIPAddress(uint32_t ui32Addr)
 {
@@ -102,14 +106,14 @@ DisplayIPAddress(uint32_t ui32Addr)
     //
     // Display the string.
     //
+#ifdef ENABLE_UART
     UARTprintf(pcBuf);
+#endif
+    
 }
+#endif
 
-//*****************************************************************************
-//
-// Required by lwIP library to support any host-related timer functions.
-//
-//*****************************************************************************
+#ifdef ENABLE_ETHERNET
 void
 lwIPHostTimerHandler(void)
 {
@@ -148,10 +152,11 @@ lwIPHostTimerHandler(void)
             //
             // Display the new IP address.
             //
+#ifdef ENABLE_UART
             UARTprintf("IP Address: ");
             DisplayIPAddress(ui32NewIPAddress);
-            //UARTprintf("\nOpen a browser and enter the IP address.\n");
             UARTprintf("\n");
+#endif
             gotIP = 1;
         }
 
@@ -189,6 +194,7 @@ lwIPHostTimerHandler(void)
         }
     }
 }
+#endif
 
 //*****************************************************************************
 //
@@ -201,8 +207,9 @@ SysTickIntHandler(void)
     //
     // Call the lwIP timer handler.
     //
+#ifdef ENABLE_ETHERNET
     lwIPTimer(SYSTICKMS);
-    
+#endif
     //timerEncoder++;
     //if(timerEncoder == 10)
     //{
@@ -211,6 +218,7 @@ SysTickIntHandler(void)
     //}
 }
 
+#ifdef ENABLE_UART
 void
 ConfigureUART(void)
 {
@@ -235,13 +243,19 @@ ConfigureUART(void)
     // Initialize the UART for console I/O.
     //
     UARTStdioConfig(0, 115200, g_ui32SysClock);
+    
+#ifdef UART_BUFFERED
+    UARTEchoSet(false);
+#endif
 }
+#endif
 
 void cyclesdelay(unsigned long cycles)
 {
 	MAP_SysCtlDelay(cycles); // Tiva C series specific
 }
 
+#ifdef ENABLE_MOTOR
 void SetupPWM()
 {
   SysCtlPWMClockSet(SYSCTL_PWMDIV_1);
@@ -312,24 +326,66 @@ Timer0IntHandler(void)
     sendEncoder = true;
 
 }
+#endif
+
+#ifdef ENABLE_IMU
+void IntADIS16375(void)
+{
+  uint32_t status;
+  
+  status = GPIOIntStatus(IMU_IRQ_PORT_BASE, true);
+  
+  imuDataReady = 1;
+  
+  /*accel_x = ADIS16375_read(&myIMU, 16, ADIS16375_REG_X_ACCEL_OUT);
+  accel_y = ADIS16375_read(&myIMU, 16, ADIS16375_REG_Y_ACCEL_OUT);
+  accel_z = ADIS16375_read(&myIMU, 16, ADIS16375_REG_Z_ACCEL_OUT);*/
+  
+  ADIS16375_readAccData(&myIMU, &accel_x, &accel_y, &accel_z);
+  ADIS16375_readGyroData(&myIMU, &gyro_x, &gyro_y, &gyro_z);
+  
+  GPIOIntClear(IMU_IRQ_PORT_BASE, status);
+}
+
+
+void ConfigureADIS16375Int(void)
+{
+  SysCtlPeripheralEnable(IMU_IRQ_PERIPH);
+  GPIOPinTypeGPIOInput(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
+  GPIOIntTypeSet(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN, GPIO_RISING_EDGE);
+  GPIOIntRegister(IMU_IRQ_PORT_BASE, IntADIS16375);
+  //GPIOIntEnable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
+  IntEnable(IMU_IRQ_INT);
+}
+#endif
 
 int
 main(void)
 {
-    ADIS16375 myIMU;
+   uint32_t status;
+   uint8_t charUART[128];
+    
+#ifdef ENABLE_UART
+    unsigned char uCom = 0;
+#endif
+    
+#ifdef ENABLE_ETHERNET
     uint32_t ui32User0, ui32User1;
     uint8_t pui8MACArray[8];
-    uint32_t encoderPos = 0;
     uint8_t sendUDP[128];
     uint32_t sends = 0;
-
-    gotIP = 0;
-    timerEncoder = 0;
+#endif
     
+    uint32_t encoderPos = 0;   
+
+#ifdef ENABLE_MOTOR
     sendEncoder = false;
     setPWMvalue = false;
     pwmValue = 0;
-    
+#endif
+
+#ifdef ENABLE_ETHERNET
+    gotIP = 0;
     // 147.102.100.130
     device_ip = 0x93666482;
 
@@ -349,79 +405,46 @@ main(void)
     IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x82);
 
     memset(pData,0x31,68);
+#endif
     
-    //
-    // Make sure the main oscillator is enabled because this is required by
-    // the PHY.  The system must have a 25MHz crystal attached to the OSC
-    // pins. The SYSCTL_MOSC_HIGHFREQ parameter is used when the crystal
-    // frequency is 10MHz or higher.
-    //
     SysCtlMOSCConfigSet(SYSCTL_MOSC_HIGHFREQ);
     
-    //
-    // Set the clocking to run directly from the crystal at 120MHz.
-    //
     g_ui32SysClock = MAP_SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
                                              SYSCTL_OSC_MAIN |
                                              SYSCTL_USE_PLL |
                                              SYSCTL_CFG_VCO_480), 120000000);
-
-    //
-    // Configure the device pins.
-    //
+#ifdef ENABLE_ETHERNET
     PinoutSet(true, false);
-    
-    //
-    // Initialize the UART.
-    //
-    ConfigureUART();
-    
-    //
-    // Configure Port N1 for as an output for the animation LED.
-    //
     MAP_GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_1);
-
-    //
-    // Initialize LED to OFF (0)
-    //
     MAP_GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, ~GPIO_PIN_1);
+#else
+    PinoutSet(false, false);
+#endif
 
-    //
-    // Configure SysTick for a periodic interrupt.
-    //
+#ifdef ENABLE_UART    
+    ConfigureUART();
+#endif
+    
+#ifdef ENABLE_ETHERNET
     MAP_SysTickPeriodSet(g_ui32SysClock / SYSTICKHZ);
     MAP_SysTickEnable();
     MAP_SysTickIntEnable();
     
-    //
-    // Configure the hardware MAC address for Ethernet Controller filtering of
-    // incoming packets.  The MAC address will be stored in the non-volatile
-    // USER0 and USER1 registers.
-    //
     MAP_FlashUserGet(&ui32User0, &ui32User1);
     if((ui32User0 == 0xffffffff) || (ui32User1 == 0xffffffff))
     {
-        //
-        // We should never get here.  This is an error if the MAC address has
-        // not been programmed into the device.  Exit the program.
-        // Let the user know there is no MAC address
-        //
+#ifdef ENABLE_UART
         UARTprintf("No MAC programmed!\n");
+#endif
         while(1)
         {
         }
     }
 
-    //
-    // Tell the user what we are doing just now.
-    //
+#ifdef ENABLE_UART
     UARTprintf("Waiting for IP.\n");
-
-    //
-    // Convert the 24/24 split MAC address from NV ram into a 32/16 split MAC
-    // address needed to program the hardware registers, then program the MAC
-    // address into the Ethernet Controller registers.
-    //
+#endif
+    
     pui8MACArray[0] = ((ui32User0 >>  0) & 0xff);
     pui8MACArray[1] = ((ui32User0 >>  8) & 0xff);
     pui8MACArray[2] = ((ui32User0 >> 16) & 0xff);
@@ -429,27 +452,24 @@ main(void)
     pui8MACArray[4] = ((ui32User1 >>  8) & 0xff);
     pui8MACArray[5] = ((ui32User1 >> 16) & 0xff);
 
-    //
-    // Initialize the lwIP library, using DHCP.
-    //
     //lwIPInit(g_ui32SysClock, pui8MACArray, 0, 0, 0, IPADDR_USE_DHCP);
     lwIPInit(g_ui32SysClock, pui8MACArray, device_ip, device_subnet, device_gateway, IPADDR_USE_STATIC);
 
-    //
-    // Set the interrupt priorities.  We set the SysTick interrupt to a higher
-    // priority than the Ethernet interrupt to ensure that the file system
-    // tick is processed if SysTick occurs while the Ethernet handler is being
-    // processed.  This is very likely since all the TCP/IP and HTTP work is
-    // done in the context of the Ethernet interrupt.
-    //
     MAP_IntPrioritySet(INT_EMAC0, ETHERNET_INT_PRIORITY);
-    MAP_IntPrioritySet(FAULT_SYSTICK, SYSTICK_INT_PRIORITY);
+#endif
     
+    MAP_IntPrioritySet(FAULT_SYSTICK, SYSTICK_INT_PRIORITY);
+
+#ifdef ENABLE_ETHERNET    
     while(gotIP == 0)
     	SysCtlDelay(120);
+#endif
     
+#ifdef ENABLE_UART
     UARTprintf("Initializing...\n");
-    
+#endif
+   
+#ifdef ENABLE_MOTOR
     SetupPWM();
     
     // QEI Setup
@@ -470,27 +490,136 @@ main(void)
     // Delay for some time...
     //
     SysCtlDelay(12000);
+#endif
 
-    //pi = pbuf_alloc(PBUF_TRANSPORT,8,PBUF_RAM);
-
+#ifdef ENABLE_ETHERNET
     Rpcb = udp_init_r();
     //Spcb = udp_init_s();
+#endif
 
-    //ADIS16375_Init(&myIMU, cyclesdelay, IMU_CS, init_spi16, SpiTransfer16);
+#ifdef ENABLE_IMU
+    // Only for Boosterpack 2 SSI3 connection
+    //MAP_GPIOPinTypeGPIOInput(GPIO_PORTA_BASE, GPIO_PIN_2 | GPIO_PIN_3);
     
-    //UARTprintf("Prod ID : %d\n",ADIS16375_device_id(&myIMU));
+    ADIS16375_Init(&myIMU, cyclesdelay, IMU_CS, IMU_RST, init_spi16, SpiTransfer16);
+    
+#ifdef ENABLE_UART
+    UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
+    //ADIS16375_write(&myIMU,ADIS16375_REG_GLOB_CMD,0x8000);  
+#endif
     //ADIS16375_debug(&myIMU);
+    ConfigureADIS16375Int();
+#endif
     
-    
+#ifdef ENABLE_MOTOR   
     SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
     TimerConfigure(TIMER0_BASE, TIMER_CFG_PERIODIC);
     TimerLoadSet(TIMER0_BASE, TIMER_A, g_ui32SysClock/5000);
     IntEnable(INT_TIMER0A);
     TimerIntEnable(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
     TimerEnable(TIMER0_BASE, TIMER_A);
+#endif
     
     while(1)
     {
+#ifdef ENABLE_IMU
+      if(imuDataReady == 1)
+      {
+        GPIOIntDisable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
+        imuDataReady = 2;
+#ifdef ENABLE_UART
+        UARTprintf("ACC_X_OUT : %d 0x%X\n",accel_x,accel_x);
+        UARTprintf("ACC_Y_OUT : %d 0x%X\n",accel_y,accel_y);
+        UARTprintf("ACC_Z_OUT : %d 0x%X\n",accel_z,accel_z);
+        
+        UARTprintf("GYRO_X_OUT : %d 0x%X\n",gyro_x,gyro_x);
+        UARTprintf("GYRO_Y_OUT : %d 0x%X\n",gyro_y,gyro_y);
+        UARTprintf("GYRO_Z_OUT : %d 0x%X\n",gyro_z,gyro_z);
+        
+        dval_x = (accel_x*1.0)*0.8192;
+        dval_y = (accel_y*1.0)*0.8192;
+        dval_z = (accel_z*1.0)*0.8192;
+        
+        sprintf(charUART, "X : %lf\n", dval_x);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "Y : %lf\n", dval_y);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "Z : %lf\n", dval_z);
+        UARTprintf("%s",charUART);
+#endif
+      }
+      /*if((UART_TX_BUFFER_SIZE == UARTTxBytesFree()) && (imuDataReady == 2))
+      {
+        imuDataReady = 3;
+        status = GPIOIntStatus(IMU_IRQ_PORT_BASE, true);
+        GPIOIntClear(IMU_IRQ_PORT_BASE, status);
+        GPIOIntEnable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
+      }*/
+#endif
+#ifdef ENABLE_UART
+#ifdef UART_BUFFERED
+      if(UARTRxBytesAvail()>0)
+      {
+        uCom = UARTgetc();
+        UARTFlushRx();
+      }
+#endif
+      switch(uCom)
+      {
+#ifdef ENABLE_IMU
+      case '1' : 
+        UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
+        break;
+      case '2': 
+        imuDataReady = 0;
+        accel_x = accel_y = accel_z = 0;
+        status = GPIOIntStatus(IMU_IRQ_PORT_BASE, true);
+        GPIOIntClear(IMU_IRQ_PORT_BASE, status);
+        GPIOIntEnable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
+        break;
+      case '3': 
+        /*accel_x = ADIS16375_read(&myIMU, 16, ADIS16375_REG_X_ACCEL_OUT);
+        accel_y = ADIS16375_read(&myIMU, 16, ADIS16375_REG_Y_ACCEL_OUT);
+        accel_z = ADIS16375_read(&myIMU, 16, ADIS16375_REG_Z_ACCEL_OUT);*/
+        
+        ADIS16375_readAccData(&myIMU, &accel_x, &accel_y, &accel_z);
+        ADIS16375_readGyroData(&myIMU, &gyro_x, &gyro_y, &gyro_z);
+        
+        UARTprintf("ACC_X_OUT : %d 0x%X\n",accel_x,accel_x);
+        UARTprintf("ACC_Y_OUT : %d 0x%X\n",accel_y,accel_y);
+        UARTprintf("ACC_Z_OUT : %d 0x%X\n",accel_z,accel_z);
+        
+        UARTprintf("GYRO_X_OUT : %d 0x%X\n",gyro_x,gyro_x);
+        UARTprintf("GYRO_Y_OUT : %d 0x%X\n",gyro_y,gyro_y);
+        UARTprintf("GYRO_Z_OUT : %d 0x%X\n",gyro_z,gyro_z);
+        
+        dval_x = (accel_x*1.0)*0.8192;
+        dval_y = (accel_y*1.0)*0.8192;
+        dval_z = (accel_z*1.0)*0.8192;
+        
+        sprintf(charUART, "X : %lf\n", dval_x);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "Y : %lf\n", dval_y);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "Z : %lf\n", dval_z);
+        UARTprintf("%s",charUART);
+        break;
+      case '4' : 
+        UARTprintf("Status : 0x%X\n",ADIS16375_status(&myIMU));
+        break;
+      case '5' : 
+        temp_out = ADIS16375_temp(&myIMU);
+        temp = (temp_out*1.0)*0.00565 + 25.0;
+        sprintf(charUART, "%lf", temp);
+        UARTprintf("Temp : 0x%X %s\n",temp_out,charUART);
+        break;
+#endif
+      default : break;
+      }
+      uCom = 0;
+#endif
+      
+#ifdef ENABLE_MOTOR
       if(setPWMvalue == true)
       {
         //UARTprintf("Setting pwm to %d\n",pwmValue);
@@ -511,12 +640,17 @@ main(void)
           //sends = 0;
         //}
         sendEncoder = false;
+#ifdef ENABLE_ETHERNET
         sendUDP[0] = 0x42;
         memcpy(&sendUDP[1],(uint8_t*)(&encoderPos),4);
         udp_send_data((void*)sendUDP,5);
+#endif
       }
+#endif
     }
 }
+
+#ifdef ENABLE_ETHERNET
 
 struct udp_pcb * udp_init_s(void)
 {
@@ -530,13 +664,14 @@ struct udp_pcb * udp_init_s(void)
 
   err = udp_connect(pcb_s, &controller_ip, 2014);
 
-
+#ifdef ENABLE_UART
   if(err != ERR_OK)
     UARTprintf("Error connecting to controller.\n");
   else
   {
 	  UARTprintf("UDP to send at port 2014...\n");
   }
+#endif
   return pcb_s;
 }
 
@@ -548,8 +683,10 @@ struct udp_pcb * udp_init_r(void)
 
   udp_bind(pcb_r, IP_ADDR_ANY, 2013);
 
+#ifdef ENABLE_UART
   UARTprintf("UDP to receive at port 2013...\n");
-
+#endif
+  
   udp_recv(pcb_r, udp_receive_data, NULL);
 
   return pcb_r;
@@ -604,3 +741,5 @@ void udp_send_data(void* sbuf, u16_t len)
 
   pbuf_free(p);
 }
+
+#endif

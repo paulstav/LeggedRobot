@@ -44,14 +44,24 @@ static void NmiSR(void);
 static void FaultISR(void);
 static void IntDefaultHandler(void);
 
+#ifdef UART_BUFFERED
+extern void UARTStdioIntHandler(void);
+#endif
+
 //*****************************************************************************
 //
 // External declarations for the interrupt handlers used by the application.
 //
 //*****************************************************************************
+#ifdef ENABLE_ETHERNET
 extern void lwIPEthernetIntHandler(void);
+#endif
+
 extern void SysTickIntHandler(void);
+
+#ifdef ENABLE_MOTOR
 extern void Timer0IntHandler(void);
+#endif
 
 //*****************************************************************************
 //
@@ -111,7 +121,11 @@ __root const uVectorEntry __vector_table[] @ ".intvec" =
     IntDefaultHandler,                      // GPIO Port C
     IntDefaultHandler,                      // GPIO Port D
     IntDefaultHandler,                      // GPIO Port E
+#ifdef UART_BUFFERED
+    UARTStdioIntHandler,                    // UART0 Rx and Tx
+#else
     IntDefaultHandler,                      // UART0 Rx and Tx
+#endif
     IntDefaultHandler,                      // UART1 Rx and Tx
     IntDefaultHandler,                      // SSI0 Rx and Tx
     IntDefaultHandler,                      // I2C0 Master and Slave
@@ -125,7 +139,11 @@ __root const uVectorEntry __vector_table[] @ ".intvec" =
     IntDefaultHandler,                      // ADC Sequence 2
     IntDefaultHandler,                      // ADC Sequence 3
     IntDefaultHandler,                      // Watchdog timer
+#ifdef ENABLE_MOTOR
     Timer0IntHandler,                       // Timer 0 subtimer A
+#else
+    IntDefaultHandler,                      // Timer 0 subtimer A
+#endif
     IntDefaultHandler,                      // Timer 0 subtimer B
     IntDefaultHandler,                      // Timer 1 subtimer A
     IntDefaultHandler,                      // Timer 1 subtimer B
@@ -146,7 +164,11 @@ __root const uVectorEntry __vector_table[] @ ".intvec" =
     IntDefaultHandler,                      // I2C1 Master and Slave
     IntDefaultHandler,                      // CAN0
     IntDefaultHandler,                      // CAN1
+#ifdef ENABLE_ETHERNET
     lwIPEthernetIntHandler,                 // Ethernet
+#else
+    IntDefaultHandler,                      // Ethernet
+#endif
     IntDefaultHandler,                      // Hibernate
     IntDefaultHandler,                      // USB0
     IntDefaultHandler,                      // PWM Generator 3
