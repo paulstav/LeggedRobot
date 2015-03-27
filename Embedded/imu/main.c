@@ -386,23 +386,37 @@ main(void)
 
 #ifdef ENABLE_ETHERNET
     gotIP = 0;
+    
+#if defined(BOARD_FL)
     // 147.102.100.130
     device_ip = 0x93666482;
+    IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x82);
+#elif defined(BOARD_FR)
+    // 147.102.100.130
+    device_ip = 0x93666482;
+    IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x82);
+#elif defined(BOARD_BL)
+    // 147.102.100.131
+    device_ip = 0x93666482;
+    IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x83);
+#elif defined(BOARD_BR)
+    // 147.102.100.132
+    device_ip = 0x93666482;
+    IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x84);
+#else
+    // 147.102.100.133
+    device_ip = 0x93666482;
+    IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x85);
+#endif
 
     // 255.255.255.0
     device_subnet = 0xFFFFFF00;
 
     // 147.102.100.200
     device_gateway = 0x93666401;
-    
-    // 147.102.100.144
-    //IP4_ADDR(&controller_ip, 0x93,0x66,0x64,0x87);
 
     // 147.102.100.251
     IP4_ADDR(&controller_ip, 0x93,0x66,0x64,0xFB);
-
-    // 147.102.100.130
-    IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x82);
 
     memset(pData,0x31,68);
 #endif
@@ -659,17 +673,17 @@ struct udp_pcb * udp_init_s(void)
 
   pcb_s = udp_new();
   //UARTprintf("Init pcb = %d\n",pcb);
-  udp_bind(pcb_s, IP_ADDR_ANY, 2014);
+  udp_bind(pcb_s, IP_ADDR_ANY, PORT_S);
   //udp_bind(pcb_s, &board_ip, 2012);
 
-  err = udp_connect(pcb_s, &controller_ip, 2014);
+  err = udp_connect(pcb_s, &controller_ip, PORT_S);
 
 #ifdef ENABLE_UART
   if(err != ERR_OK)
     UARTprintf("Error connecting to controller.\n");
   else
   {
-	  UARTprintf("UDP to send at port 2014...\n");
+	  UARTprintf("UDP to send at port %d...\n",PORT_S);
   }
 #endif
   return pcb_s;
@@ -681,10 +695,10 @@ struct udp_pcb * udp_init_r(void)
   struct udp_pcb *pcb_r;
   pcb_r = udp_new();
 
-  udp_bind(pcb_r, IP_ADDR_ANY, 2013);
+  udp_bind(pcb_r, IP_ADDR_ANY, PORT_R);
 
 #ifdef ENABLE_UART
-  UARTprintf("UDP to receive at port 2013...\n");
+  UARTprintf("UDP to receive at port %d...\n", PORT_R);
 #endif
   
   udp_recv(pcb_r, udp_receive_data, NULL);
