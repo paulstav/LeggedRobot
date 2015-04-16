@@ -388,35 +388,35 @@ main(void)
     gotIP = 0;
     
 #if defined(BOARD_FL)
-    // 147.102.100.130
-    device_ip = 0x93666482;
-    IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x82);
+    // 192.168.1.10
+    device_ip = 0xC0A8010A;
+    IP4_ADDR(&board_ip, 0xC0,0xA8,0x01,0x0A);
 #elif defined(BOARD_FR)
-    // 147.102.100.131
-    device_ip = 0x93666482;
-    IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x83);
+    // // 192.168.1.11
+    device_ip = 0xC0A8010B;
+    IP4_ADDR(&board_ip, 0xC0,0xA8,0x01,0x0B);
 #elif defined(BOARD_BL)
-    // 147.102.100.132
-    device_ip = 0x93666482;
-    IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x84);
+    // // 192.168.1.12
+    device_ip = 0xC0A8010C;
+    IP4_ADDR(&board_ip, 0xC0,0xA8,0x01,0x0C);
 #elif defined(BOARD_BR)
-    // 147.102.100.133
-    device_ip = 0x93666482;
-    IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x85);
+    // // 192.168.1.13
+    device_ip = 0xC0A8010D;
+    IP4_ADDR(&board_ip, 0xC0,0xA8,0x01,0x0D);
 #else
-    // 147.102.100.130
-    device_ip = 0x93666482;
-    IP4_ADDR(&board_ip, 0x93,0x66,0x64,0x82);
+    // // 192.168.1.10
+    device_ip = 0xC0A8010A;
+    IP4_ADDR(&board_ip, 0xC0,0xA8,0x01,0x0A);
 #endif
 
     // 255.255.255.0
     device_subnet = 0xFFFFFF00;
 
-    // 147.102.100.200
-    device_gateway = 0x93666401;
+    // 192.168.1.1
+    device_gateway = 0xC0A80101;
 
-    // 147.102.100.251
-    IP4_ADDR(&controller_ip, 0x93,0x66,0x64,0xFB);
+    // 192.168.1.22
+    IP4_ADDR(&controller_ip, 0xC0,0xA8,0x01,0x16);
 
     memset(pData,0x31,68);
 #endif

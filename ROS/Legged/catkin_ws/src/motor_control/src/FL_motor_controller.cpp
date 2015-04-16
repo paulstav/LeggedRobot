@@ -18,7 +18,7 @@
 #define ASYNC
 
 #define PORT_BRD 2013
-#define BRD_IP "147.102.100.130"
+#define BRD_IP "192.168.1.10"
 
 #include "ros/ros.h"
 #include "motor_control/FL_Encoder.h"
