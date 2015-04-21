@@ -87,7 +87,7 @@ int8_t pwmValue;
 #ifdef ENABLE_IMU    
 ADIS16375 myIMU;
 uint8_t imuDataReady = 0;
-int16_t accel_x, accel_y, accel_z, gyro_x, gyro_y, gyro_z, temp_out;
+int16_t accel_x, accel_y, accel_z, gyro_x, gyro_y, gyro_z, delta_x, delta_y, delta_z, dv_x, dv_y, dv_z, temp_out;
 double dval_x, dval_y, dval_z, temp;
 #endif
 
@@ -343,6 +343,8 @@ void IntADIS16375(void)
   
   ADIS16375_readAccData(&myIMU, &accel_x, &accel_y, &accel_z);
   ADIS16375_readGyroData(&myIMU, &gyro_x, &gyro_y, &gyro_z);
+  ADIS16375_readDeltaAngle(&myIMU, &delta_x, &delta_y, &delta_z);
+  ADIS16375_readDeltaVel(&myIMU, &dv_x, &dv_y, &dv_z);
   
   GPIOIntClear(IMU_IRQ_PORT_BASE, status);
 }
@@ -363,7 +365,7 @@ int
 main(void)
 {
    uint32_t status;
-   uint8_t charUART[128];
+   uint8_t charUART[256];
     
 #ifdef ENABLE_UART
     unsigned char uCom = 0;
@@ -542,23 +544,56 @@ main(void)
         GPIOIntDisable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
         imuDataReady = 2;
 #ifdef ENABLE_UART
-        UARTprintf("ACC_X_OUT : %d 0x%X\n",accel_x,accel_x);
+        /*UARTprintf("ACC_X_OUT : %d 0x%X\n",accel_x,accel_x);
         UARTprintf("ACC_Y_OUT : %d 0x%X\n",accel_y,accel_y);
         UARTprintf("ACC_Z_OUT : %d 0x%X\n",accel_z,accel_z);
         
         UARTprintf("GYRO_X_OUT : %d 0x%X\n",gyro_x,gyro_x);
         UARTprintf("GYRO_Y_OUT : %d 0x%X\n",gyro_y,gyro_y);
-        UARTprintf("GYRO_Z_OUT : %d 0x%X\n",gyro_z,gyro_z);
+        UARTprintf("GYRO_Z_OUT : %d 0x%X\n",gyro_z,gyro_z);*/
+        
+        dval_x = (gyro_x*1.0)*0.013108;
+        dval_y = (gyro_y*1.0)*0.013108;
+        dval_z = (gyro_z*1.0)*0.013108;
+        
+        sprintf(charUART, "GYRO X : %lf\n", dval_x);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "GYRO Y : %lf\n", dval_y);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "GYRO Z : %lf\n", dval_z);
+        UARTprintf("%s",charUART);
         
         dval_x = (accel_x*1.0)*0.8192;
         dval_y = (accel_y*1.0)*0.8192;
         dval_z = (accel_z*1.0)*0.8192;
         
-        sprintf(charUART, "X : %lf\n", dval_x);
+        sprintf(charUART, "ACC X : %lf\n", dval_x);
         UARTprintf("%s",charUART);
-        sprintf(charUART, "Y : %lf\n", dval_y);
+        sprintf(charUART, "ACC Y : %lf\n", dval_y);
         UARTprintf("%s",charUART);
-        sprintf(charUART, "Z : %lf\n", dval_z);
+        sprintf(charUART, "ACC Z : %lf\n", dval_z);
+        UARTprintf("%s",charUART);
+        
+        dval_x = (delta_x*1.0)*0.00543;
+        dval_y = (delta_y*1.0)*0.00543;
+        dval_z = (delta_z*1.0)*0.00543;
+        
+        sprintf(charUART, "DELTA X : %lf\n", dval_x);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "DELTA Y : %lf\n", dval_y);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "DELTA Z : %lf\n", dval_z);
+        UARTprintf("%s",charUART);
+        
+        dval_x = (dv_x*1.0)*3.0518;
+        dval_y = (dv_y*1.0)*3.0518;
+        dval_z = (dv_z*1.0)*3.0518;
+        
+        sprintf(charUART, "DELTA VEL X : %lf\n", dval_x);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "DELTA VEL Y : %lf\n", dval_y);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "DELTA VEL Z : %lf\n", dval_z);
         UARTprintf("%s",charUART);
 #endif
       }
@@ -598,24 +633,59 @@ main(void)
         
         ADIS16375_readAccData(&myIMU, &accel_x, &accel_y, &accel_z);
         ADIS16375_readGyroData(&myIMU, &gyro_x, &gyro_y, &gyro_z);
+        ADIS16375_readDeltaAngle(&myIMU, &delta_x, &delta_y, &delta_z);
+        ADIS16375_readDeltaVel(&myIMU, &dv_x, &dv_y, &dv_z);
         
-        UARTprintf("ACC_X_OUT : %d 0x%X\n",accel_x,accel_x);
+        /*UARTprintf("ACC_X_OUT : %d 0x%X\n",accel_x,accel_x);
         UARTprintf("ACC_Y_OUT : %d 0x%X\n",accel_y,accel_y);
         UARTprintf("ACC_Z_OUT : %d 0x%X\n",accel_z,accel_z);
         
         UARTprintf("GYRO_X_OUT : %d 0x%X\n",gyro_x,gyro_x);
         UARTprintf("GYRO_Y_OUT : %d 0x%X\n",gyro_y,gyro_y);
-        UARTprintf("GYRO_Z_OUT : %d 0x%X\n",gyro_z,gyro_z);
+        UARTprintf("GYRO_Z_OUT : %d 0x%X\n",gyro_z,gyro_z);*/
+        
+        dval_x = (gyro_x*1.0)*0.013108;
+        dval_y = (gyro_y*1.0)*0.013108;
+        dval_z = (gyro_z*1.0)*0.013108;
+        
+        sprintf(charUART, "GYRO X : %lf\n", dval_x);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "GYRO Y : %lf\n", dval_y);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "GYRO Z : %lf\n", dval_z);
+        UARTprintf("%s",charUART);
         
         dval_x = (accel_x*1.0)*0.8192;
         dval_y = (accel_y*1.0)*0.8192;
         dval_z = (accel_z*1.0)*0.8192;
         
-        sprintf(charUART, "X : %lf\n", dval_x);
+        sprintf(charUART, "ACC X : %lf\n", dval_x);
         UARTprintf("%s",charUART);
-        sprintf(charUART, "Y : %lf\n", dval_y);
+        sprintf(charUART, "ACC Y : %lf\n", dval_y);
         UARTprintf("%s",charUART);
-        sprintf(charUART, "Z : %lf\n", dval_z);
+        sprintf(charUART, "ACC Z : %lf\n", dval_z);
+        UARTprintf("%s",charUART);
+        
+        dval_x = (delta_x*1.0)*0.00543;
+        dval_y = (delta_y*1.0)*0.00543;
+        dval_z = (delta_z*1.0)*0.00543;
+        
+        sprintf(charUART, "DELTA X : %lf\n", dval_x);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "DELTA Y : %lf\n", dval_y);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "DELTA Z : %lf\n", dval_z);
+        UARTprintf("%s",charUART);
+        
+        dval_x = (dv_x*1.0)*3.0518;
+        dval_y = (dv_y*1.0)*3.0518;
+        dval_z = (dv_z*1.0)*3.0518;
+        
+        sprintf(charUART, "DELTA VEL X : %lf\n", dval_x);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "DELTA VEL Y : %lf\n", dval_y);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "DELTA VEL Z : %lf\n", dval_z);
         UARTprintf("%s",charUART);
         break;
       case '4' : 
@@ -626,6 +696,29 @@ main(void)
         temp = (temp_out*1.0)*0.00565 + 25.0;
         sprintf(charUART, "%lf", temp);
         UARTprintf("Temp : 0x%X %s\n",temp_out,charUART);
+        break;
+      case '6' :
+        UARTprintf("X_GYRO_OFF_L : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_X_GYRO_OFF_L));
+        UARTprintf("X_GYRO_OFF_H : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_X_GYRO_OFF_H));
+        UARTprintf("Y_GYRO_OFF_L : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_Y_GYRO_OFF_L));
+        UARTprintf("Y_GYRO_OFF_H : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_Y_GYRO_OFF_H));
+        UARTprintf("Z_GYRO_OFF_L : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_Z_GYRO_OFF_L));
+        UARTprintf("Z_GYRO_OFF_H : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_Z_GYRO_OFF_H));
+        UARTprintf("X_ACC_OFF_L : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_X_ACC_OFF_L));
+        UARTprintf("X_ACC_OFF_H : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_X_ACC_OFF_H));
+        UARTprintf("Y_ACC_OFF_L : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_Y_ACC_OFF_L));
+        UARTprintf("Y_ACC_OFF_H : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_Y_ACC_OFF_H));
+        UARTprintf("Z_ACC_OFF_L : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_Z_ACC_OFF_L));
+        UARTprintf("Z_ACC_OFF_H : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_Z_ACC_OFF_H));
+        UARTprintf("X_GYRO_SCALE : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_X_GYRO_SCALE));
+        UARTprintf("Y_GYRO_SCALE : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_Y_GYRO_SCALE));
+        UARTprintf("Z_GYRO_SCALE : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_Z_GYRO_SCALE));
+        UARTprintf("X_ACC_SCALE : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_X_ACCEL_SCALE));
+        UARTprintf("Y_ACC_SCALE : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_Y_ACCEL_SCALE));
+        UARTprintf("Z_ACC_SCALE : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_Z_ACCEL_SCALE));
+        UARTprintf("GEN_CONFIG : 0x%X\n",(ADIS16375_read(&myIMU, 16, ADIS16375_REG_GEN_CFG) & 0x00FF));
+        UARTprintf("NULL_CONFIG : 0x%X\n",(ADIS16375_read(&myIMU, 16, ADIS16375_REG_NULL_CFG) & 0x3FFF));
+        UARTprintf("DEC_RATE : 0x%X\n",(ADIS16375_read(&myIMU, 16, ADIS16375_REG_DEC_RATE) & 0x07FF));
         break;
 #endif
       default : break;

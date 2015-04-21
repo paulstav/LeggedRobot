@@ -174,6 +174,76 @@ void ADIS16375_readAccData(ADIS16375 *this, int16_t* accX, int16_t* accY, int16_
   this->_cs(HIGH);
 }
 
+void ADIS16375_readDeltaAngle(ADIS16375 *this, int16_t* deltaX, int16_t* deltaY, int16_t* deltaZ)
+{
+  int16_t reg = 0;
+  
+  reg = ADIS16375_REG_X_DELTAANG_H_OUT;
+  ADIS16375_CheckPageChange(this,reg);
+  
+  this->_cs(LOW);
+  this->_delay_cycle(1);
+  this->_spi_write(reg);
+  this->_delay_cycle(1);
+  this->_cs(HIGH);
+  this->_delay_cycle(80);
+  reg = ADIS16375_REG_Y_DELTAANG_H_OUT;
+  this->_cs(LOW);
+  this->_delay_cycle(1);
+  *deltaX = this->_spi_write(reg);
+  this->_delay_cycle(1);
+  this->_cs(HIGH);
+  this->_delay_cycle(80);
+  reg = ADIS16375_REG_Z_DELTAANG_H_OUT;
+  this->_cs(LOW);
+  this->_delay_cycle(1);
+  *deltaY = this->_spi_write(reg);
+  this->_delay_cycle(1);
+  this->_cs(HIGH);
+  this->_delay_cycle(80);
+  reg = ADIS16375_REG_Y_DELTAANG_H_OUT;
+  this->_cs(LOW);
+  this->_delay_cycle(1);
+  *deltaZ = this->_spi_write(reg);
+  this->_delay_cycle(1);
+  this->_cs(HIGH);
+}
+
+void ADIS16375_readDeltaVel(ADIS16375 *this, int16_t* deltaX, int16_t* deltaY, int16_t* deltaZ)
+{
+  int16_t reg = 0;
+  
+  reg = ADIS16375_REG_X_DELTAVEL_H_OUT;
+  ADIS16375_CheckPageChange(this,reg);
+  
+  this->_cs(LOW);
+  this->_delay_cycle(1);
+  this->_spi_write(reg);
+  this->_delay_cycle(1);
+  this->_cs(HIGH);
+  this->_delay_cycle(80);
+  reg = ADIS16375_REG_Y_DELTAVEL_H_OUT;
+  this->_cs(LOW);
+  this->_delay_cycle(1);
+  *deltaX = this->_spi_write(reg);
+  this->_delay_cycle(1);
+  this->_cs(HIGH);
+  this->_delay_cycle(80);
+  reg = ADIS16375_REG_Z_DELTAVEL_H_OUT;
+  this->_cs(LOW);
+  this->_delay_cycle(1);
+  *deltaY = this->_spi_write(reg);
+  this->_delay_cycle(1);
+  this->_cs(HIGH);
+  this->_delay_cycle(80);
+  reg = ADIS16375_REG_X_DELTAVEL_H_OUT;
+  this->_cs(LOW);
+  this->_delay_cycle(1);
+  *deltaZ = this->_spi_write(reg);
+  this->_delay_cycle(1);
+  this->_cs(HIGH);
+}
+
 int16_t ADIS16375_read(ADIS16375 *this, unsigned char nbits, int16_t reg){
   // initialize variables
   int16_t rshort/*, mask, measure*/; 

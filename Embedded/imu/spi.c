@@ -123,6 +123,9 @@ void init_spi16()
   MAP_GPIOPadConfigSet(IMU_SPI_PORT_BASE, IMU_SPI_CLK_PIN, GPIO_STRENGTH_8MA,
                                 GPIO_PIN_TYPE_STD_WPD);
   
+  MAP_GPIOPadConfigSet(IMU_SPI_PORT_BASE, IMU_SPI_RX_PIN, GPIO_STRENGTH_8MA,
+                                GPIO_PIN_TYPE_OD);
+  
   // RST Setup
   MAP_GPIOPinTypeGPIOOutput(IMU_RST_PORT_BASE, IMU_RST_PIN);
   MAP_GPIOPadConfigSet(IMU_RST_PORT_BASE, IMU_RST_PIN, GPIO_STRENGTH_8MA,
