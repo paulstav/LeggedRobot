@@ -29,4 +29,6 @@
 #define PORT_R 2011
 #endif
 
+#define DECIMATION_COEF         0x3000
+
 #endif

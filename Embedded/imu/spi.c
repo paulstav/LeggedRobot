@@ -106,13 +106,13 @@ void init_spi16()
   
   MAP_SysCtlPeripheralEnable(IMU_SPI_PORT_PERIPH);
 
-  //SysCtlPeripheralReset(IMU_SPI_PERIPH);
+  SysCtlPeripheralReset(IMU_SPI_PERIPH);
 
   MAP_SysCtlPeripheralEnable(IMU_CS_PERIPH);
   
   MAP_SysCtlPeripheralEnable(IMU_RST_PERIPH);
 
-  //SysCtlPeripheralReset(IMU_CS_PERIPH);
+  SysCtlPeripheralReset(IMU_CS_PERIPH);
   
   // CS Setup
   MAP_GPIOPinTypeGPIOOutput(IMU_CS_PORT_BASE, IMU_CS_PIN);
@@ -129,7 +129,7 @@ void init_spi16()
   // RST Setup
   MAP_GPIOPinTypeGPIOOutput(IMU_RST_PORT_BASE, IMU_RST_PIN);
   MAP_GPIOPadConfigSet(IMU_RST_PORT_BASE, IMU_RST_PIN, GPIO_STRENGTH_8MA,
-                                GPIO_PIN_TYPE_STD_WPU);
+                                GPIO_PIN_TYPE_STD);
   MAP_GPIOPinWrite(IMU_RST_PORT_BASE, IMU_RST_PIN, IMU_RST_PIN);
  
 
@@ -145,7 +145,7 @@ void init_spi16()
   //SSIClockSourceSet(SSI0_BASE, SSI_CLOCK_SYSTEM);
   //HWREG(SSI0_BASE + SSI_O_CC) = SSI_CLOCK_SYSTEM;
 
-  MAP_SSIConfigSetExpClk(IMU_SPI_SSI_BASE, g_ui32SysClock, SSI_FRF_MOTO_MODE_3, SSI_MODE_MASTER, 12000000, 16);
+  MAP_SSIConfigSetExpClk(IMU_SPI_SSI_BASE, g_ui32SysClock, SSI_FRF_MOTO_MODE_3, SSI_MODE_MASTER, 8000000, 16);
 
   MAP_SSIEnable(IMU_SPI_SSI_BASE);
   

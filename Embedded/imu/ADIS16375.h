@@ -28,12 +28,14 @@
 #define ADIS16375_REG_Y_DELTAANG_H_OUT          ADIS16375_REG(0x00, 0x46)
 #define ADIS16375_REG_Z_DELTAANG_L_OUT          ADIS16375_REG(0x00, 0x48)
 #define ADIS16375_REG_Z_DELTAANG_H_OUT          ADIS16375_REG(0x00, 0x4A)
+
 #define ADIS16375_REG_X_DELTAVEL_L_OUT          ADIS16375_REG(0x00, 0x4C)
 #define ADIS16375_REG_X_DELTAVEL_H_OUT          ADIS16375_REG(0x00, 0x4E)
 #define ADIS16375_REG_Y_DELTAVEL_L_OUT          ADIS16375_REG(0x00, 0x50)
 #define ADIS16375_REG_Y_DELTAVEL_H_OUT          ADIS16375_REG(0x00, 0x52)
 #define ADIS16375_REG_Z_DELTAVEL_L_OUT          ADIS16375_REG(0x00, 0x54)
 #define ADIS16375_REG_Z_DELTAVEL_H_OUT          ADIS16375_REG(0x00, 0x56)
+
 #define ADIS16375_REG_PROD_ID                   ADIS16375_REG(0x00, 0x7E)
  
 #define ADIS16375_REG_X_GYRO_OFF_L              ADIS16375_REG(0x02, 0x10)
@@ -93,6 +95,7 @@ void ADIS16375_Init(ADIS16375 *this, void (* _delay_cycle)(unsigned long), void 
 int16_t ADIS16375_status(ADIS16375 *this);
 int16_t ADIS16375_device_id(ADIS16375 *this);
 int16_t ADIS16375_temp(ADIS16375 *this);
+void ADIS16375_wake(ADIS16375 *this);
 void ADIS16375_readAccData(ADIS16375 *this, int16_t* accX, int16_t* accY, int16_t* accZ);
 void ADIS16375_readGyroData(ADIS16375 *this, int16_t* gyroX, int16_t* gyroY, int16_t* gyroZ);
 void ADIS16375_readDeltaVel(ADIS16375 *this, int16_t* deltaX, int16_t* deltaY, int16_t* deltaZ);

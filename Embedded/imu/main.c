@@ -85,10 +85,11 @@ bool sendEncoder, setPWMvalue;
 int8_t pwmValue;
 
 #ifdef ENABLE_IMU    
+void ConfigureADIS16375Int(void);
 ADIS16375 myIMU;
 uint8_t imuDataReady = 0;
 int16_t accel_x, accel_y, accel_z, gyro_x, gyro_y, gyro_z, delta_x, delta_y, delta_z, dv_x, dv_y, dv_z, temp_out;
-double dval_x, dval_y, dval_z, temp;
+double dval_x, dval_y, dval_z, temp, deltaAccX, deltaAccY, deltaAccZ;
 #endif
 
 #ifdef ENABLE_ETHERNET
@@ -272,12 +273,12 @@ void SetupPWM()
   // use the following equation: N = (1 / f) * SysClk.  Where N is the
   // function parameter, f is the desired frequency, and SysClk is the
   // system clock frequency.
-  // In this case you get: (1 / 10000Hz) * 120MHz = 12000 cycles.  Note that
+  // In this case you get: (1 / 20000Hz) * 120MHz = 6000 cycles.  Note that
   // the maximum period you can set is 2^16.
   // TODO: modify this calculation to use the clock frequency that you are
   // using.
   //
-  PWMGenPeriodSet(PWM0_BASE, PWM_GEN_2, 12000);
+  PWMGenPeriodSet(PWM0_BASE, PWM_GEN_2, 6000);
   
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOL);
   MAP_GPIOPinTypeGPIOOutput(GPIO_PORTL_BASE, GPIO_PIN_4);
@@ -337,14 +338,18 @@ void IntADIS16375(void)
   
   imuDataReady = 1;
   
-  /*accel_x = ADIS16375_read(&myIMU, 16, ADIS16375_REG_X_ACCEL_OUT);
-  accel_y = ADIS16375_read(&myIMU, 16, ADIS16375_REG_Y_ACCEL_OUT);
-  accel_z = ADIS16375_read(&myIMU, 16, ADIS16375_REG_Z_ACCEL_OUT);*/
-  
-  ADIS16375_readAccData(&myIMU, &accel_x, &accel_y, &accel_z);
-  ADIS16375_readGyroData(&myIMU, &gyro_x, &gyro_y, &gyro_z);
+  //ADIS16375_readAccData(&myIMU, &accel_x, &accel_y, &accel_z);
+  //ADIS16375_readGyroData(&myIMU, &gyro_x, &gyro_y, &gyro_z);
   ADIS16375_readDeltaAngle(&myIMU, &delta_x, &delta_y, &delta_z);
-  ADIS16375_readDeltaVel(&myIMU, &dv_x, &dv_y, &dv_z);
+  //ADIS16375_readDeltaVel(&myIMU, &dv_x, &dv_y, &dv_z);
+  
+  dval_x = (delta_x*1.0)*0.005493;
+  dval_y = (delta_y*1.0)*0.005493;
+  dval_z = (delta_z*1.0)*0.005493;
+  
+  deltaAccX += dval_x;
+  deltaAccY += dval_y;
+  deltaAccZ += dval_z;
   
   GPIOIntClear(IMU_IRQ_PORT_BASE, status);
 }
@@ -366,6 +371,7 @@ main(void)
 {
    uint32_t status;
    uint8_t charUART[256];
+   uint8_t firstIMU = 0;
     
 #ifdef ENABLE_UART
     unsigned char uCom = 0;
@@ -520,11 +526,19 @@ main(void)
     ADIS16375_Init(&myIMU, cyclesdelay, IMU_CS, IMU_RST, init_spi16, SpiTransfer16);
     
 #ifdef ENABLE_UART
-    UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
+    //UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
     //ADIS16375_write(&myIMU,ADIS16375_REG_GLOB_CMD,0x8000);  
 #endif
     //ADIS16375_debug(&myIMU);
     ConfigureADIS16375Int();
+    //status = GPIOIntStatus(IMU_IRQ_PORT_BASE, true);
+    
+    GPIOIntClear(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
+    GPIOIntEnable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
+    
+    //ADIS16375_wake(&myIMU);
+    //init_spi16();
+    //UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
 #endif
     
 #ifdef ENABLE_MOTOR   
@@ -541,60 +555,77 @@ main(void)
 #ifdef ENABLE_IMU
       if(imuDataReady == 1)
       {
-        GPIOIntDisable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
-        imuDataReady = 2;
+        if(!firstIMU)
+        {
+          firstIMU = 1;
+          UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
+          ADIS16375_write(&myIMU, ADIS16375_REG_GLOB_CMD, 0x4000);
+          MAP_SysCtlDelay(40000*100);
+          ADIS16375_write(&myIMU, ADIS16375_REG_DEC_RATE, DECIMATION_COEF);
+          ADIS16375_write(&myIMU, ADIS16375_REG_NULL_CFG, 0x0A07);
+          //ADIS16375_write(&myIMU, ADIS16375_REG_GLOB_CMD, 0x0100);
+          //GPIOIntDisable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
+          imuDataReady = 0;  
+          deltaAccX = deltaAccY = deltaAccZ = 0.0;
+        }
+        else
+        {
+          //GPIOIntDisable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
+          //imuDataReady = 2;
+          imuDataReady = 0;
 #ifdef ENABLE_UART
-        /*UARTprintf("ACC_X_OUT : %d 0x%X\n",accel_x,accel_x);
-        UARTprintf("ACC_Y_OUT : %d 0x%X\n",accel_y,accel_y);
-        UARTprintf("ACC_Z_OUT : %d 0x%X\n",accel_z,accel_z);
-        
-        UARTprintf("GYRO_X_OUT : %d 0x%X\n",gyro_x,gyro_x);
-        UARTprintf("GYRO_Y_OUT : %d 0x%X\n",gyro_y,gyro_y);
-        UARTprintf("GYRO_Z_OUT : %d 0x%X\n",gyro_z,gyro_z);*/
-        
-        dval_x = (gyro_x*1.0)*0.013108;
-        dval_y = (gyro_y*1.0)*0.013108;
-        dval_z = (gyro_z*1.0)*0.013108;
-        
-        sprintf(charUART, "GYRO X : %lf\n", dval_x);
-        UARTprintf("%s",charUART);
-        sprintf(charUART, "GYRO Y : %lf\n", dval_y);
-        UARTprintf("%s",charUART);
-        sprintf(charUART, "GYRO Z : %lf\n", dval_z);
-        UARTprintf("%s",charUART);
-        
-        dval_x = (accel_x*1.0)*0.8192;
-        dval_y = (accel_y*1.0)*0.8192;
-        dval_z = (accel_z*1.0)*0.8192;
-        
-        sprintf(charUART, "ACC X : %lf\n", dval_x);
-        UARTprintf("%s",charUART);
-        sprintf(charUART, "ACC Y : %lf\n", dval_y);
-        UARTprintf("%s",charUART);
-        sprintf(charUART, "ACC Z : %lf\n", dval_z);
-        UARTprintf("%s",charUART);
-        
-        dval_x = (delta_x*1.0)*0.00543;
-        dval_y = (delta_y*1.0)*0.00543;
-        dval_z = (delta_z*1.0)*0.00543;
-        
-        sprintf(charUART, "DELTA X : %lf\n", dval_x);
-        UARTprintf("%s",charUART);
-        sprintf(charUART, "DELTA Y : %lf\n", dval_y);
-        UARTprintf("%s",charUART);
-        sprintf(charUART, "DELTA Z : %lf\n", dval_z);
-        UARTprintf("%s",charUART);
-        
-        dval_x = (dv_x*1.0)*3.0518;
-        dval_y = (dv_y*1.0)*3.0518;
-        dval_z = (dv_z*1.0)*3.0518;
-        
-        sprintf(charUART, "DELTA VEL X : %lf\n", dval_x);
-        UARTprintf("%s",charUART);
-        sprintf(charUART, "DELTA VEL Y : %lf\n", dval_y);
-        UARTprintf("%s",charUART);
-        sprintf(charUART, "DELTA VEL Z : %lf\n", dval_z);
-        UARTprintf("%s",charUART);
+          /*UARTprintf("ACC_X_OUT : %d 0x%X\n",accel_x,accel_x);
+          UARTprintf("ACC_Y_OUT : %d 0x%X\n",accel_y,accel_y);
+          UARTprintf("ACC_Z_OUT : %d 0x%X\n",accel_z,accel_z);
+          
+          UARTprintf("GYRO_X_OUT : %d 0x%X\n",gyro_x,gyro_x);
+          UARTprintf("GYRO_Y_OUT : %d 0x%X\n",gyro_y,gyro_y);
+          UARTprintf("GYRO_Z_OUT : %d 0x%X\n",gyro_z,gyro_z);*/
+          
+          /*dval_x = (gyro_x*1.0)*0.013108;
+          dval_y = (gyro_y*1.0)*0.013108;
+          dval_z = (gyro_z*1.0)*0.013108;
+          
+          sprintf(charUART, "GYRO X : %lf\n", dval_x);
+          UARTprintf("%s",charUART);
+          sprintf(charUART, "GYRO Y : %lf\n", dval_y);
+          UARTprintf("%s",charUART);
+          sprintf(charUART, "GYRO Z : %lf\n", dval_z);
+          UARTprintf("%s",charUART);
+          
+          dval_x = (accel_x*1.0)*0.8192;
+          dval_y = (accel_y*1.0)*0.8192;
+          dval_z = (accel_z*1.0)*0.8192;
+          
+          sprintf(charUART, "ACC X : %lf\n", dval_x);
+          UARTprintf("%s",charUART);
+          sprintf(charUART, "ACC Y : %lf\n", dval_y);
+          UARTprintf("%s",charUART);
+          sprintf(charUART, "ACC Z : %lf\n", dval_z);
+          UARTprintf("%s",charUART);*/
+          
+          /*dval_x = (delta_x*1.0)*0.005493;
+          dval_y = (delta_y*1.0)*0.005493;
+          dval_z = (delta_z*1.0)*0.005493;
+          
+          sprintf(charUART, "DELTA X : 0x%X %lf\n", delta_x, dval_x);
+          UARTprintf("%s",charUART);
+          sprintf(charUART, "DELTA Y : 0x%X %lf\n", delta_y, dval_y);
+          UARTprintf("%s",charUART);
+          sprintf(charUART, "DELTA Z : 0x%X %lf\n", delta_z, dval_z);
+          UARTprintf("%s",charUART);
+          
+          dval_x = (dv_x*1.0)*3.0518;
+          dval_y = (dv_y*1.0)*3.0518;
+          dval_z = (dv_z*1.0)*3.0518;
+          
+          sprintf(charUART, "DELTA VEL X : %lf\n", dval_x);
+          UARTprintf("%s",charUART);
+          sprintf(charUART, "DELTA VEL Y : %lf\n", dval_y);
+          UARTprintf("%s",charUART);
+          sprintf(charUART, "DELTA VEL Z : %lf\n", dval_z);
+          UARTprintf("%s",charUART);*/
+        }
 #endif
       }
       /*if((UART_TX_BUFFER_SIZE == UARTTxBytesFree()) && (imuDataReady == 2))
@@ -622,6 +653,7 @@ main(void)
       case '2': 
         imuDataReady = 0;
         accel_x = accel_y = accel_z = 0;
+        deltaAccX = deltaAccY = deltaAccZ = 0.0;
         status = GPIOIntStatus(IMU_IRQ_PORT_BASE, true);
         GPIOIntClear(IMU_IRQ_PORT_BASE, status);
         GPIOIntEnable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
@@ -666,9 +698,9 @@ main(void)
         sprintf(charUART, "ACC Z : %lf\n", dval_z);
         UARTprintf("%s",charUART);
         
-        dval_x = (delta_x*1.0)*0.00543;
-        dval_y = (delta_y*1.0)*0.00543;
-        dval_z = (delta_z*1.0)*0.00543;
+        dval_x = (delta_x*1.0)*0.005493;
+        dval_y = (delta_y*1.0)*0.005493;
+        dval_z = (delta_z*1.0)*0.005493;
         
         sprintf(charUART, "DELTA X : %lf\n", dval_x);
         UARTprintf("%s",charUART);
@@ -719,6 +751,20 @@ main(void)
         UARTprintf("GEN_CONFIG : 0x%X\n",(ADIS16375_read(&myIMU, 16, ADIS16375_REG_GEN_CFG) & 0x00FF));
         UARTprintf("NULL_CONFIG : 0x%X\n",(ADIS16375_read(&myIMU, 16, ADIS16375_REG_NULL_CFG) & 0x3FFF));
         UARTprintf("DEC_RATE : 0x%X\n",(ADIS16375_read(&myIMU, 16, ADIS16375_REG_DEC_RATE) & 0x07FF));
+        break;
+      case '7':
+        ADIS16375_write(&myIMU, ADIS16375_REG_GLOB_CMD, 0x0100);
+        break;
+      case '8': 
+        sprintf(charUART, "DELTA X : %lf\n", deltaAccX);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "DELTA Y : %lf\n", deltaAccY);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "DELTA Z : %lf\n", deltaAccZ);
+        UARTprintf("%s",charUART);
+        break;
+      case 'w':
+        ADIS16375_wake(&myIMU);
         break;
 #endif
       default : break;
@@ -843,7 +889,7 @@ void udp_send_data(void* sbuf, u16_t len)
 
   p = pbuf_alloc(PBUF_TRANSPORT,len,PBUF_RAM);
   memcpy (p->payload, sbuf, len);
-  err = udp_sendto(Rpcb, p, &controller_ip, 2014);
+  err = udp_sendto(Rpcb, p, &controller_ip, PORT_S);
   //err = udp_send(Spcb, p);
 
   pbuf_free(p);

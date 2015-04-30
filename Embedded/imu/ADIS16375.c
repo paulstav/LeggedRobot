@@ -12,9 +12,9 @@ extern uint8_t imuDataReady;
 
 void ADIS16375_wake(ADIS16375 *this){
     this->_cs(LOW);
-    this->_delay_cycle(1000);
+    this->_delay_cycle(2400);
     this->_cs(HIGH);
-    this->_delay_cycle(21000);
+    this->_delay_cycle(60000);
 }
 
 double ADIS16375_signed_double(unsigned char nbits, unsigned int num){
@@ -69,18 +69,20 @@ void ADIS16375_Init(ADIS16375 *this, void (* _delay_cycle)(unsigned long), void 
 	// Wake device up, incase it's sleeping
 	ADIS16375_wake(this);
         
-        // Software Reset
         //ADIS16375_write(this, ADIS16375_REG_GLOB_CMD, 0x8000);
-        //this->_delay_cycle(60000000);
+        //this->_delay_cycle(120000000);
         
         // H/W Reset
-        this->_cs(LOW);
+        /*this->_cs(LOW);
         this->_delay_cycle(10);
         this->_cs(HIGH);
-        this->_delay_cycle(60000000);
+        this->_delay_cycle(60000000);*/
         
         // Wake device up, incase it's sleeping
-	ADIS16375_wake(this);
+	//ADIS16375_wake(this);
+        
+        //ADIS16375_write(this, ADIS16375_REG_NULL_CFG, 0x0A07);
+        //ADIS16375_write(this, ADIS16375_REG_DEC_RATE, 0x1800);
         
         imuDataReady = 0;
 }
@@ -201,7 +203,7 @@ void ADIS16375_readDeltaAngle(ADIS16375 *this, int16_t* deltaX, int16_t* deltaY,
   this->_delay_cycle(1);
   this->_cs(HIGH);
   this->_delay_cycle(80);
-  reg = ADIS16375_REG_Y_DELTAANG_H_OUT;
+  reg = ADIS16375_REG_X_DELTAANG_H_OUT;
   this->_cs(LOW);
   this->_delay_cycle(1);
   *deltaZ = this->_spi_write(reg);
