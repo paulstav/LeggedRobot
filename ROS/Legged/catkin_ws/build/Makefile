@@ -228,30 +228,238 @@ gtest_main/fast:
 .PHONY : gtest_main/fast
 
 #=============================================================================
-# Target rules for targets named _motor_control_generate_messages_check_deps_Encoder
+# Target rules for targets named BL_motor_controller
 
 # Build rule for target.
-_motor_control_generate_messages_check_deps_Encoder: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _motor_control_generate_messages_check_deps_Encoder
-.PHONY : _motor_control_generate_messages_check_deps_Encoder
+BL_motor_controller: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 BL_motor_controller
+.PHONY : BL_motor_controller
 
 # fast build rule for target.
-_motor_control_generate_messages_check_deps_Encoder/fast:
-	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/build
-.PHONY : _motor_control_generate_messages_check_deps_Encoder/fast
+BL_motor_controller/fast:
+	$(MAKE) -f motor_control/CMakeFiles/BL_motor_controller.dir/build.make motor_control/CMakeFiles/BL_motor_controller.dir/build
+.PHONY : BL_motor_controller/fast
 
 #=============================================================================
-# Target rules for targets named _motor_control_generate_messages_check_deps_PWM
+# Target rules for targets named BL_motor_pid
 
 # Build rule for target.
-_motor_control_generate_messages_check_deps_PWM: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _motor_control_generate_messages_check_deps_PWM
-.PHONY : _motor_control_generate_messages_check_deps_PWM
+BL_motor_pid: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 BL_motor_pid
+.PHONY : BL_motor_pid
 
 # fast build rule for target.
-_motor_control_generate_messages_check_deps_PWM/fast:
-	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/build
-.PHONY : _motor_control_generate_messages_check_deps_PWM/fast
+BL_motor_pid/fast:
+	$(MAKE) -f motor_control/CMakeFiles/BL_motor_pid.dir/build.make motor_control/CMakeFiles/BL_motor_pid.dir/build
+.PHONY : BL_motor_pid/fast
+
+#=============================================================================
+# Target rules for targets named BR_motor_controller
+
+# Build rule for target.
+BR_motor_controller: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 BR_motor_controller
+.PHONY : BR_motor_controller
+
+# fast build rule for target.
+BR_motor_controller/fast:
+	$(MAKE) -f motor_control/CMakeFiles/BR_motor_controller.dir/build.make motor_control/CMakeFiles/BR_motor_controller.dir/build
+.PHONY : BR_motor_controller/fast
+
+#=============================================================================
+# Target rules for targets named BR_motor_pid
+
+# Build rule for target.
+BR_motor_pid: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 BR_motor_pid
+.PHONY : BR_motor_pid
+
+# fast build rule for target.
+BR_motor_pid/fast:
+	$(MAKE) -f motor_control/CMakeFiles/BR_motor_pid.dir/build.make motor_control/CMakeFiles/BR_motor_pid.dir/build
+.PHONY : BR_motor_pid/fast
+
+#=============================================================================
+# Target rules for targets named FL_Read_Position
+
+# Build rule for target.
+FL_Read_Position: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 FL_Read_Position
+.PHONY : FL_Read_Position
+
+# fast build rule for target.
+FL_Read_Position/fast:
+	$(MAKE) -f motor_control/CMakeFiles/FL_Read_Position.dir/build.make motor_control/CMakeFiles/FL_Read_Position.dir/build
+.PHONY : FL_Read_Position/fast
+
+#=============================================================================
+# Target rules for targets named FL_motor_controller
+
+# Build rule for target.
+FL_motor_controller: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 FL_motor_controller
+.PHONY : FL_motor_controller
+
+# fast build rule for target.
+FL_motor_controller/fast:
+	$(MAKE) -f motor_control/CMakeFiles/FL_motor_controller.dir/build.make motor_control/CMakeFiles/FL_motor_controller.dir/build
+.PHONY : FL_motor_controller/fast
+
+#=============================================================================
+# Target rules for targets named FL_motor_pid
+
+# Build rule for target.
+FL_motor_pid: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 FL_motor_pid
+.PHONY : FL_motor_pid
+
+# fast build rule for target.
+FL_motor_pid/fast:
+	$(MAKE) -f motor_control/CMakeFiles/FL_motor_pid.dir/build.make motor_control/CMakeFiles/FL_motor_pid.dir/build
+.PHONY : FL_motor_pid/fast
+
+#=============================================================================
+# Target rules for targets named FR_motor_controller
+
+# Build rule for target.
+FR_motor_controller: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 FR_motor_controller
+.PHONY : FR_motor_controller
+
+# fast build rule for target.
+FR_motor_controller/fast:
+	$(MAKE) -f motor_control/CMakeFiles/FR_motor_controller.dir/build.make motor_control/CMakeFiles/FR_motor_controller.dir/build
+.PHONY : FR_motor_controller/fast
+
+#=============================================================================
+# Target rules for targets named FR_motor_pid
+
+# Build rule for target.
+FR_motor_pid: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 FR_motor_pid
+.PHONY : FR_motor_pid
+
+# fast build rule for target.
+FR_motor_pid/fast:
+	$(MAKE) -f motor_control/CMakeFiles/FR_motor_pid.dir/build.make motor_control/CMakeFiles/FR_motor_pid.dir/build
+.PHONY : FR_motor_pid/fast
+
+#=============================================================================
+# Target rules for targets named _motor_control_generate_messages_check_deps_BL_Encoder
+
+# Build rule for target.
+_motor_control_generate_messages_check_deps_BL_Encoder: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _motor_control_generate_messages_check_deps_BL_Encoder
+.PHONY : _motor_control_generate_messages_check_deps_BL_Encoder
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_BL_Encoder/fast:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_BL_Encoder/fast
+
+#=============================================================================
+# Target rules for targets named _motor_control_generate_messages_check_deps_BL_PWM
+
+# Build rule for target.
+_motor_control_generate_messages_check_deps_BL_PWM: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _motor_control_generate_messages_check_deps_BL_PWM
+.PHONY : _motor_control_generate_messages_check_deps_BL_PWM
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_BL_PWM/fast:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_BL_PWM/fast
+
+#=============================================================================
+# Target rules for targets named _motor_control_generate_messages_check_deps_BR_Encoder
+
+# Build rule for target.
+_motor_control_generate_messages_check_deps_BR_Encoder: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _motor_control_generate_messages_check_deps_BR_Encoder
+.PHONY : _motor_control_generate_messages_check_deps_BR_Encoder
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_BR_Encoder/fast:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_BR_Encoder/fast
+
+#=============================================================================
+# Target rules for targets named _motor_control_generate_messages_check_deps_BR_PWM
+
+# Build rule for target.
+_motor_control_generate_messages_check_deps_BR_PWM: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _motor_control_generate_messages_check_deps_BR_PWM
+.PHONY : _motor_control_generate_messages_check_deps_BR_PWM
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_BR_PWM/fast:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_BR_PWM/fast
+
+#=============================================================================
+# Target rules for targets named _motor_control_generate_messages_check_deps_FL_Encoder
+
+# Build rule for target.
+_motor_control_generate_messages_check_deps_FL_Encoder: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _motor_control_generate_messages_check_deps_FL_Encoder
+.PHONY : _motor_control_generate_messages_check_deps_FL_Encoder
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_FL_Encoder/fast:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_FL_Encoder/fast
+
+#=============================================================================
+# Target rules for targets named _motor_control_generate_messages_check_deps_FL_PWM
+
+# Build rule for target.
+_motor_control_generate_messages_check_deps_FL_PWM: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _motor_control_generate_messages_check_deps_FL_PWM
+.PHONY : _motor_control_generate_messages_check_deps_FL_PWM
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_FL_PWM/fast:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_FL_PWM/fast
+
+#=============================================================================
+# Target rules for targets named _motor_control_generate_messages_check_deps_FR_Encoder
+
+# Build rule for target.
+_motor_control_generate_messages_check_deps_FR_Encoder: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _motor_control_generate_messages_check_deps_FR_Encoder
+.PHONY : _motor_control_generate_messages_check_deps_FR_Encoder
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_FR_Encoder/fast:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_FR_Encoder/fast
+
+#=============================================================================
+# Target rules for targets named _motor_control_generate_messages_check_deps_FR_PWM
+
+# Build rule for target.
+_motor_control_generate_messages_check_deps_FR_PWM: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _motor_control_generate_messages_check_deps_FR_PWM
+.PHONY : _motor_control_generate_messages_check_deps_FR_PWM
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_FR_PWM/fast:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_FR_PWM/fast
+
+#=============================================================================
+# Target rules for targets named _motor_control_generate_messages_check_deps_Position
+
+# Build rule for target.
+_motor_control_generate_messages_check_deps_Position: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _motor_control_generate_messages_check_deps_Position
+.PHONY : _motor_control_generate_messages_check_deps_Position
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_Position/fast:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_Position/fast
 
 #=============================================================================
 # Target rules for targets named motor_control_gencpp
@@ -343,32 +551,6 @@ motor_control_genpy: cmake_check_build_system
 motor_control_genpy/fast:
 	$(MAKE) -f motor_control/CMakeFiles/motor_control_genpy.dir/build.make motor_control/CMakeFiles/motor_control_genpy.dir/build
 .PHONY : motor_control_genpy/fast
-
-#=============================================================================
-# Target rules for targets named motor_controller
-
-# Build rule for target.
-motor_controller: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 motor_controller
-.PHONY : motor_controller
-
-# fast build rule for target.
-motor_controller/fast:
-	$(MAKE) -f motor_control/CMakeFiles/motor_controller.dir/build.make motor_control/CMakeFiles/motor_controller.dir/build
-.PHONY : motor_controller/fast
-
-#=============================================================================
-# Target rules for targets named motor_pid
-
-# Build rule for target.
-motor_pid: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 motor_pid
-.PHONY : motor_pid
-
-# fast build rule for target.
-motor_pid/fast:
-	$(MAKE) -f motor_control/CMakeFiles/motor_pid.dir/build.make motor_control/CMakeFiles/motor_pid.dir/build
-.PHONY : motor_pid/fast
 
 #=============================================================================
 # Target rules for targets named roscpp_generate_messages_cpp
@@ -506,8 +688,24 @@ help:
 	@echo "... tests"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... _motor_control_generate_messages_check_deps_Encoder"
-	@echo "... _motor_control_generate_messages_check_deps_PWM"
+	@echo "... BL_motor_controller"
+	@echo "... BL_motor_pid"
+	@echo "... BR_motor_controller"
+	@echo "... BR_motor_pid"
+	@echo "... FL_Read_Position"
+	@echo "... FL_motor_controller"
+	@echo "... FL_motor_pid"
+	@echo "... FR_motor_controller"
+	@echo "... FR_motor_pid"
+	@echo "... _motor_control_generate_messages_check_deps_BL_Encoder"
+	@echo "... _motor_control_generate_messages_check_deps_BL_PWM"
+	@echo "... _motor_control_generate_messages_check_deps_BR_Encoder"
+	@echo "... _motor_control_generate_messages_check_deps_BR_PWM"
+	@echo "... _motor_control_generate_messages_check_deps_FL_Encoder"
+	@echo "... _motor_control_generate_messages_check_deps_FL_PWM"
+	@echo "... _motor_control_generate_messages_check_deps_FR_Encoder"
+	@echo "... _motor_control_generate_messages_check_deps_FR_PWM"
+	@echo "... _motor_control_generate_messages_check_deps_Position"
 	@echo "... motor_control_gencpp"
 	@echo "... motor_control_generate_messages"
 	@echo "... motor_control_generate_messages_cpp"
@@ -515,8 +713,6 @@ help:
 	@echo "... motor_control_generate_messages_py"
 	@echo "... motor_control_genlisp"
 	@echo "... motor_control_genpy"
-	@echo "... motor_controller"
-	@echo "... motor_pid"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_py"

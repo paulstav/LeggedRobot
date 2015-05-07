@@ -7,8 +7,7 @@
   <maintainer email="pavlos.stavrou@gmail.com">Pavlos Stavrou</maintainer>
   <license>BSD</license>
   <url type="website">http://csl-ep.mech.ntua.gr/</url>
-  <author email="pavlos.stavrou@gmail.com">Pavlos Stavrou</author> -->
-
+  <author email="pavlos.stavrou@gmail.com">Pavlos Stavrou</author>
   <buildtool_depend>catkin</buildtool_depend>
 
   <build_depend>roscpp</build_depend>

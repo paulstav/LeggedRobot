@@ -150,32 +150,256 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/rule:
-	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/rule
-.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/rule
+motor_control/CMakeFiles/BL_motor_controller.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/BL_motor_controller.dir/rule
+.PHONY : motor_control/CMakeFiles/BL_motor_controller.dir/rule
 
 # Convenience name for target.
-_motor_control_generate_messages_check_deps_Encoder: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/rule
-.PHONY : _motor_control_generate_messages_check_deps_Encoder
+BL_motor_controller: motor_control/CMakeFiles/BL_motor_controller.dir/rule
+.PHONY : BL_motor_controller
 
 # fast build rule for target.
-_motor_control_generate_messages_check_deps_Encoder/fast:
-	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/build
-.PHONY : _motor_control_generate_messages_check_deps_Encoder/fast
+BL_motor_controller/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BL_motor_controller.dir/build.make motor_control/CMakeFiles/BL_motor_controller.dir/build
+.PHONY : BL_motor_controller/fast
 
 # Convenience name for target.
-motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/rule:
-	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/rule
-.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/rule
+motor_control/CMakeFiles/BL_motor_pid.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/BL_motor_pid.dir/rule
+.PHONY : motor_control/CMakeFiles/BL_motor_pid.dir/rule
 
 # Convenience name for target.
-_motor_control_generate_messages_check_deps_PWM: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/rule
-.PHONY : _motor_control_generate_messages_check_deps_PWM
+BL_motor_pid: motor_control/CMakeFiles/BL_motor_pid.dir/rule
+.PHONY : BL_motor_pid
 
 # fast build rule for target.
-_motor_control_generate_messages_check_deps_PWM/fast:
-	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/build
-.PHONY : _motor_control_generate_messages_check_deps_PWM/fast
+BL_motor_pid/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BL_motor_pid.dir/build.make motor_control/CMakeFiles/BL_motor_pid.dir/build
+.PHONY : BL_motor_pid/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/BR_motor_controller.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/BR_motor_controller.dir/rule
+.PHONY : motor_control/CMakeFiles/BR_motor_controller.dir/rule
+
+# Convenience name for target.
+BR_motor_controller: motor_control/CMakeFiles/BR_motor_controller.dir/rule
+.PHONY : BR_motor_controller
+
+# fast build rule for target.
+BR_motor_controller/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BR_motor_controller.dir/build.make motor_control/CMakeFiles/BR_motor_controller.dir/build
+.PHONY : BR_motor_controller/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/BR_motor_pid.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/BR_motor_pid.dir/rule
+.PHONY : motor_control/CMakeFiles/BR_motor_pid.dir/rule
+
+# Convenience name for target.
+BR_motor_pid: motor_control/CMakeFiles/BR_motor_pid.dir/rule
+.PHONY : BR_motor_pid
+
+# fast build rule for target.
+BR_motor_pid/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BR_motor_pid.dir/build.make motor_control/CMakeFiles/BR_motor_pid.dir/build
+.PHONY : BR_motor_pid/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/FL_Read_Position.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/FL_Read_Position.dir/rule
+.PHONY : motor_control/CMakeFiles/FL_Read_Position.dir/rule
+
+# Convenience name for target.
+FL_Read_Position: motor_control/CMakeFiles/FL_Read_Position.dir/rule
+.PHONY : FL_Read_Position
+
+# fast build rule for target.
+FL_Read_Position/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FL_Read_Position.dir/build.make motor_control/CMakeFiles/FL_Read_Position.dir/build
+.PHONY : FL_Read_Position/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/FL_motor_controller.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/FL_motor_controller.dir/rule
+.PHONY : motor_control/CMakeFiles/FL_motor_controller.dir/rule
+
+# Convenience name for target.
+FL_motor_controller: motor_control/CMakeFiles/FL_motor_controller.dir/rule
+.PHONY : FL_motor_controller
+
+# fast build rule for target.
+FL_motor_controller/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FL_motor_controller.dir/build.make motor_control/CMakeFiles/FL_motor_controller.dir/build
+.PHONY : FL_motor_controller/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/FL_motor_pid.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/FL_motor_pid.dir/rule
+.PHONY : motor_control/CMakeFiles/FL_motor_pid.dir/rule
+
+# Convenience name for target.
+FL_motor_pid: motor_control/CMakeFiles/FL_motor_pid.dir/rule
+.PHONY : FL_motor_pid
+
+# fast build rule for target.
+FL_motor_pid/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FL_motor_pid.dir/build.make motor_control/CMakeFiles/FL_motor_pid.dir/build
+.PHONY : FL_motor_pid/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/FR_motor_controller.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/FR_motor_controller.dir/rule
+.PHONY : motor_control/CMakeFiles/FR_motor_controller.dir/rule
+
+# Convenience name for target.
+FR_motor_controller: motor_control/CMakeFiles/FR_motor_controller.dir/rule
+.PHONY : FR_motor_controller
+
+# fast build rule for target.
+FR_motor_controller/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FR_motor_controller.dir/build.make motor_control/CMakeFiles/FR_motor_controller.dir/build
+.PHONY : FR_motor_controller/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/FR_motor_pid.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/FR_motor_pid.dir/rule
+.PHONY : motor_control/CMakeFiles/FR_motor_pid.dir/rule
+
+# Convenience name for target.
+FR_motor_pid: motor_control/CMakeFiles/FR_motor_pid.dir/rule
+.PHONY : FR_motor_pid
+
+# fast build rule for target.
+FR_motor_pid/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FR_motor_pid.dir/build.make motor_control/CMakeFiles/FR_motor_pid.dir/build
+.PHONY : FR_motor_pid/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/rule
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_BL_Encoder: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_BL_Encoder
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_BL_Encoder/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_BL_Encoder/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/rule
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_BL_PWM: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_BL_PWM
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_BL_PWM/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_BL_PWM/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/rule
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_BR_Encoder: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_BR_Encoder
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_BR_Encoder/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_BR_Encoder/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/rule
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_BR_PWM: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_BR_PWM
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_BR_PWM/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_BR_PWM/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/rule
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_FL_Encoder: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_FL_Encoder
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_FL_Encoder/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_FL_Encoder/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/rule
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_FL_PWM: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_FL_PWM
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_FL_PWM/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_FL_PWM/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/rule
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_FR_Encoder: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_FR_Encoder
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_FR_Encoder/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_FR_Encoder/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/rule
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_FR_PWM: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_FR_PWM
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_FR_PWM/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_FR_PWM/fast
+
+# Convenience name for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/rule:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/rule
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_Position: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_Position
+
+# fast build rule for target.
+_motor_control_generate_messages_check_deps_Position/fast:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/build
+.PHONY : _motor_control_generate_messages_check_deps_Position/fast
 
 # Convenience name for target.
 motor_control/CMakeFiles/motor_control_gencpp.dir/rule:
@@ -274,34 +498,6 @@ motor_control_genpy: motor_control/CMakeFiles/motor_control_genpy.dir/rule
 motor_control_genpy/fast:
 	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/motor_control_genpy.dir/build.make motor_control/CMakeFiles/motor_control_genpy.dir/build
 .PHONY : motor_control_genpy/fast
-
-# Convenience name for target.
-motor_control/CMakeFiles/motor_controller.dir/rule:
-	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/motor_controller.dir/rule
-.PHONY : motor_control/CMakeFiles/motor_controller.dir/rule
-
-# Convenience name for target.
-motor_controller: motor_control/CMakeFiles/motor_controller.dir/rule
-.PHONY : motor_controller
-
-# fast build rule for target.
-motor_controller/fast:
-	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/motor_controller.dir/build.make motor_control/CMakeFiles/motor_controller.dir/build
-.PHONY : motor_controller/fast
-
-# Convenience name for target.
-motor_control/CMakeFiles/motor_pid.dir/rule:
-	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/motor_pid.dir/rule
-.PHONY : motor_control/CMakeFiles/motor_pid.dir/rule
-
-# Convenience name for target.
-motor_pid: motor_control/CMakeFiles/motor_pid.dir/rule
-.PHONY : motor_pid
-
-# fast build rule for target.
-motor_pid/fast:
-	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/motor_pid.dir/build.make motor_control/CMakeFiles/motor_pid.dir/build
-.PHONY : motor_pid/fast
 
 # Convenience name for target.
 motor_control/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
@@ -429,53 +625,221 @@ std_msgs_generate_messages_py/fast:
 	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/std_msgs_generate_messages_py.dir/build.make motor_control/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
 
-src/motor_controller.o: src/motor_controller.cpp.o
-.PHONY : src/motor_controller.o
+src/BL_motor_controller.o: src/BL_motor_controller.cpp.o
+.PHONY : src/BL_motor_controller.o
 
 # target to build an object file
-src/motor_controller.cpp.o:
-	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/motor_controller.dir/build.make motor_control/CMakeFiles/motor_controller.dir/src/motor_controller.cpp.o
-.PHONY : src/motor_controller.cpp.o
+src/BL_motor_controller.cpp.o:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BL_motor_controller.dir/build.make motor_control/CMakeFiles/BL_motor_controller.dir/src/BL_motor_controller.cpp.o
+.PHONY : src/BL_motor_controller.cpp.o
 
-src/motor_controller.i: src/motor_controller.cpp.i
-.PHONY : src/motor_controller.i
+src/BL_motor_controller.i: src/BL_motor_controller.cpp.i
+.PHONY : src/BL_motor_controller.i
 
 # target to preprocess a source file
-src/motor_controller.cpp.i:
-	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/motor_controller.dir/build.make motor_control/CMakeFiles/motor_controller.dir/src/motor_controller.cpp.i
-.PHONY : src/motor_controller.cpp.i
+src/BL_motor_controller.cpp.i:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BL_motor_controller.dir/build.make motor_control/CMakeFiles/BL_motor_controller.dir/src/BL_motor_controller.cpp.i
+.PHONY : src/BL_motor_controller.cpp.i
 
-src/motor_controller.s: src/motor_controller.cpp.s
-.PHONY : src/motor_controller.s
+src/BL_motor_controller.s: src/BL_motor_controller.cpp.s
+.PHONY : src/BL_motor_controller.s
 
 # target to generate assembly for a file
-src/motor_controller.cpp.s:
-	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/motor_controller.dir/build.make motor_control/CMakeFiles/motor_controller.dir/src/motor_controller.cpp.s
-.PHONY : src/motor_controller.cpp.s
+src/BL_motor_controller.cpp.s:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BL_motor_controller.dir/build.make motor_control/CMakeFiles/BL_motor_controller.dir/src/BL_motor_controller.cpp.s
+.PHONY : src/BL_motor_controller.cpp.s
 
-src/motor_pid.o: src/motor_pid.cpp.o
-.PHONY : src/motor_pid.o
+src/BL_motor_pid.o: src/BL_motor_pid.cpp.o
+.PHONY : src/BL_motor_pid.o
 
 # target to build an object file
-src/motor_pid.cpp.o:
-	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/motor_pid.dir/build.make motor_control/CMakeFiles/motor_pid.dir/src/motor_pid.cpp.o
-.PHONY : src/motor_pid.cpp.o
+src/BL_motor_pid.cpp.o:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BL_motor_pid.dir/build.make motor_control/CMakeFiles/BL_motor_pid.dir/src/BL_motor_pid.cpp.o
+.PHONY : src/BL_motor_pid.cpp.o
 
-src/motor_pid.i: src/motor_pid.cpp.i
-.PHONY : src/motor_pid.i
+src/BL_motor_pid.i: src/BL_motor_pid.cpp.i
+.PHONY : src/BL_motor_pid.i
 
 # target to preprocess a source file
-src/motor_pid.cpp.i:
-	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/motor_pid.dir/build.make motor_control/CMakeFiles/motor_pid.dir/src/motor_pid.cpp.i
-.PHONY : src/motor_pid.cpp.i
+src/BL_motor_pid.cpp.i:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BL_motor_pid.dir/build.make motor_control/CMakeFiles/BL_motor_pid.dir/src/BL_motor_pid.cpp.i
+.PHONY : src/BL_motor_pid.cpp.i
 
-src/motor_pid.s: src/motor_pid.cpp.s
-.PHONY : src/motor_pid.s
+src/BL_motor_pid.s: src/BL_motor_pid.cpp.s
+.PHONY : src/BL_motor_pid.s
 
 # target to generate assembly for a file
-src/motor_pid.cpp.s:
-	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/motor_pid.dir/build.make motor_control/CMakeFiles/motor_pid.dir/src/motor_pid.cpp.s
-.PHONY : src/motor_pid.cpp.s
+src/BL_motor_pid.cpp.s:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BL_motor_pid.dir/build.make motor_control/CMakeFiles/BL_motor_pid.dir/src/BL_motor_pid.cpp.s
+.PHONY : src/BL_motor_pid.cpp.s
+
+src/BR_motor_controller.o: src/BR_motor_controller.cpp.o
+.PHONY : src/BR_motor_controller.o
+
+# target to build an object file
+src/BR_motor_controller.cpp.o:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BR_motor_controller.dir/build.make motor_control/CMakeFiles/BR_motor_controller.dir/src/BR_motor_controller.cpp.o
+.PHONY : src/BR_motor_controller.cpp.o
+
+src/BR_motor_controller.i: src/BR_motor_controller.cpp.i
+.PHONY : src/BR_motor_controller.i
+
+# target to preprocess a source file
+src/BR_motor_controller.cpp.i:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BR_motor_controller.dir/build.make motor_control/CMakeFiles/BR_motor_controller.dir/src/BR_motor_controller.cpp.i
+.PHONY : src/BR_motor_controller.cpp.i
+
+src/BR_motor_controller.s: src/BR_motor_controller.cpp.s
+.PHONY : src/BR_motor_controller.s
+
+# target to generate assembly for a file
+src/BR_motor_controller.cpp.s:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BR_motor_controller.dir/build.make motor_control/CMakeFiles/BR_motor_controller.dir/src/BR_motor_controller.cpp.s
+.PHONY : src/BR_motor_controller.cpp.s
+
+src/BR_motor_pid.o: src/BR_motor_pid.cpp.o
+.PHONY : src/BR_motor_pid.o
+
+# target to build an object file
+src/BR_motor_pid.cpp.o:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BR_motor_pid.dir/build.make motor_control/CMakeFiles/BR_motor_pid.dir/src/BR_motor_pid.cpp.o
+.PHONY : src/BR_motor_pid.cpp.o
+
+src/BR_motor_pid.i: src/BR_motor_pid.cpp.i
+.PHONY : src/BR_motor_pid.i
+
+# target to preprocess a source file
+src/BR_motor_pid.cpp.i:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BR_motor_pid.dir/build.make motor_control/CMakeFiles/BR_motor_pid.dir/src/BR_motor_pid.cpp.i
+.PHONY : src/BR_motor_pid.cpp.i
+
+src/BR_motor_pid.s: src/BR_motor_pid.cpp.s
+.PHONY : src/BR_motor_pid.s
+
+# target to generate assembly for a file
+src/BR_motor_pid.cpp.s:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/BR_motor_pid.dir/build.make motor_control/CMakeFiles/BR_motor_pid.dir/src/BR_motor_pid.cpp.s
+.PHONY : src/BR_motor_pid.cpp.s
+
+src/FL_Read_Position.o: src/FL_Read_Position.cpp.o
+.PHONY : src/FL_Read_Position.o
+
+# target to build an object file
+src/FL_Read_Position.cpp.o:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FL_Read_Position.dir/build.make motor_control/CMakeFiles/FL_Read_Position.dir/src/FL_Read_Position.cpp.o
+.PHONY : src/FL_Read_Position.cpp.o
+
+src/FL_Read_Position.i: src/FL_Read_Position.cpp.i
+.PHONY : src/FL_Read_Position.i
+
+# target to preprocess a source file
+src/FL_Read_Position.cpp.i:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FL_Read_Position.dir/build.make motor_control/CMakeFiles/FL_Read_Position.dir/src/FL_Read_Position.cpp.i
+.PHONY : src/FL_Read_Position.cpp.i
+
+src/FL_Read_Position.s: src/FL_Read_Position.cpp.s
+.PHONY : src/FL_Read_Position.s
+
+# target to generate assembly for a file
+src/FL_Read_Position.cpp.s:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FL_Read_Position.dir/build.make motor_control/CMakeFiles/FL_Read_Position.dir/src/FL_Read_Position.cpp.s
+.PHONY : src/FL_Read_Position.cpp.s
+
+src/FL_motor_controller.o: src/FL_motor_controller.cpp.o
+.PHONY : src/FL_motor_controller.o
+
+# target to build an object file
+src/FL_motor_controller.cpp.o:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FL_motor_controller.dir/build.make motor_control/CMakeFiles/FL_motor_controller.dir/src/FL_motor_controller.cpp.o
+.PHONY : src/FL_motor_controller.cpp.o
+
+src/FL_motor_controller.i: src/FL_motor_controller.cpp.i
+.PHONY : src/FL_motor_controller.i
+
+# target to preprocess a source file
+src/FL_motor_controller.cpp.i:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FL_motor_controller.dir/build.make motor_control/CMakeFiles/FL_motor_controller.dir/src/FL_motor_controller.cpp.i
+.PHONY : src/FL_motor_controller.cpp.i
+
+src/FL_motor_controller.s: src/FL_motor_controller.cpp.s
+.PHONY : src/FL_motor_controller.s
+
+# target to generate assembly for a file
+src/FL_motor_controller.cpp.s:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FL_motor_controller.dir/build.make motor_control/CMakeFiles/FL_motor_controller.dir/src/FL_motor_controller.cpp.s
+.PHONY : src/FL_motor_controller.cpp.s
+
+src/FL_motor_pid.o: src/FL_motor_pid.cpp.o
+.PHONY : src/FL_motor_pid.o
+
+# target to build an object file
+src/FL_motor_pid.cpp.o:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FL_motor_pid.dir/build.make motor_control/CMakeFiles/FL_motor_pid.dir/src/FL_motor_pid.cpp.o
+.PHONY : src/FL_motor_pid.cpp.o
+
+src/FL_motor_pid.i: src/FL_motor_pid.cpp.i
+.PHONY : src/FL_motor_pid.i
+
+# target to preprocess a source file
+src/FL_motor_pid.cpp.i:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FL_motor_pid.dir/build.make motor_control/CMakeFiles/FL_motor_pid.dir/src/FL_motor_pid.cpp.i
+.PHONY : src/FL_motor_pid.cpp.i
+
+src/FL_motor_pid.s: src/FL_motor_pid.cpp.s
+.PHONY : src/FL_motor_pid.s
+
+# target to generate assembly for a file
+src/FL_motor_pid.cpp.s:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FL_motor_pid.dir/build.make motor_control/CMakeFiles/FL_motor_pid.dir/src/FL_motor_pid.cpp.s
+.PHONY : src/FL_motor_pid.cpp.s
+
+src/FR_motor_controller.o: src/FR_motor_controller.cpp.o
+.PHONY : src/FR_motor_controller.o
+
+# target to build an object file
+src/FR_motor_controller.cpp.o:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FR_motor_controller.dir/build.make motor_control/CMakeFiles/FR_motor_controller.dir/src/FR_motor_controller.cpp.o
+.PHONY : src/FR_motor_controller.cpp.o
+
+src/FR_motor_controller.i: src/FR_motor_controller.cpp.i
+.PHONY : src/FR_motor_controller.i
+
+# target to preprocess a source file
+src/FR_motor_controller.cpp.i:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FR_motor_controller.dir/build.make motor_control/CMakeFiles/FR_motor_controller.dir/src/FR_motor_controller.cpp.i
+.PHONY : src/FR_motor_controller.cpp.i
+
+src/FR_motor_controller.s: src/FR_motor_controller.cpp.s
+.PHONY : src/FR_motor_controller.s
+
+# target to generate assembly for a file
+src/FR_motor_controller.cpp.s:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FR_motor_controller.dir/build.make motor_control/CMakeFiles/FR_motor_controller.dir/src/FR_motor_controller.cpp.s
+.PHONY : src/FR_motor_controller.cpp.s
+
+src/FR_motor_pid.o: src/FR_motor_pid.cpp.o
+.PHONY : src/FR_motor_pid.o
+
+# target to build an object file
+src/FR_motor_pid.cpp.o:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FR_motor_pid.dir/build.make motor_control/CMakeFiles/FR_motor_pid.dir/src/FR_motor_pid.cpp.o
+.PHONY : src/FR_motor_pid.cpp.o
+
+src/FR_motor_pid.i: src/FR_motor_pid.cpp.i
+.PHONY : src/FR_motor_pid.i
+
+# target to preprocess a source file
+src/FR_motor_pid.cpp.i:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FR_motor_pid.dir/build.make motor_control/CMakeFiles/FR_motor_pid.dir/src/FR_motor_pid.cpp.i
+.PHONY : src/FR_motor_pid.cpp.i
+
+src/FR_motor_pid.s: src/FR_motor_pid.cpp.s
+.PHONY : src/FR_motor_pid.s
+
+# target to generate assembly for a file
+src/FR_motor_pid.cpp.s:
+	cd /home/legged/Legged/catkin_ws/build && $(MAKE) -f motor_control/CMakeFiles/FR_motor_pid.dir/build.make motor_control/CMakeFiles/FR_motor_pid.dir/src/FR_motor_pid.cpp.s
+.PHONY : src/FR_motor_pid.cpp.s
 
 # Help Target
 help:
@@ -483,8 +847,24 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... _motor_control_generate_messages_check_deps_Encoder"
-	@echo "... _motor_control_generate_messages_check_deps_PWM"
+	@echo "... BL_motor_controller"
+	@echo "... BL_motor_pid"
+	@echo "... BR_motor_controller"
+	@echo "... BR_motor_pid"
+	@echo "... FL_Read_Position"
+	@echo "... FL_motor_controller"
+	@echo "... FL_motor_pid"
+	@echo "... FR_motor_controller"
+	@echo "... FR_motor_pid"
+	@echo "... _motor_control_generate_messages_check_deps_BL_Encoder"
+	@echo "... _motor_control_generate_messages_check_deps_BL_PWM"
+	@echo "... _motor_control_generate_messages_check_deps_BR_Encoder"
+	@echo "... _motor_control_generate_messages_check_deps_BR_PWM"
+	@echo "... _motor_control_generate_messages_check_deps_FL_Encoder"
+	@echo "... _motor_control_generate_messages_check_deps_FL_PWM"
+	@echo "... _motor_control_generate_messages_check_deps_FR_Encoder"
+	@echo "... _motor_control_generate_messages_check_deps_FR_PWM"
+	@echo "... _motor_control_generate_messages_check_deps_Position"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
@@ -497,8 +877,6 @@ help:
 	@echo "... motor_control_generate_messages_py"
 	@echo "... motor_control_genlisp"
 	@echo "... motor_control_genpy"
-	@echo "... motor_controller"
-	@echo "... motor_pid"
 	@echo "... rebuild_cache"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_lisp"
@@ -510,12 +888,33 @@ help:
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... test"
-	@echo "... src/motor_controller.o"
-	@echo "... src/motor_controller.i"
-	@echo "... src/motor_controller.s"
-	@echo "... src/motor_pid.o"
-	@echo "... src/motor_pid.i"
-	@echo "... src/motor_pid.s"
+	@echo "... src/BL_motor_controller.o"
+	@echo "... src/BL_motor_controller.i"
+	@echo "... src/BL_motor_controller.s"
+	@echo "... src/BL_motor_pid.o"
+	@echo "... src/BL_motor_pid.i"
+	@echo "... src/BL_motor_pid.s"
+	@echo "... src/BR_motor_controller.o"
+	@echo "... src/BR_motor_controller.i"
+	@echo "... src/BR_motor_controller.s"
+	@echo "... src/BR_motor_pid.o"
+	@echo "... src/BR_motor_pid.i"
+	@echo "... src/BR_motor_pid.s"
+	@echo "... src/FL_Read_Position.o"
+	@echo "... src/FL_Read_Position.i"
+	@echo "... src/FL_Read_Position.s"
+	@echo "... src/FL_motor_controller.o"
+	@echo "... src/FL_motor_controller.i"
+	@echo "... src/FL_motor_controller.s"
+	@echo "... src/FL_motor_pid.o"
+	@echo "... src/FL_motor_pid.i"
+	@echo "... src/FL_motor_pid.s"
+	@echo "... src/FR_motor_controller.o"
+	@echo "... src/FR_motor_controller.i"
+	@echo "... src/FR_motor_controller.s"
+	@echo "... src/FR_motor_pid.o"
+	@echo "... src/FR_motor_pid.i"
+	@echo "... src/FR_motor_pid.s"
 .PHONY : help
 
 

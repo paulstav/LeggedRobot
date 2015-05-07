@@ -34,8 +34,15 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/motor_control/msg" TYPE FILE FILES
-    "/home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg"
-    "/home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg"
+    "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg"
+    "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg"
+    "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg"
+    "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg"
+    "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg"
+    "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg"
+    "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg"
+    "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg"
+    "/home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg"
     )
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 

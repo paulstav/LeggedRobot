@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg;/home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg"
+messages_str = "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg;/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg;/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg;/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg;/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg;/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg;/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg;/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg;/home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg"
 services_str = ""
 pkg_name = "motor_control"
 dependencies_str = "std_msgs"

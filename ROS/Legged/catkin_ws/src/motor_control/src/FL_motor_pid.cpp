@@ -7,6 +7,7 @@
 #include "ros/ros.h"
 #include "motor_control/FL_Encoder.h"
 #include "motor_control/FL_PWM.h"
+#include "motor_control/Position.h"
 
 #include <sstream>
 
@@ -73,12 +74,17 @@ void encoderCallback(const motor_control::FL_Encoder::ConstPtr& msg)
  //}
 }
 
+void positionCallback(const motor_control::Position::ConstPtr& msg)
+{
+ desiredPos = (int32_t)msg->desiredPos;
+}
+
 int main(int argc, char **argv)
 {
   int i, msg_count;
   motor_control::FL_Encoder encoder_msg;
   moveVelocity = SATURATION_POS;
-  desiredPos = 102000;
+  desiredPos = 0;
   
   msg_count = 0;
   
@@ -88,6 +94,7 @@ int main(int argc, char **argv)
   ros::NodeHandle n;
   ros::Publisher motor_pid_pub = n.advertise<motor_control::FL_PWM>("FL_pwm_feedback", 1000);
   ros::Subscriber motor_controller_sub = n.subscribe("FL_encoder_feedback", 1000, encoderCallback);
+  ros::Subscriber motor_position_sub = n.subscribe("FL_Position", 1000, positionCallback);
   ros::Rate loop_rate(12000);
   
   ROS_INFO("Staring communication with FL Motor Controller node.");

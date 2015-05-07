@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "motor_control: 2 messages, 0 services")
+message(STATUS "motor_control: 9 messages, 0 services")
 
 set(MSG_I_FLAGS "-Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg;-Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg")
 
@@ -15,14 +15,49 @@ add_custom_target(motor_control_generate_messages ALL)
 
 
 
-get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg" NAME_WE)
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg" NAME_WE)
 add_custom_target(_motor_control_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "motor_control" "/home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "motor_control" "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg" ""
 )
 
-get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg" NAME_WE)
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg" NAME_WE)
 add_custom_target(_motor_control_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "motor_control" "/home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "motor_control" "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg" ""
+)
+
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg" NAME_WE)
+add_custom_target(_motor_control_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "motor_control" "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg" ""
+)
+
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg" NAME_WE)
+add_custom_target(_motor_control_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "motor_control" "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg" ""
+)
+
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg" NAME_WE)
+add_custom_target(_motor_control_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "motor_control" "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg" ""
+)
+
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg" NAME_WE)
+add_custom_target(_motor_control_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "motor_control" "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg" ""
+)
+
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg" NAME_WE)
+add_custom_target(_motor_control_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "motor_control" "/home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg" ""
+)
+
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg" NAME_WE)
+add_custom_target(_motor_control_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "motor_control" "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg" ""
+)
+
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg" NAME_WE)
+add_custom_target(_motor_control_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "motor_control" "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg" ""
 )
 
 #
@@ -32,13 +67,55 @@ add_custom_target(_motor_control_generate_messages_check_deps_${_filename}
 ### Section generating for lang: gencpp
 ### Generating Messages
 _generate_msg_cpp(motor_control
-  "/home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg"
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/motor_control
 )
 _generate_msg_cpp(motor_control
-  "/home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg"
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/motor_control
+)
+_generate_msg_cpp(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/motor_control
+)
+_generate_msg_cpp(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/motor_control
+)
+_generate_msg_cpp(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/motor_control
+)
+_generate_msg_cpp(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/motor_control
+)
+_generate_msg_cpp(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/motor_control
+)
+_generate_msg_cpp(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/motor_control
+)
+_generate_msg_cpp(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/motor_control
@@ -58,9 +135,23 @@ add_custom_target(motor_control_generate_messages_cpp
 add_dependencies(motor_control_generate_messages motor_control_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg" NAME_WE)
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg" NAME_WE)
 add_dependencies(motor_control_generate_messages_cpp _motor_control_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg" NAME_WE)
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_cpp _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_cpp _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_cpp _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_cpp _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_cpp _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_cpp _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_cpp _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg" NAME_WE)
 add_dependencies(motor_control_generate_messages_cpp _motor_control_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -73,13 +164,55 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS motor_control_generate_messages_cpp
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(motor_control
-  "/home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg"
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/motor_control
 )
 _generate_msg_lisp(motor_control
-  "/home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg"
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/motor_control
+)
+_generate_msg_lisp(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/motor_control
+)
+_generate_msg_lisp(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/motor_control
+)
+_generate_msg_lisp(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/motor_control
+)
+_generate_msg_lisp(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/motor_control
+)
+_generate_msg_lisp(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/motor_control
+)
+_generate_msg_lisp(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/motor_control
+)
+_generate_msg_lisp(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/motor_control
@@ -99,9 +232,23 @@ add_custom_target(motor_control_generate_messages_lisp
 add_dependencies(motor_control_generate_messages motor_control_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg" NAME_WE)
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg" NAME_WE)
 add_dependencies(motor_control_generate_messages_lisp _motor_control_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg" NAME_WE)
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_lisp _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_lisp _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_lisp _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_lisp _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_lisp _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_lisp _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_lisp _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg" NAME_WE)
 add_dependencies(motor_control_generate_messages_lisp _motor_control_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -114,13 +261,55 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS motor_control_generate_messages_lis
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(motor_control
-  "/home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg"
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/motor_control
 )
 _generate_msg_py(motor_control
-  "/home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg"
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/motor_control
+)
+_generate_msg_py(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/motor_control
+)
+_generate_msg_py(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/motor_control
+)
+_generate_msg_py(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/motor_control
+)
+_generate_msg_py(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/motor_control
+)
+_generate_msg_py(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/motor_control
+)
+_generate_msg_py(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/motor_control
+)
+_generate_msg_py(motor_control
+  "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/motor_control
@@ -140,9 +329,23 @@ add_custom_target(motor_control_generate_messages_py
 add_dependencies(motor_control_generate_messages motor_control_generate_messages_py)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg" NAME_WE)
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg" NAME_WE)
 add_dependencies(motor_control_generate_messages_py _motor_control_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg" NAME_WE)
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_py _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_py _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_py _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_py _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_py _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_py _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg" NAME_WE)
+add_dependencies(motor_control_generate_messages_py _motor_control_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg" NAME_WE)
 add_dependencies(motor_control_generate_messages_py _motor_control_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

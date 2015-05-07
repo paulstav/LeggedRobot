@@ -45,32 +45,95 @@ CMAKE_BINARY_DIR = /home/legged/Legged/catkin_ws/build
 # Include the progress variables for this target.
 include motor_control/CMakeFiles/motor_control_generate_messages_py.dir/progress.make
 
-motor_control/CMakeFiles/motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_Encoder.py
-motor_control/CMakeFiles/motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_PWM.py
+motor_control/CMakeFiles/motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FR_Encoder.py
+motor_control/CMakeFiles/motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BR_PWM.py
+motor_control/CMakeFiles/motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BL_PWM.py
+motor_control/CMakeFiles/motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_Position.py
+motor_control/CMakeFiles/motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FL_Encoder.py
+motor_control/CMakeFiles/motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FR_PWM.py
+motor_control/CMakeFiles/motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FL_PWM.py
+motor_control/CMakeFiles/motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BR_Encoder.py
+motor_control/CMakeFiles/motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BL_Encoder.py
 motor_control/CMakeFiles/motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/__init__.py
 
-/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_Encoder.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py
-/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_Encoder.py: /home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FR_Encoder.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FR_Encoder.py: /home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python from MSG motor_control/Encoder"
-	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python from MSG motor_control/FR_Encoder"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg
 
-/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_PWM.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py
-/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_PWM.py: /home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BR_PWM.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BR_PWM.py: /home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python from MSG motor_control/PWM"
-	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python from MSG motor_control/BR_PWM"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg
+
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BL_PWM.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BL_PWM.py: /home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python from MSG motor_control/BL_PWM"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg
+
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_Position.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_Position.py: /home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python from MSG motor_control/Position"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg
+
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FL_Encoder.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FL_Encoder.py: /home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python from MSG motor_control/FL_Encoder"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg
+
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FR_PWM.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FR_PWM.py: /home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python from MSG motor_control/FR_PWM"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg
+
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FL_PWM.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FL_PWM.py: /home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python from MSG motor_control/FL_PWM"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg
+
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BR_Encoder.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BR_Encoder.py: /home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python from MSG motor_control/BR_Encoder"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg
+
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BL_Encoder.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BL_Encoder.py: /home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python from MSG motor_control/BL_Encoder"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg
 
 /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/__init__.py: /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py
-/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/__init__.py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_Encoder.py
-/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/__init__.py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_PWM.py
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_3)
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/__init__.py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FR_Encoder.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/__init__.py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BR_PWM.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/__init__.py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BL_PWM.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/__init__.py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_Position.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/__init__.py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FL_Encoder.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/__init__.py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FR_PWM.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/__init__.py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FL_PWM.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/__init__.py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BR_Encoder.py
+/home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/__init__.py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BL_Encoder.py
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Python msg __init__.py for motor_control"
 	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg --initpy
 
 motor_control_generate_messages_py: motor_control/CMakeFiles/motor_control_generate_messages_py
-motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_Encoder.py
-motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_PWM.py
+motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FR_Encoder.py
+motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BR_PWM.py
+motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BL_PWM.py
+motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_Position.py
+motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FL_Encoder.py
+motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FR_PWM.py
+motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_FL_PWM.py
+motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BR_Encoder.py
+motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/_BL_Encoder.py
 motor_control_generate_messages_py: /home/legged/Legged/catkin_ws/devel/lib/python2.7/dist-packages/motor_control/msg/__init__.py
 motor_control_generate_messages_py: motor_control/CMakeFiles/motor_control_generate_messages_py.dir/build.make
 .PHONY : motor_control_generate_messages_py

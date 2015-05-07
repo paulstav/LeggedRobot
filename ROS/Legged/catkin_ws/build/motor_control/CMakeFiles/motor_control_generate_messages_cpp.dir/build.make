@@ -45,26 +45,89 @@ CMAKE_BINARY_DIR = /home/legged/Legged/catkin_ws/build
 # Include the progress variables for this target.
 include motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/progress.make
 
-motor_control/CMakeFiles/motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/Encoder.h
-motor_control/CMakeFiles/motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/PWM.h
+motor_control/CMakeFiles/motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/FR_Encoder.h
+motor_control/CMakeFiles/motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/BR_PWM.h
+motor_control/CMakeFiles/motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/BL_PWM.h
+motor_control/CMakeFiles/motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/Position.h
+motor_control/CMakeFiles/motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/FL_Encoder.h
+motor_control/CMakeFiles/motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/FR_PWM.h
+motor_control/CMakeFiles/motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/FL_PWM.h
+motor_control/CMakeFiles/motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/BR_Encoder.h
+motor_control/CMakeFiles/motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/BL_Encoder.h
 
-/home/legged/Legged/catkin_ws/devel/include/motor_control/Encoder.h: /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py
-/home/legged/Legged/catkin_ws/devel/include/motor_control/Encoder.h: /home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg
-/home/legged/Legged/catkin_ws/devel/include/motor_control/Encoder.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
+/home/legged/Legged/catkin_ws/devel/include/motor_control/FR_Encoder.h: /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py
+/home/legged/Legged/catkin_ws/devel/include/motor_control/FR_Encoder.h: /home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg
+/home/legged/Legged/catkin_ws/devel/include/motor_control/FR_Encoder.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from motor_control/Encoder.msg"
-	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/include/motor_control -e /opt/ros/indigo/share/gencpp/cmake/..
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from motor_control/FR_Encoder.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/include/motor_control -e /opt/ros/indigo/share/gencpp/cmake/..
 
-/home/legged/Legged/catkin_ws/devel/include/motor_control/PWM.h: /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py
-/home/legged/Legged/catkin_ws/devel/include/motor_control/PWM.h: /home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg
-/home/legged/Legged/catkin_ws/devel/include/motor_control/PWM.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
+/home/legged/Legged/catkin_ws/devel/include/motor_control/BR_PWM.h: /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py
+/home/legged/Legged/catkin_ws/devel/include/motor_control/BR_PWM.h: /home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg
+/home/legged/Legged/catkin_ws/devel/include/motor_control/BR_PWM.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from motor_control/PWM.msg"
-	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/include/motor_control -e /opt/ros/indigo/share/gencpp/cmake/..
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from motor_control/BR_PWM.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/include/motor_control -e /opt/ros/indigo/share/gencpp/cmake/..
+
+/home/legged/Legged/catkin_ws/devel/include/motor_control/BL_PWM.h: /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py
+/home/legged/Legged/catkin_ws/devel/include/motor_control/BL_PWM.h: /home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg
+/home/legged/Legged/catkin_ws/devel/include/motor_control/BL_PWM.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from motor_control/BL_PWM.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/include/motor_control -e /opt/ros/indigo/share/gencpp/cmake/..
+
+/home/legged/Legged/catkin_ws/devel/include/motor_control/Position.h: /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py
+/home/legged/Legged/catkin_ws/devel/include/motor_control/Position.h: /home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg
+/home/legged/Legged/catkin_ws/devel/include/motor_control/Position.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from motor_control/Position.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/include/motor_control -e /opt/ros/indigo/share/gencpp/cmake/..
+
+/home/legged/Legged/catkin_ws/devel/include/motor_control/FL_Encoder.h: /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py
+/home/legged/Legged/catkin_ws/devel/include/motor_control/FL_Encoder.h: /home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg
+/home/legged/Legged/catkin_ws/devel/include/motor_control/FL_Encoder.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from motor_control/FL_Encoder.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/include/motor_control -e /opt/ros/indigo/share/gencpp/cmake/..
+
+/home/legged/Legged/catkin_ws/devel/include/motor_control/FR_PWM.h: /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py
+/home/legged/Legged/catkin_ws/devel/include/motor_control/FR_PWM.h: /home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg
+/home/legged/Legged/catkin_ws/devel/include/motor_control/FR_PWM.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from motor_control/FR_PWM.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/include/motor_control -e /opt/ros/indigo/share/gencpp/cmake/..
+
+/home/legged/Legged/catkin_ws/devel/include/motor_control/FL_PWM.h: /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py
+/home/legged/Legged/catkin_ws/devel/include/motor_control/FL_PWM.h: /home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg
+/home/legged/Legged/catkin_ws/devel/include/motor_control/FL_PWM.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from motor_control/FL_PWM.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/include/motor_control -e /opt/ros/indigo/share/gencpp/cmake/..
+
+/home/legged/Legged/catkin_ws/devel/include/motor_control/BR_Encoder.h: /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py
+/home/legged/Legged/catkin_ws/devel/include/motor_control/BR_Encoder.h: /home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg
+/home/legged/Legged/catkin_ws/devel/include/motor_control/BR_Encoder.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from motor_control/BR_Encoder.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/include/motor_control -e /opt/ros/indigo/share/gencpp/cmake/..
+
+/home/legged/Legged/catkin_ws/devel/include/motor_control/BL_Encoder.h: /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py
+/home/legged/Legged/catkin_ws/devel/include/motor_control/BL_Encoder.h: /home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg
+/home/legged/Legged/catkin_ws/devel/include/motor_control/BL_Encoder.h: /opt/ros/indigo/share/gencpp/cmake/../msg.h.template
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating C++ code from motor_control/BL_Encoder.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/include/motor_control -e /opt/ros/indigo/share/gencpp/cmake/..
 
 motor_control_generate_messages_cpp: motor_control/CMakeFiles/motor_control_generate_messages_cpp
-motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/Encoder.h
-motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/PWM.h
+motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/FR_Encoder.h
+motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/BR_PWM.h
+motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/BL_PWM.h
+motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/Position.h
+motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/FL_Encoder.h
+motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/FR_PWM.h
+motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/FL_PWM.h
+motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/BR_Encoder.h
+motor_control_generate_messages_cpp: /home/legged/Legged/catkin_ws/devel/include/motor_control/BL_Encoder.h
 motor_control_generate_messages_cpp: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/build.make
 .PHONY : motor_control_generate_messages_cpp
 

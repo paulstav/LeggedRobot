@@ -45,24 +45,80 @@ CMAKE_BINARY_DIR = /home/legged/Legged/catkin_ws/build
 # Include the progress variables for this target.
 include motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/progress.make
 
-motor_control/CMakeFiles/motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/Encoder.lisp
-motor_control/CMakeFiles/motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/PWM.lisp
+motor_control/CMakeFiles/motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FR_Encoder.lisp
+motor_control/CMakeFiles/motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BR_PWM.lisp
+motor_control/CMakeFiles/motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BL_PWM.lisp
+motor_control/CMakeFiles/motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/Position.lisp
+motor_control/CMakeFiles/motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FL_Encoder.lisp
+motor_control/CMakeFiles/motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FR_PWM.lisp
+motor_control/CMakeFiles/motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FL_PWM.lisp
+motor_control/CMakeFiles/motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BR_Encoder.lisp
+motor_control/CMakeFiles/motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BL_Encoder.lisp
 
-/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/Encoder.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
-/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/Encoder.lisp: /home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FR_Encoder.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FR_Encoder.lisp: /home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from motor_control/Encoder.msg"
-	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from motor_control/FR_Encoder.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/FR_Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg
 
-/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/PWM.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
-/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/PWM.lisp: /home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BR_PWM.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BR_PWM.lisp: /home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from motor_control/PWM.msg"
-	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from motor_control/BR_PWM.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/BR_PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg
+
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BL_PWM.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BL_PWM.lisp: /home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from motor_control/BL_PWM.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/BL_PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg
+
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/Position.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/Position.lisp: /home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from motor_control/Position.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/Position.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg
+
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FL_Encoder.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FL_Encoder.lisp: /home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from motor_control/FL_Encoder.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/FL_Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg
+
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FR_PWM.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FR_PWM.lisp: /home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from motor_control/FR_PWM.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/FR_PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg
+
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FL_PWM.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FL_PWM.lisp: /home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from motor_control/FL_PWM.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/FL_PWM.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg
+
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BR_Encoder.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BR_Encoder.lisp: /home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from motor_control/BR_Encoder.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/BR_Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg
+
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BL_Encoder.lisp: /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py
+/home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BL_Encoder.lisp: /home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating Lisp code from motor_control/BL_Encoder.msg"
+	cd /home/legged/Legged/catkin_ws/build/motor_control && ../catkin_generated/env_cached.sh /usr/bin/python /opt/ros/indigo/share/genlisp/cmake/../../../lib/genlisp/gen_lisp.py /home/legged/Legged/catkin_ws/src/motor_control/msg/BL_Encoder.msg -Imotor_control:/home/legged/Legged/catkin_ws/src/motor_control/msg -Istd_msgs:/opt/ros/indigo/share/std_msgs/cmake/../msg -p motor_control -o /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg
 
 motor_control_generate_messages_lisp: motor_control/CMakeFiles/motor_control_generate_messages_lisp
-motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/Encoder.lisp
-motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/PWM.lisp
+motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FR_Encoder.lisp
+motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BR_PWM.lisp
+motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BL_PWM.lisp
+motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/Position.lisp
+motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FL_Encoder.lisp
+motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FR_PWM.lisp
+motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/FL_PWM.lisp
+motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BR_Encoder.lisp
+motor_control_generate_messages_lisp: /home/legged/Legged/catkin_ws/devel/share/common-lisp/ros/motor_control/msg/BL_Encoder.lisp
 motor_control_generate_messages_lisp: motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/build.make
 .PHONY : motor_control_generate_messages_lisp
 

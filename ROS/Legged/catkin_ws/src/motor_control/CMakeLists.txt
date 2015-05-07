@@ -47,8 +47,15 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
    FILES
-   PWM.msg
-   Encoder.msg
+   FL_PWM.msg
+   FL_Encoder.msg
+   FR_PWM.msg
+   FR_Encoder.msg
+   BL_PWM.msg
+   BL_Encoder.msg
+   BR_PWM.msg
+   BR_Encoder.msg
+   Position.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -106,9 +113,37 @@ include_directories(
 
 ## Declare a cpp executable
 # add_executable(motor_control_node src/motor_control_node.cpp)
-add_executable(motor_controller src/motor_controller.cpp)
-target_link_libraries(motor_controller ${catkin_LIBRARIES})
-add_dependencies(motor_controller motor_control_generate_messages_cpp)
+add_executable(FL_motor_controller src/FL_motor_controller.cpp)
+target_link_libraries(FL_motor_controller ${catkin_LIBRARIES})
+add_dependencies(FL_motor_controller motor_control_generate_messages_cpp)
+add_executable(FL_motor_pid src/FL_motor_pid.cpp)
+target_link_libraries(FL_motor_pid ${catkin_LIBRARIES})
+add_dependencies(FL_motor_pid motor_control_generate_messages_cpp)
+add_executable(FL_Read_Position src/FL_Read_Position.cpp)
+target_link_libraries(FL_Read_Position ${catkin_LIBRARIES})
+add_dependencies(FL_Read_Position motor_control_generate_messages_cpp)
+
+
+add_executable(FR_motor_controller src/FR_motor_controller.cpp)
+target_link_libraries(FR_motor_controller ${catkin_LIBRARIES})
+add_dependencies(FR_motor_controller motor_control_generate_messages_cpp)
+add_executable(FR_motor_pid src/FR_motor_pid.cpp)
+target_link_libraries(FR_motor_pid ${catkin_LIBRARIES})
+add_dependencies(FR_motor_pid motor_control_generate_messages_cpp)
+
+add_executable(BL_motor_controller src/BL_motor_controller.cpp)
+target_link_libraries(BL_motor_controller ${catkin_LIBRARIES})
+add_dependencies(BL_motor_controller motor_control_generate_messages_cpp)
+add_executable(BL_motor_pid src/BL_motor_pid.cpp)
+target_link_libraries(BL_motor_pid ${catkin_LIBRARIES})
+add_dependencies(BL_motor_pid motor_control_generate_messages_cpp)
+
+add_executable(BR_motor_controller src/BR_motor_controller.cpp)
+target_link_libraries(BR_motor_controller ${catkin_LIBRARIES})
+add_dependencies(BR_motor_controller motor_control_generate_messages_cpp)
+add_executable(BR_motor_pid src/BR_motor_pid.cpp)
+target_link_libraries(BR_motor_pid ${catkin_LIBRARIES})
+add_dependencies(BR_motor_pid motor_control_generate_messages_cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes

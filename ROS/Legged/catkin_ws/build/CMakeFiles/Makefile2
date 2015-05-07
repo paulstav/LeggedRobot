@@ -199,7 +199,7 @@ gtest/preinstall:
 gtest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f gtest/CMakeFiles/gtest.dir/build.make gtest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gtest.dir/build.make gtest/CMakeFiles/gtest.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  10
 	@echo "Built target gtest"
 .PHONY : gtest/CMakeFiles/gtest.dir/all
 
@@ -230,7 +230,7 @@ clean: gtest/CMakeFiles/gtest.dir/clean
 gtest/CMakeFiles/gtest_main.dir/all: gtest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  2
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  11
 	@echo "Built target gtest_main"
 .PHONY : gtest/CMakeFiles/gtest_main.dir/all
 
@@ -258,14 +258,37 @@ clean: gtest/CMakeFiles/gtest_main.dir/clean
 # Directory level rules for directory motor_control
 
 # Convenience name for "all" pass in the directory.
+motor_control/all: motor_control/CMakeFiles/BL_motor_controller.dir/all
+motor_control/all: motor_control/CMakeFiles/BL_motor_pid.dir/all
+motor_control/all: motor_control/CMakeFiles/BR_motor_controller.dir/all
+motor_control/all: motor_control/CMakeFiles/BR_motor_pid.dir/all
+motor_control/all: motor_control/CMakeFiles/FL_Read_Position.dir/all
+motor_control/all: motor_control/CMakeFiles/FL_motor_controller.dir/all
+motor_control/all: motor_control/CMakeFiles/FL_motor_pid.dir/all
+motor_control/all: motor_control/CMakeFiles/FR_motor_controller.dir/all
+motor_control/all: motor_control/CMakeFiles/FR_motor_pid.dir/all
 motor_control/all: motor_control/CMakeFiles/motor_control_generate_messages.dir/all
-motor_control/all: motor_control/CMakeFiles/motor_controller.dir/all
-motor_control/all: motor_control/CMakeFiles/motor_pid.dir/all
 .PHONY : motor_control/all
 
 # Convenience name for "clean" pass in the directory.
-motor_control/clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/clean
-motor_control/clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/clean
+motor_control/clean: motor_control/CMakeFiles/BL_motor_controller.dir/clean
+motor_control/clean: motor_control/CMakeFiles/BL_motor_pid.dir/clean
+motor_control/clean: motor_control/CMakeFiles/BR_motor_controller.dir/clean
+motor_control/clean: motor_control/CMakeFiles/BR_motor_pid.dir/clean
+motor_control/clean: motor_control/CMakeFiles/FL_Read_Position.dir/clean
+motor_control/clean: motor_control/CMakeFiles/FL_motor_controller.dir/clean
+motor_control/clean: motor_control/CMakeFiles/FL_motor_pid.dir/clean
+motor_control/clean: motor_control/CMakeFiles/FR_motor_controller.dir/clean
+motor_control/clean: motor_control/CMakeFiles/FR_motor_pid.dir/clean
+motor_control/clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/clean
+motor_control/clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/clean
+motor_control/clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/clean
+motor_control/clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/clean
+motor_control/clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/clean
+motor_control/clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/clean
+motor_control/clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/clean
+motor_control/clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/clean
+motor_control/clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/clean
 motor_control/clean: motor_control/CMakeFiles/motor_control_gencpp.dir/clean
 motor_control/clean: motor_control/CMakeFiles/motor_control_generate_messages.dir/clean
 motor_control/clean: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/clean
@@ -273,8 +296,6 @@ motor_control/clean: motor_control/CMakeFiles/motor_control_generate_messages_li
 motor_control/clean: motor_control/CMakeFiles/motor_control_generate_messages_py.dir/clean
 motor_control/clean: motor_control/CMakeFiles/motor_control_genlisp.dir/clean
 motor_control/clean: motor_control/CMakeFiles/motor_control_genpy.dir/clean
-motor_control/clean: motor_control/CMakeFiles/motor_controller.dir/clean
-motor_control/clean: motor_control/CMakeFiles/motor_pid.dir/clean
 motor_control/clean: motor_control/CMakeFiles/roscpp_generate_messages_cpp.dir/clean
 motor_control/clean: motor_control/CMakeFiles/roscpp_generate_messages_lisp.dir/clean
 motor_control/clean: motor_control/CMakeFiles/roscpp_generate_messages_py.dir/clean
@@ -291,65 +312,597 @@ motor_control/preinstall:
 .PHONY : motor_control/preinstall
 
 #=============================================================================
-# Target rules for target motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir
+# Target rules for target motor_control/CMakeFiles/BL_motor_controller.dir
 
 # All Build rule for target.
-motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/all:
-	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/depend
-	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles 
-	@echo "Built target _motor_control_generate_messages_check_deps_Encoder"
-.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/all
+motor_control/CMakeFiles/BL_motor_controller.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all
+	$(MAKE) -f motor_control/CMakeFiles/BL_motor_controller.dir/build.make motor_control/CMakeFiles/BL_motor_controller.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/BL_motor_controller.dir/build.make motor_control/CMakeFiles/BL_motor_controller.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  1
+	@echo "Built target BL_motor_controller"
+.PHONY : motor_control/CMakeFiles/BL_motor_controller.dir/all
+
+# Include target in all.
+all: motor_control/CMakeFiles/BL_motor_controller.dir/all
+.PHONY : all
 
 # Build rule for subdir invocation for target.
-motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/rule: cmake_check_build_system
+motor_control/CMakeFiles/BL_motor_controller.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 10
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/BL_motor_controller.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
-.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/rule
+.PHONY : motor_control/CMakeFiles/BL_motor_controller.dir/rule
 
 # Convenience name for target.
-_motor_control_generate_messages_check_deps_Encoder: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/rule
-.PHONY : _motor_control_generate_messages_check_deps_Encoder
+BL_motor_controller: motor_control/CMakeFiles/BL_motor_controller.dir/rule
+.PHONY : BL_motor_controller
 
 # clean rule for target.
-motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/clean:
-	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/clean
-.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/clean
+motor_control/CMakeFiles/BL_motor_controller.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/BL_motor_controller.dir/build.make motor_control/CMakeFiles/BL_motor_controller.dir/clean
+.PHONY : motor_control/CMakeFiles/BL_motor_controller.dir/clean
 
 # clean rule for target.
-clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/clean
+clean: motor_control/CMakeFiles/BL_motor_controller.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir
+# Target rules for target motor_control/CMakeFiles/BL_motor_pid.dir
 
 # All Build rule for target.
-motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/all:
-	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/depend
-	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles 
-	@echo "Built target _motor_control_generate_messages_check_deps_PWM"
-.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/all
+motor_control/CMakeFiles/BL_motor_pid.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all
+	$(MAKE) -f motor_control/CMakeFiles/BL_motor_pid.dir/build.make motor_control/CMakeFiles/BL_motor_pid.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/BL_motor_pid.dir/build.make motor_control/CMakeFiles/BL_motor_pid.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  2
+	@echo "Built target BL_motor_pid"
+.PHONY : motor_control/CMakeFiles/BL_motor_pid.dir/all
+
+# Include target in all.
+all: motor_control/CMakeFiles/BL_motor_pid.dir/all
+.PHONY : all
 
 # Build rule for subdir invocation for target.
-motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/rule: cmake_check_build_system
+motor_control/CMakeFiles/BL_motor_pid.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 10
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/BL_motor_pid.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
-.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/rule
+.PHONY : motor_control/CMakeFiles/BL_motor_pid.dir/rule
 
 # Convenience name for target.
-_motor_control_generate_messages_check_deps_PWM: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/rule
-.PHONY : _motor_control_generate_messages_check_deps_PWM
+BL_motor_pid: motor_control/CMakeFiles/BL_motor_pid.dir/rule
+.PHONY : BL_motor_pid
 
 # clean rule for target.
-motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/clean:
-	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/clean
-.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/clean
+motor_control/CMakeFiles/BL_motor_pid.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/BL_motor_pid.dir/build.make motor_control/CMakeFiles/BL_motor_pid.dir/clean
+.PHONY : motor_control/CMakeFiles/BL_motor_pid.dir/clean
 
 # clean rule for target.
-clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/clean
+clean: motor_control/CMakeFiles/BL_motor_pid.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/BR_motor_controller.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/BR_motor_controller.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all
+	$(MAKE) -f motor_control/CMakeFiles/BR_motor_controller.dir/build.make motor_control/CMakeFiles/BR_motor_controller.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/BR_motor_controller.dir/build.make motor_control/CMakeFiles/BR_motor_controller.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  3
+	@echo "Built target BR_motor_controller"
+.PHONY : motor_control/CMakeFiles/BR_motor_controller.dir/all
+
+# Include target in all.
+all: motor_control/CMakeFiles/BR_motor_controller.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/BR_motor_controller.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 10
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/BR_motor_controller.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/BR_motor_controller.dir/rule
+
+# Convenience name for target.
+BR_motor_controller: motor_control/CMakeFiles/BR_motor_controller.dir/rule
+.PHONY : BR_motor_controller
+
+# clean rule for target.
+motor_control/CMakeFiles/BR_motor_controller.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/BR_motor_controller.dir/build.make motor_control/CMakeFiles/BR_motor_controller.dir/clean
+.PHONY : motor_control/CMakeFiles/BR_motor_controller.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/BR_motor_controller.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/BR_motor_pid.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/BR_motor_pid.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all
+	$(MAKE) -f motor_control/CMakeFiles/BR_motor_pid.dir/build.make motor_control/CMakeFiles/BR_motor_pid.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/BR_motor_pid.dir/build.make motor_control/CMakeFiles/BR_motor_pid.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  4
+	@echo "Built target BR_motor_pid"
+.PHONY : motor_control/CMakeFiles/BR_motor_pid.dir/all
+
+# Include target in all.
+all: motor_control/CMakeFiles/BR_motor_pid.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/BR_motor_pid.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 10
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/BR_motor_pid.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/BR_motor_pid.dir/rule
+
+# Convenience name for target.
+BR_motor_pid: motor_control/CMakeFiles/BR_motor_pid.dir/rule
+.PHONY : BR_motor_pid
+
+# clean rule for target.
+motor_control/CMakeFiles/BR_motor_pid.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/BR_motor_pid.dir/build.make motor_control/CMakeFiles/BR_motor_pid.dir/clean
+.PHONY : motor_control/CMakeFiles/BR_motor_pid.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/BR_motor_pid.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/FL_Read_Position.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/FL_Read_Position.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all
+	$(MAKE) -f motor_control/CMakeFiles/FL_Read_Position.dir/build.make motor_control/CMakeFiles/FL_Read_Position.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/FL_Read_Position.dir/build.make motor_control/CMakeFiles/FL_Read_Position.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  5
+	@echo "Built target FL_Read_Position"
+.PHONY : motor_control/CMakeFiles/FL_Read_Position.dir/all
+
+# Include target in all.
+all: motor_control/CMakeFiles/FL_Read_Position.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/FL_Read_Position.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 10
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/FL_Read_Position.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/FL_Read_Position.dir/rule
+
+# Convenience name for target.
+FL_Read_Position: motor_control/CMakeFiles/FL_Read_Position.dir/rule
+.PHONY : FL_Read_Position
+
+# clean rule for target.
+motor_control/CMakeFiles/FL_Read_Position.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/FL_Read_Position.dir/build.make motor_control/CMakeFiles/FL_Read_Position.dir/clean
+.PHONY : motor_control/CMakeFiles/FL_Read_Position.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/FL_Read_Position.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/FL_motor_controller.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/FL_motor_controller.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all
+	$(MAKE) -f motor_control/CMakeFiles/FL_motor_controller.dir/build.make motor_control/CMakeFiles/FL_motor_controller.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/FL_motor_controller.dir/build.make motor_control/CMakeFiles/FL_motor_controller.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  6
+	@echo "Built target FL_motor_controller"
+.PHONY : motor_control/CMakeFiles/FL_motor_controller.dir/all
+
+# Include target in all.
+all: motor_control/CMakeFiles/FL_motor_controller.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/FL_motor_controller.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 10
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/FL_motor_controller.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/FL_motor_controller.dir/rule
+
+# Convenience name for target.
+FL_motor_controller: motor_control/CMakeFiles/FL_motor_controller.dir/rule
+.PHONY : FL_motor_controller
+
+# clean rule for target.
+motor_control/CMakeFiles/FL_motor_controller.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/FL_motor_controller.dir/build.make motor_control/CMakeFiles/FL_motor_controller.dir/clean
+.PHONY : motor_control/CMakeFiles/FL_motor_controller.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/FL_motor_controller.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/FL_motor_pid.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/FL_motor_pid.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all
+	$(MAKE) -f motor_control/CMakeFiles/FL_motor_pid.dir/build.make motor_control/CMakeFiles/FL_motor_pid.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/FL_motor_pid.dir/build.make motor_control/CMakeFiles/FL_motor_pid.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  7
+	@echo "Built target FL_motor_pid"
+.PHONY : motor_control/CMakeFiles/FL_motor_pid.dir/all
+
+# Include target in all.
+all: motor_control/CMakeFiles/FL_motor_pid.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/FL_motor_pid.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 10
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/FL_motor_pid.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/FL_motor_pid.dir/rule
+
+# Convenience name for target.
+FL_motor_pid: motor_control/CMakeFiles/FL_motor_pid.dir/rule
+.PHONY : FL_motor_pid
+
+# clean rule for target.
+motor_control/CMakeFiles/FL_motor_pid.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/FL_motor_pid.dir/build.make motor_control/CMakeFiles/FL_motor_pid.dir/clean
+.PHONY : motor_control/CMakeFiles/FL_motor_pid.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/FL_motor_pid.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/FR_motor_controller.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/FR_motor_controller.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all
+	$(MAKE) -f motor_control/CMakeFiles/FR_motor_controller.dir/build.make motor_control/CMakeFiles/FR_motor_controller.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/FR_motor_controller.dir/build.make motor_control/CMakeFiles/FR_motor_controller.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  8
+	@echo "Built target FR_motor_controller"
+.PHONY : motor_control/CMakeFiles/FR_motor_controller.dir/all
+
+# Include target in all.
+all: motor_control/CMakeFiles/FR_motor_controller.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/FR_motor_controller.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 10
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/FR_motor_controller.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/FR_motor_controller.dir/rule
+
+# Convenience name for target.
+FR_motor_controller: motor_control/CMakeFiles/FR_motor_controller.dir/rule
+.PHONY : FR_motor_controller
+
+# clean rule for target.
+motor_control/CMakeFiles/FR_motor_controller.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/FR_motor_controller.dir/build.make motor_control/CMakeFiles/FR_motor_controller.dir/clean
+.PHONY : motor_control/CMakeFiles/FR_motor_controller.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/FR_motor_controller.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/FR_motor_pid.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/FR_motor_pid.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all
+	$(MAKE) -f motor_control/CMakeFiles/FR_motor_pid.dir/build.make motor_control/CMakeFiles/FR_motor_pid.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/FR_motor_pid.dir/build.make motor_control/CMakeFiles/FR_motor_pid.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  9
+	@echo "Built target FR_motor_pid"
+.PHONY : motor_control/CMakeFiles/FR_motor_pid.dir/all
+
+# Include target in all.
+all: motor_control/CMakeFiles/FR_motor_pid.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/FR_motor_pid.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 10
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/FR_motor_pid.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/FR_motor_pid.dir/rule
+
+# Convenience name for target.
+FR_motor_pid: motor_control/CMakeFiles/FR_motor_pid.dir/rule
+.PHONY : FR_motor_pid
+
+# clean rule for target.
+motor_control/CMakeFiles/FR_motor_pid.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/FR_motor_pid.dir/build.make motor_control/CMakeFiles/FR_motor_pid.dir/clean
+.PHONY : motor_control/CMakeFiles/FR_motor_pid.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/FR_motor_pid.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/all:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles 
+	@echo "Built target _motor_control_generate_messages_check_deps_BL_Encoder"
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_BL_Encoder: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_BL_Encoder
+
+# clean rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/clean
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/all:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles 
+	@echo "Built target _motor_control_generate_messages_check_deps_BL_PWM"
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_BL_PWM: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_BL_PWM
+
+# clean rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/clean
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/all:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles 
+	@echo "Built target _motor_control_generate_messages_check_deps_BR_Encoder"
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_BR_Encoder: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_BR_Encoder
+
+# clean rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/clean
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/all:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles 
+	@echo "Built target _motor_control_generate_messages_check_deps_BR_PWM"
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_BR_PWM: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_BR_PWM
+
+# clean rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/clean
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/all:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles 
+	@echo "Built target _motor_control_generate_messages_check_deps_FL_Encoder"
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_FL_Encoder: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_FL_Encoder
+
+# clean rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/clean
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/all:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles 
+	@echo "Built target _motor_control_generate_messages_check_deps_FL_PWM"
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_FL_PWM: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_FL_PWM
+
+# clean rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/clean
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/all:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles 
+	@echo "Built target _motor_control_generate_messages_check_deps_FR_Encoder"
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_FR_Encoder: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_FR_Encoder
+
+# clean rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/clean
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/all:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles 
+	@echo "Built target _motor_control_generate_messages_check_deps_FR_PWM"
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_FR_PWM: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_FR_PWM
+
+# clean rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/clean
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir
+
+# All Build rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/all:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/depend
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles 
+	@echo "Built target _motor_control_generate_messages_check_deps_Position"
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/all
+
+# Build rule for subdir invocation for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/rule
+
+# Convenience name for target.
+_motor_control_generate_messages_check_deps_Position: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/rule
+.PHONY : _motor_control_generate_messages_check_deps_Position
+
+# clean rule for target.
+motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/clean:
+	$(MAKE) -f motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/build.make motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/clean
+.PHONY : motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/clean
+
+# clean rule for target.
+clean: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -365,7 +918,7 @@ motor_control/CMakeFiles/motor_control_gencpp.dir/all: motor_control/CMakeFiles/
 
 # Build rule for subdir invocation for target.
 motor_control/CMakeFiles/motor_control_gencpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/motor_control_gencpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
 .PHONY : motor_control/CMakeFiles/motor_control_gencpp.dir/rule
@@ -387,9 +940,9 @@ clean: motor_control/CMakeFiles/motor_control_gencpp.dir/clean
 # Target rules for target motor_control/CMakeFiles/motor_control_generate_messages.dir
 
 # All Build rule for target.
-motor_control/CMakeFiles/motor_control_generate_messages.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all
-motor_control/CMakeFiles/motor_control_generate_messages.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all
 motor_control/CMakeFiles/motor_control_generate_messages.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all
 	$(MAKE) -f motor_control/CMakeFiles/motor_control_generate_messages.dir/build.make motor_control/CMakeFiles/motor_control_generate_messages.dir/depend
 	$(MAKE) -f motor_control/CMakeFiles/motor_control_generate_messages.dir/build.make motor_control/CMakeFiles/motor_control_generate_messages.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles 
@@ -402,7 +955,7 @@ all: motor_control/CMakeFiles/motor_control_generate_messages.dir/all
 
 # Build rule for subdir invocation for target.
 motor_control/CMakeFiles/motor_control_generate_messages.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 28
 	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/motor_control_generate_messages.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
 .PHONY : motor_control/CMakeFiles/motor_control_generate_messages.dir/rule
@@ -424,18 +977,25 @@ clean: motor_control/CMakeFiles/motor_control_generate_messages.dir/clean
 # Target rules for target motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir
 
 # All Build rule for target.
-motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/all
 motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all: motor_control/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
-motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/all
 	$(MAKE) -f motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/build.make motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/depend
 	$(MAKE) -f motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/build.make motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  3 4
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  12 13 14 15 16 17 18 19 20
 	@echo "Built target motor_control_generate_messages_cpp"
 .PHONY : motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
 .PHONY : motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/rule
@@ -457,18 +1017,25 @@ clean: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/clean
 # Target rules for target motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir
 
 # All Build rule for target.
-motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/all
 motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all: motor_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
-motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/all
 	$(MAKE) -f motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/build.make motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/depend
 	$(MAKE) -f motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/build.make motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  5 6
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  21 22 23 24 25 26 27 28 29
 	@echo "Built target motor_control_generate_messages_lisp"
 .PHONY : motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
 .PHONY : motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/rule
@@ -490,18 +1057,25 @@ clean: motor_control/CMakeFiles/motor_control_generate_messages_lisp.dir/clean
 # Target rules for target motor_control/CMakeFiles/motor_control_generate_messages_py.dir
 
 # All Build rule for target.
+motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_PWM.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_PWM.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_PWM.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_PWM.dir/all
 motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all: motor_control/CMakeFiles/std_msgs_generate_messages_py.dir/all
-motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_PWM.dir/all
-motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Encoder.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_Position.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BR_Encoder.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FL_Encoder.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_BL_Encoder.dir/all
+motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all: motor_control/CMakeFiles/_motor_control_generate_messages_check_deps_FR_Encoder.dir/all
 	$(MAKE) -f motor_control/CMakeFiles/motor_control_generate_messages_py.dir/build.make motor_control/CMakeFiles/motor_control_generate_messages_py.dir/depend
 	$(MAKE) -f motor_control/CMakeFiles/motor_control_generate_messages_py.dir/build.make motor_control/CMakeFiles/motor_control_generate_messages_py.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  7 8 9
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  30 31 32 33 34 35 36 37 38 39
 	@echo "Built target motor_control_generate_messages_py"
 .PHONY : motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
 motor_control/CMakeFiles/motor_control_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 10
 	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/motor_control_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
 .PHONY : motor_control/CMakeFiles/motor_control_generate_messages_py.dir/rule
@@ -532,7 +1106,7 @@ motor_control/CMakeFiles/motor_control_genlisp.dir/all: motor_control/CMakeFiles
 
 # Build rule for subdir invocation for target.
 motor_control/CMakeFiles/motor_control_genlisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/motor_control_genlisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
 .PHONY : motor_control/CMakeFiles/motor_control_genlisp.dir/rule
@@ -563,7 +1137,7 @@ motor_control/CMakeFiles/motor_control_genpy.dir/all: motor_control/CMakeFiles/m
 
 # Build rule for subdir invocation for target.
 motor_control/CMakeFiles/motor_control_genpy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 10
 	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/motor_control_genpy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
 .PHONY : motor_control/CMakeFiles/motor_control_genpy.dir/rule
@@ -579,76 +1153,6 @@ motor_control/CMakeFiles/motor_control_genpy.dir/clean:
 
 # clean rule for target.
 clean: motor_control/CMakeFiles/motor_control_genpy.dir/clean
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target motor_control/CMakeFiles/motor_controller.dir
-
-# All Build rule for target.
-motor_control/CMakeFiles/motor_controller.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all
-	$(MAKE) -f motor_control/CMakeFiles/motor_controller.dir/build.make motor_control/CMakeFiles/motor_controller.dir/depend
-	$(MAKE) -f motor_control/CMakeFiles/motor_controller.dir/build.make motor_control/CMakeFiles/motor_controller.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  10
-	@echo "Built target motor_controller"
-.PHONY : motor_control/CMakeFiles/motor_controller.dir/all
-
-# Include target in all.
-all: motor_control/CMakeFiles/motor_controller.dir/all
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-motor_control/CMakeFiles/motor_controller.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 3
-	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/motor_controller.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
-.PHONY : motor_control/CMakeFiles/motor_controller.dir/rule
-
-# Convenience name for target.
-motor_controller: motor_control/CMakeFiles/motor_controller.dir/rule
-.PHONY : motor_controller
-
-# clean rule for target.
-motor_control/CMakeFiles/motor_controller.dir/clean:
-	$(MAKE) -f motor_control/CMakeFiles/motor_controller.dir/build.make motor_control/CMakeFiles/motor_controller.dir/clean
-.PHONY : motor_control/CMakeFiles/motor_controller.dir/clean
-
-# clean rule for target.
-clean: motor_control/CMakeFiles/motor_controller.dir/clean
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target motor_control/CMakeFiles/motor_pid.dir
-
-# All Build rule for target.
-motor_control/CMakeFiles/motor_pid.dir/all: motor_control/CMakeFiles/motor_control_generate_messages_cpp.dir/all
-	$(MAKE) -f motor_control/CMakeFiles/motor_pid.dir/build.make motor_control/CMakeFiles/motor_pid.dir/depend
-	$(MAKE) -f motor_control/CMakeFiles/motor_pid.dir/build.make motor_control/CMakeFiles/motor_pid.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/legged/Legged/catkin_ws/build/CMakeFiles  11
-	@echo "Built target motor_pid"
-.PHONY : motor_control/CMakeFiles/motor_pid.dir/all
-
-# Include target in all.
-all: motor_control/CMakeFiles/motor_pid.dir/all
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-motor_control/CMakeFiles/motor_pid.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 3
-	$(MAKE) -f CMakeFiles/Makefile2 motor_control/CMakeFiles/motor_pid.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/legged/Legged/catkin_ws/build/CMakeFiles 0
-.PHONY : motor_control/CMakeFiles/motor_pid.dir/rule
-
-# Convenience name for target.
-motor_pid: motor_control/CMakeFiles/motor_pid.dir/rule
-.PHONY : motor_pid
-
-# clean rule for target.
-motor_control/CMakeFiles/motor_pid.dir/clean:
-	$(MAKE) -f motor_control/CMakeFiles/motor_pid.dir/build.make motor_control/CMakeFiles/motor_pid.dir/clean
-.PHONY : motor_control/CMakeFiles/motor_pid.dir/clean
-
-# clean rule for target.
-clean: motor_control/CMakeFiles/motor_pid.dir/clean
 .PHONY : clean
 
 #=============================================================================
