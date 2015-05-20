@@ -79,7 +79,7 @@
 
 typedef struct {
 
-	double sensor[11];
+	//double sensor[11];
         unsigned char cur_page;
 
 	void (* _delay_cycle)(unsigned long);

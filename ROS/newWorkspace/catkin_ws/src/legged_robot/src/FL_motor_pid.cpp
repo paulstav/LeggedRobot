@@ -65,7 +65,7 @@ void encoderCallback(const legged_robot::Encoder::ConstPtr& msg)
 {
  //ROS_INFO("I heard: [%u]", msg->encoder);
  //msgs++;
- pwm_msg.pwm_duty = PID_controller (1.5, 0.2, 0.1, moveVelocity, desiredPos, (int32_t)msg->encoder);
+ pwm_msg.pwm_duty = PID_controller (1.0, 0.0, 0.0, moveVelocity, desiredPos, (int32_t)msg->encoder);
  sendMsg = true;
  //if(msgs == 1000)
  //{

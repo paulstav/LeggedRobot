@@ -7,9 +7,9 @@
 //#define ENABLE_MOTOR
 
 
-//#define BOARD_FL
+#define BOARD_FL
 //#define BOARD_FR
-#define BOARD_BL
+//#define BOARD_BL
 //#define BOARD_BR
 
 #if defined(BOARD_FL)
@@ -32,3 +32,4 @@
 #define DECIMATION_COEF         0x3000
 
 #endif
+

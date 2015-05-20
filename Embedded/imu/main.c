@@ -338,18 +338,18 @@ void IntADIS16375(void)
   
   imuDataReady = 1;
   
-  //ADIS16375_readAccData(&myIMU, &accel_x, &accel_y, &accel_z);
-  //ADIS16375_readGyroData(&myIMU, &gyro_x, &gyro_y, &gyro_z);
-  ADIS16375_readDeltaAngle(&myIMU, &delta_x, &delta_y, &delta_z);
+  ADIS16375_readAccData(&myIMU, &accel_x, &accel_y, &accel_z);
+  ADIS16375_readGyroData(&myIMU, &gyro_x, &gyro_y, &gyro_z);
+  //ADIS16375_readDeltaAngle(&myIMU, &delta_x, &delta_y, &delta_z);
   //ADIS16375_readDeltaVel(&myIMU, &dv_x, &dv_y, &dv_z);
   
-  dval_x = (delta_x*1.0)*0.005493;
+  /*dval_x = (delta_x*1.0)*0.005493;
   dval_y = (delta_y*1.0)*0.005493;
   dval_z = (delta_z*1.0)*0.005493;
   
   deltaAccX += dval_x;
   deltaAccY += dval_y;
-  deltaAccZ += dval_z;
+  deltaAccZ += dval_z;*/
   
   GPIOIntClear(IMU_IRQ_PORT_BASE, status);
 }
@@ -384,7 +384,7 @@ main(void)
     uint32_t sends = 0;
 #endif
     
-    uint32_t encoderPos = 0;   
+    int32_t encoderPos = 0;   
 
 #ifdef ENABLE_MOTOR
     sendEncoder = false;
@@ -507,7 +507,7 @@ main(void)
     // Enable the quadrature encoder.
     //
     QEIEnable(QEI0_BASE);
-    QEIPositionSet(QEI0_BASE,0);
+    QEIPositionSet(QEI0_BASE,(0x00000001 << 31));
     //
     // Delay for some time...
     //
@@ -560,9 +560,9 @@ main(void)
           firstIMU = 1;
           UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
           ADIS16375_write(&myIMU, ADIS16375_REG_GLOB_CMD, 0x4000);
-          MAP_SysCtlDelay(40000*100);
-          ADIS16375_write(&myIMU, ADIS16375_REG_DEC_RATE, DECIMATION_COEF);
-          ADIS16375_write(&myIMU, ADIS16375_REG_NULL_CFG, 0x0A07);
+          //MAP_SysCtlDelay(40000*100);
+          //ADIS16375_write(&myIMU, ADIS16375_REG_DEC_RATE, DECIMATION_COEF);
+          //ADIS16375_write(&myIMU, ADIS16375_REG_NULL_CFG, 0x0A07);
           //ADIS16375_write(&myIMU, ADIS16375_REG_GLOB_CMD, 0x0100);
           //GPIOIntDisable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
           imuDataReady = 0;  
@@ -721,7 +721,27 @@ main(void)
         UARTprintf("%s",charUART);
         break;
       case '4' : 
-        UARTprintf("Status : 0x%X\n",ADIS16375_status(&myIMU));
+        dval_x = (gyro_x*1.0)*0.013108;
+        dval_y = (gyro_y*1.0)*0.013108;
+        dval_z = (gyro_z*1.0)*0.013108;
+        
+        sprintf(charUART, "GYRO X : %lf\n", dval_x);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "GYRO Y : %lf\n", dval_y);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "GYRO Z : %lf\n", dval_z);
+        UARTprintf("%s",charUART);
+        
+        dval_x = (accel_x*1.0)*0.8192;
+        dval_y = (accel_y*1.0)*0.8192;
+        dval_z = (accel_z*1.0)*0.8192;
+        
+        sprintf(charUART, "ACC X : %lf\n", dval_x);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "ACC Y : %lf\n", dval_y);
+        UARTprintf("%s",charUART);
+        sprintf(charUART, "ACC Z : %lf\n", dval_z);
+        UARTprintf("%s",charUART);
         break;
       case '5' : 
         temp_out = ADIS16375_temp(&myIMU);
@@ -786,7 +806,7 @@ main(void)
       if(sendEncoder == true)
       {
         //sends++;
-        encoderPos = QEIPositionGet(QEI0_BASE);
+        encoderPos = (QEIPositionGet(QEI0_BASE)- (0x00000001 << 31));
         //if(sends == 5000)
         //{
           //UARTprintf("Position %d\n",encoderPos);
