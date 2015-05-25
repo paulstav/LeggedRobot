@@ -28,7 +28,7 @@
 
 bool gotMsg = false;
 int sock;
-uint32_t encoderPos = 0;
+int32_t encoderPos = 0;
 int msgs = 0;
 struct sockaddr_in si_pwm;
 ssize_t SendPWMBytes = 2;
@@ -175,8 +175,8 @@ int main(int argc, char **argv)
 	  {
 		msg_count = 0;
 		//sprintf(strout,"%d",(uint32_t)encoder_msg.encoder);
-		//ROS_INFO("%s", strout);
-		ROS_INFO("%u", (uint32_t)encoder_msg.encoder);
+		//ROS_INFO("counts are: %s", strout);
+		ROS_INFO("counts are: %d", encoder_msg.encoder);
 	  }
       gotMsg = false;
     }

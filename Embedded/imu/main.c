@@ -27,6 +27,7 @@
 #include "driverlib/timer.h"
 
 #include "ADIS16375.h"
+#include "ForceSensor.h"
 #include "spi.h"
 
 //*****************************************************************************
@@ -68,11 +69,9 @@ __error__(char *pcFilename, uint32_t ui32Line)
 #endif
 
 #ifdef ENABLE_ETHERNET
-struct udp_pcb * udp_init_s(void);
 struct udp_pcb * udp_init_r(void);
 void udp_send_data(void* sbuf, u16_t len);
 void udp_receive_data(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port);
-struct udp_pcb *Spcb;
 struct udp_pcb *Rpcb;
 struct ip_addr controller_ip, board_ip;
 volatile uint8_t gotIP = 0;
@@ -90,6 +89,13 @@ ADIS16375 myIMU;
 uint8_t imuDataReady = 0;
 int16_t accel_x, accel_y, accel_z, gyro_x, gyro_y, gyro_z, delta_x, delta_y, delta_z, dv_x, dv_y, dv_z, temp_out;
 double dval_x, dval_y, dval_z, temp, deltaAccX, deltaAccY, deltaAccZ;
+#endif
+
+#ifdef ENABLE_FORCE
+void ConfigureForceSensorInt(void);
+uint8_t forceDataReady;
+FORCESENSOR myForce;
+uint16_t forceValues[6] = {0,0,0,0,0,0};
 #endif
 
 #ifdef ENABLE_ETHERNET
@@ -280,6 +286,7 @@ void SetupPWM()
   //
   PWMGenPeriodSet(PWM0_BASE, PWM_GEN_2, 6000);
   
+  // Configure Direction pin
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOL);
   MAP_GPIOPinTypeGPIOOutput(GPIO_PORTL_BASE, GPIO_PIN_4);
   MAP_GPIOPadConfigSet(GPIO_PORTL_BASE, GPIO_PIN_4, GPIO_STRENGTH_8MA,
@@ -363,6 +370,32 @@ void ConfigureADIS16375Int(void)
   GPIOIntRegister(IMU_IRQ_PORT_BASE, IntADIS16375);
   //GPIOIntEnable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
   IntEnable(IMU_IRQ_INT);
+}
+#endif
+
+#ifdef ENABLE_FORCE
+void IntForceSensor(void)
+{
+  uint32_t status;
+  
+  status = GPIOIntStatus(FORCE_IRQ_PORT_BASE, true);
+  
+  forceDataReady = 1;
+  
+  ReadForceValues(&myForce, forceValues);
+  
+  GPIOIntClear(FORCE_IRQ_PORT_BASE, status);
+}
+
+
+void ConfigureForceSensorInt(void)
+{
+  SysCtlPeripheralEnable(FORCE_IRQ_PERIPH);
+  GPIOPinTypeGPIOInput(FORCE_IRQ_PORT_BASE, FORCE_IRQ_PIN);
+  GPIOIntTypeSet(FORCE_IRQ_PORT_BASE, FORCE_IRQ_PIN, GPIO_RISING_EDGE);
+  GPIOIntRegister(FORCE_IRQ_PORT_BASE, IntForceSensor);
+  //GPIOIntEnable(FORCE_IRQ_PORT_BASE, FORCE_IRQ_PIN);
+  IntEnable(FORCE_IRQ_INT);
 }
 #endif
 
@@ -516,7 +549,6 @@ main(void)
 
 #ifdef ENABLE_ETHERNET
     Rpcb = udp_init_r();
-    //Spcb = udp_init_s();
 #endif
 
 #ifdef ENABLE_IMU
@@ -541,6 +573,13 @@ main(void)
     //UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
 #endif
     
+#ifdef ENABLE_FORCE
+    FORCESENSOR_Init(&myForce, cyclesdelay, FORCE_CS, init_spi, SpiTransfer);   
+    ConfigureForceSensorInt();   
+    GPIOIntClear(FORCE_IRQ_PORT_BASE, FORCE_IRQ_PIN);
+    GPIOIntEnable(FORCE_IRQ_PORT_BASE, FORCE_IRQ_PIN);
+#endif
+    
 #ifdef ENABLE_MOTOR   
     SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
     TimerConfigure(TIMER0_BASE, TIMER_CFG_PERIODIC);
@@ -552,6 +591,16 @@ main(void)
     
     while(1)
     {
+#ifdef ENABLE_FORCE
+      if(forceDataReady == 1)
+      {
+        forceDataReady = 0;
+        
+#ifdef ENABLE_UART
+        UARTprintf("Read : %u %u %u %u %u %u\n",forceValues[0],forceValues[1],forceValues[2],forceValues[3],forceValues[4],forceValues[5]);
+#endif    
+      }
+#endif
 #ifdef ENABLE_IMU
       if(imuDataReady == 1)
       {
@@ -825,29 +874,6 @@ main(void)
 
 #ifdef ENABLE_ETHERNET
 
-struct udp_pcb * udp_init_s(void)
-{
-  err_t err;
-  struct udp_pcb *pcb_s;
-
-  pcb_s = udp_new();
-  //UARTprintf("Init pcb = %d\n",pcb);
-  udp_bind(pcb_s, IP_ADDR_ANY, PORT_S);
-  //udp_bind(pcb_s, &board_ip, 2012);
-
-  err = udp_connect(pcb_s, &controller_ip, PORT_S);
-
-#ifdef ENABLE_UART
-  if(err != ERR_OK)
-    UARTprintf("Error connecting to controller.\n");
-  else
-  {
-	  UARTprintf("UDP to send at port %d...\n",PORT_S);
-  }
-#endif
-  return pcb_s;
-}
-
 struct udp_pcb * udp_init_r(void)
 {
   //err_t err;
@@ -910,7 +936,6 @@ void udp_send_data(void* sbuf, u16_t len)
   p = pbuf_alloc(PBUF_TRANSPORT,len,PBUF_RAM);
   memcpy (p->payload, sbuf, len);
   err = udp_sendto(Rpcb, p, &controller_ip, PORT_S);
-  //err = udp_send(Spcb, p);
 
   pbuf_free(p);
 }

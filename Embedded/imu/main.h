@@ -1,16 +1,12 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
-//#define ENABLE_ETHERNET
-//#define ENABLE_UART
-//#define ENABLE_IMU
-//#define ENABLE_MOTOR
+// Definition for the Leg to which the board is connected
 
-
-#define BOARD_FL
+//#define BOARD_FL
 //#define BOARD_FR
 //#define BOARD_BL
-//#define BOARD_BR
+#define BOARD_BR
 
 #if defined(BOARD_FL)
 #define PORT_S 2014
@@ -29,6 +25,7 @@
 #define PORT_R 2011
 #endif
 
+// Decimation coefficient for IMU data rate and Euler angle calculation
 #define DECIMATION_COEF         0x3000
 
 #endif

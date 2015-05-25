@@ -3,10 +3,13 @@
 
 #include <stdint.h>
 
+// Size of the ADIS16375 page
 #define ADIS16375_PAGE_SIZE 0x80
 
+// Combine Page and Register to one value
 #define ADIS16375_REG(page, reg) (((reg << 8) & 0xFF00) + (page))
- 
+
+// (Page,Register) definition for ADIS16375 register access
 #define ADIS16375_REG_PAGE_ID 0x00 /* Same address on each page */
 
 #define ADIS16375_REG_SEQ_CNT                   ADIS16375_REG(0x00, 0x06)
@@ -76,29 +79,45 @@
 #define ADIS16375_REG_YA_ALM_MAGN               ADIS16375_REG(0x03, 0x48)
 #define ADIS16375_REG_ZA_ALM_MAGN               ADIS16375_REG(0x03, 0x4A)
 
-
+// ADIS16375 struct
+// This struct has pointers to all functions needed to communicate
+// with the ADIS16375 IMU
 typedef struct {
 
-	//double sensor[11];
+        // Hold the value of the last accessed page of the device
         unsigned char cur_page;
 
+        // Generic Delay fucntion
 	void (* _delay_cycle)(unsigned long);
+        // Function to control CS
 	void (* _cs)(unsigned char);
+        // Function to control RST
         void (* _rst)(unsigned char);
+        // SPI initialization function (16 bit width needed)
 	void (* _spi_setup)();
+        // SPI transaction funtion, write 2 byte, read 2 byte
 	int16_t (* _spi_write)(int16_t);
 
 }ADIS16375;
 
+// Initialization function for the ADIS16375 IMU
 void ADIS16375_Init(ADIS16375 *this, void (* _delay_cycle)(unsigned long), void (* _cs)(unsigned char), void (* _rst)(unsigned char), void (* _spi_setup)(), int16_t (* _spi_write)(int16_t));
 
+// Get the status of the device
 int16_t ADIS16375_status(ADIS16375 *this);
+// Get the device ID
 int16_t ADIS16375_device_id(ADIS16375 *this);
+// Get the device's internal temperature
 int16_t ADIS16375_temp(ADIS16375 *this);
+// Wake-up the device from sleep
 void ADIS16375_wake(ADIS16375 *this);
+// Read accelerometer data
 void ADIS16375_readAccData(ADIS16375 *this, int16_t* accX, int16_t* accY, int16_t* accZ);
+// Read gyroscope data
 void ADIS16375_readGyroData(ADIS16375 *this, int16_t* gyroX, int16_t* gyroY, int16_t* gyroZ);
+// Read delta angle displacement data
 void ADIS16375_readDeltaVel(ADIS16375 *this, int16_t* deltaX, int16_t* deltaY, int16_t* deltaZ);
+// Read delta velocity data data
 void ADIS16375_readDeltaAngle(ADIS16375 *this, int16_t* deltaX, int16_t* deltaY, int16_t* deltaZ);
 // Regsiter read/write, and two's complement converters
 short ADIS16375_read(ADIS16375 *this, unsigned char nbits, int16_t reg);

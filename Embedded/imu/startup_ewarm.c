@@ -44,6 +44,7 @@ static void NmiSR(void);
 static void FaultISR(void);
 static void IntDefaultHandler(void);
 
+// Interrupt Handler for Buffered UART
 #ifdef UART_BUFFERED
 extern void UARTStdioIntHandler(void);
 #endif
@@ -53,12 +54,16 @@ extern void UARTStdioIntHandler(void);
 // External declarations for the interrupt handlers used by the application.
 //
 //*****************************************************************************
+
+// Ethernet lwip interrupt handler
 #ifdef ENABLE_ETHERNET
 extern void lwIPEthernetIntHandler(void);
 #endif
 
 extern void SysTickIntHandler(void);
 
+
+// Timer Interrupt Handler for Encoder read and send
 #ifdef ENABLE_MOTOR
 extern void Timer0IntHandler(void);
 #endif

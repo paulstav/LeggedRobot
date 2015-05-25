@@ -31,7 +31,9 @@ int8_t PID_controller (double P_Gain, double I_Gain, double D_Gain, double satur
 	int8_t output = 0;
 	int32_t error = 0;
 	double Pterm, Dterm, Iterm, PIDsum;
-	
+	//ROS_INFO("reference counts = %u", Ref_point);
+
+	//ROS_INFO("feedback counts = %u", Enc_value);
 	// Error calculation
 	error = Ref_point - Enc_value;
 	Pterm = error * P_Gain;
@@ -65,11 +67,12 @@ void encoderCallback(const legged_robot::Encoder::ConstPtr& msg)
 {
  //ROS_INFO("I heard: [%u]", msg->encoder);
  //msgs++;
- pwm_msg.pwm_duty = PID_controller (1.0, 0.0, 0.0, moveVelocity, desiredPos, (int32_t)msg->encoder);
+ pwm_msg.pwm_duty = PID_controller (0.05, 0.0, 0.0, moveVelocity, desiredPos, (int32_t)msg->encoder);
  sendMsg = true;
- //if(msgs == 1000)
+ //ROS_INFO("feedback counts = %u", msg->encoder);
+ //if(msgs == 25)
  //{
-	 //ROS_INFO("PWM: [%d]", pwm_msg.pwm_duty);
+	 //printf("%d,%d,%d\n", (int32_t)msg->encoder, desiredPos, pwm_msg.pwm_duty);
 	 //msgs = 0;
  //}
 }
