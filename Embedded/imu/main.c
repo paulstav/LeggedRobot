@@ -69,38 +69,53 @@ __error__(char *pcFilename, uint32_t ui32Line)
 #endif
 
 #ifdef ENABLE_ETHERNET
+// Initialize the UDP receive pcb
 struct udp_pcb * udp_init_r(void);
+// Send data over UDP
 void udp_send_data(void* sbuf, u16_t len);
+// Callback for UDP data reception
 void udp_receive_data(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port);
+// The variable that hold the UDP receive pcb
 struct udp_pcb *Rpcb;
+// Variables assgined to the controller pc IP and current board IP
 struct ip_addr controller_ip, board_ip;
+// Flag that is raised when the IP is assigned
 volatile uint8_t gotIP = 0;
+// Variables for lwip configuration
 unsigned long device_ip,device_subnet,device_gateway;
-struct pbuf *pi;
-char pData[68];
 #endif
 
+// Flags raised when events for encoder send and pwm set are active
 bool sendEncoder, setPWMvalue;
+// Variable for received PWM command
 int8_t pwmValue;
 
 #ifdef ENABLE_IMU    
+// Function that configures the interrupt detection of ADIS16375 IMU
 void ConfigureADIS16375Int(void);
+// ADIS16375 object
 ADIS16375 myIMU;
+// Flag for IMU Data ready on interrupt
 uint8_t imuDataReady = 0;
+// Variables that hold the measurements received from the IMU
 int16_t accel_x, accel_y, accel_z, gyro_x, gyro_y, gyro_z, delta_x, delta_y, delta_z, dv_x, dv_y, dv_z, temp_out;
 double dval_x, dval_y, dval_z, temp, deltaAccX, deltaAccY, deltaAccZ;
 #endif
 
 #ifdef ENABLE_FORCE
+// Function that configures the interrupt detection from the Force Sensor
 void ConfigureForceSensorInt(void);
+// Flag for Force Sensor Data ready on interrupt
 uint8_t forceDataReady;
+// Force Sensor object
 FORCESENSOR myForce;
+// Variable that hold the received measurements from the Force Sensor
 uint16_t forceValues[6] = {0,0,0,0,0,0};
 #endif
 
 #ifdef ENABLE_ETHERNET
-void
-DisplayIPAddress(uint32_t ui32Addr)
+// Display the input IP address on UART
+void DisplayIPAddress(uint32_t ui32Addr)
 {
     char pcBuf[16];
 
@@ -121,8 +136,8 @@ DisplayIPAddress(uint32_t ui32Addr)
 #endif
 
 #ifdef ENABLE_ETHERNET
-void
-lwIPHostTimerHandler(void)
+// Ethernet lwip interrupt handler
+void lwIPHostTimerHandler(void)
 {
     uint32_t ui32Idx, ui32NewIPAddress;
 
@@ -164,6 +179,7 @@ lwIPHostTimerHandler(void)
             DisplayIPAddress(ui32NewIPAddress);
             UARTprintf("\n");
 #endif
+            // Set the gotIP flag once IP is assigned
             gotIP = 1;
         }
 
@@ -217,17 +233,11 @@ SysTickIntHandler(void)
 #ifdef ENABLE_ETHERNET
     lwIPTimer(SYSTICKMS);
 #endif
-    //timerEncoder++;
-    //if(timerEncoder == 10)
-    //{
-      //timerEncoder = 0;
-      //sendEncoder = true;
-    //}
 }
 
 #ifdef ENABLE_UART
-void
-ConfigureUART(void)
+// Configure the UART peripheral
+void ConfigureUART(void)
 {
     //
     // Enable the GPIO Peripheral used by the UART.
@@ -257,12 +267,14 @@ ConfigureUART(void)
 }
 #endif
 
+// Generic delay function
 void cyclesdelay(unsigned long cycles)
 {
 	MAP_SysCtlDelay(cycles); // Tiva C series specific
 }
 
 #ifdef ENABLE_MOTOR
+// Setup the PWM peripheral
 void SetupPWM()
 {
   SysCtlPWMClockSet(SYSCTL_PWMDIV_1);
@@ -295,8 +307,13 @@ void SetupPWM()
 
 }
 
+// Fucntion to set the PWM output given the duty cycle
+// PWM can range from -100 to 100, if the value is negative
+// we reverse the motion by setting the DIR pin low for the drive
+// positive direction correspond to DIR pin being high
 int8_t SetPWMDuty(int8_t duty)
 {
+  // If duty cycle is 0 , disable the PWM generator and output
   if(!duty)
   {
     PWMOutputState(PWM0_BASE, PWM_OUT_4_BIT, false);
@@ -304,6 +321,7 @@ int8_t SetPWMDuty(int8_t duty)
   }
   else
   {
+    // Set DIR pin accordingly
     if(duty < 0)
     {
       MAP_GPIOPinWrite(GPIO_PORTL_BASE, GPIO_PIN_4, 0);
@@ -314,15 +332,18 @@ int8_t SetPWMDuty(int8_t duty)
     
     if(duty == 100)
       duty = 95;
+    
+    // Set the PWM pulse width (duty cycle)
     PWMPulseWidthSet(PWM0_BASE, PWM_OUT_4,
                    (PWMGenPeriodGet(PWM0_BASE, PWM_GEN_2) / 100) * (uint32_t)duty);
     PWMOutputState(PWM0_BASE, PWM_OUT_4_BIT, true);
     PWMGenEnable(PWM0_BASE, PWM_GEN_2);
   }
-  
+  // Return the set duty cycle
   return duty;
 }
 
+// 5 KHz timer that sets the flag for encoder value transmission
 void
 Timer0IntHandler(void)
 {
@@ -331,25 +352,32 @@ Timer0IntHandler(void)
     //
     ROM_TimerIntClear(TIMER0_BASE, TIMER_TIMA_TIMEOUT);
     
+    // Set the flag
     sendEncoder = true;
 
 }
 #endif
 
 #ifdef ENABLE_IMU
+// ADIS16375 Interrupt handler
 void IntADIS16375(void)
 {
   uint32_t status;
   
+  // Clear the interrupt flag
   status = GPIOIntStatus(IMU_IRQ_PORT_BASE, true);
   
+  // Set the appropriate flag
   imuDataReady = 1;
   
+  // Read the desired data from the IMU
   ADIS16375_readAccData(&myIMU, &accel_x, &accel_y, &accel_z);
   ADIS16375_readGyroData(&myIMU, &gyro_x, &gyro_y, &gyro_z);
   //ADIS16375_readDeltaAngle(&myIMU, &delta_x, &delta_y, &delta_z);
   //ADIS16375_readDeltaVel(&myIMU, &dv_x, &dv_y, &dv_z);
   
+  // Value conversion for delta angle displacement
+  // Delta angles need to be accumulated to get proper euler angle values
   /*dval_x = (delta_x*1.0)*0.005493;
   dval_y = (delta_y*1.0)*0.005493;
   dval_z = (delta_z*1.0)*0.005493;
@@ -361,7 +389,7 @@ void IntADIS16375(void)
   GPIOIntClear(IMU_IRQ_PORT_BASE, status);
 }
 
-
+// Configure the ADIS16375 interrupt pin 
 void ConfigureADIS16375Int(void)
 {
   SysCtlPeripheralEnable(IMU_IRQ_PERIPH);
@@ -374,20 +402,24 @@ void ConfigureADIS16375Int(void)
 #endif
 
 #ifdef ENABLE_FORCE
+// Force Sensor data ready interrupt handler
 void IntForceSensor(void)
 {
   uint32_t status;
   
+  // Clear the interrupt
   status = GPIOIntStatus(FORCE_IRQ_PORT_BASE, true);
   
+  // Set the appropriate flag
   forceDataReady = 1;
   
+  // Read measurements from the Force sensor
   ReadForceValues(&myForce, forceValues);
   
   GPIOIntClear(FORCE_IRQ_PORT_BASE, status);
 }
 
-
+// Configure the Force Sensor interrupt pin
 void ConfigureForceSensorInt(void)
 {
   SysCtlPeripheralEnable(FORCE_IRQ_PERIPH);
@@ -399,26 +431,35 @@ void ConfigureForceSensorInt(void)
 }
 #endif
 
-int
-main(void)
+// Main application
+int main(void)
 {
    uint32_t status;
+   // UART buffer
    uint8_t charUART[256];
+   // The first time the IMU gives an interrupt we can set the BIAS NULL
+   // command for auto-bias correction on accelerometer and gyroscope data
    uint8_t firstIMU = 0;
     
 #ifdef ENABLE_UART
+    // Character that is used to receive commands from the UART
+    // Used only for debugging
     unsigned char uCom = 0;
 #endif
     
 #ifdef ENABLE_ETHERNET
     uint32_t ui32User0, ui32User1;
     uint8_t pui8MACArray[8];
+    // UDP Send buffer
     uint8_t sendUDP[128];
+    // Hold the number of transmission (used for debugging)
     uint32_t sends = 0;
 #endif
     
+    // Variable to hold the read encoder value
     int32_t encoderPos = 0;   
 
+    // Initialize the application flags
 #ifdef ENABLE_MOTOR
     sendEncoder = false;
     setPWMvalue = false;
@@ -428,6 +469,7 @@ main(void)
 #ifdef ENABLE_ETHERNET
     gotIP = 0;
     
+    // Set the proper values for lwip configuration based on board selection
 #if defined(BOARD_FL)
     // 192.168.1.10
     device_ip = 0xC0A8010A;
@@ -459,9 +501,9 @@ main(void)
     // 192.168.1.22
     IP4_ADDR(&controller_ip, 0xC0,0xA8,0x01,0x16);
 
-    memset(pData,0x31,68);
 #endif
     
+    // Start the system clock (120 MHz)
     SysCtlMOSCConfigSet(SYSCTL_MOSC_HIGHFREQ);
     
     g_ui32SysClock = MAP_SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
@@ -469,6 +511,7 @@ main(void)
                                              SYSCTL_USE_PLL |
                                              SYSCTL_CFG_VCO_480), 120000000);
 #ifdef ENABLE_ETHERNET
+    // Set pins for ethernet functionality
     PinoutSet(true, false);
     MAP_GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_1);
     MAP_GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_1, ~GPIO_PIN_1);
@@ -481,6 +524,7 @@ main(void)
 #endif
     
 #ifdef ENABLE_ETHERNET
+    // Initialize the SysTick timer
     MAP_SysTickPeriodSet(g_ui32SysClock / SYSTICKHZ);
     MAP_SysTickEnable();
     MAP_SysTickIntEnable();
@@ -507,6 +551,7 @@ main(void)
     pui8MACArray[4] = ((ui32User1 >>  8) & 0xff);
     pui8MACArray[5] = ((ui32User1 >> 16) & 0xff);
 
+    // lwIP stack initialization
     //lwIPInit(g_ui32SysClock, pui8MACArray, 0, 0, 0, IPADDR_USE_DHCP);
     lwIPInit(g_ui32SysClock, pui8MACArray, device_ip, device_subnet, device_gateway, IPADDR_USE_STATIC);
 
@@ -515,6 +560,7 @@ main(void)
     
     MAP_IntPrioritySet(FAULT_SYSTICK, SYSTICK_INT_PRIORITY);
 
+    // Wait until an IP is assigned 
 #ifdef ENABLE_ETHERNET    
     while(gotIP == 0)
     	SysCtlDelay(120);
@@ -524,7 +570,9 @@ main(void)
     UARTprintf("Initializing...\n");
 #endif
    
+    // Configure motor interface modules
 #ifdef ENABLE_MOTOR
+    // Setup the PWM generator
     SetupPWM();
     
     // QEI Setup
@@ -547,16 +595,14 @@ main(void)
     SysCtlDelay(12000);
 #endif
 
+    // Initialize the UDP receive pcb
 #ifdef ENABLE_ETHERNET
     Rpcb = udp_init_r();
 #endif
 
+    // IMU Initializaztion
 #ifdef ENABLE_IMU
-    // Only for Boosterpack 2 SSI3 connection
-    //MAP_GPIOPinTypeGPIOInput(GPIO_PORTA_BASE, GPIO_PIN_2 | GPIO_PIN_3);
-    
-    ADIS16375_Init(&myIMU, cyclesdelay, IMU_CS, IMU_RST, init_spi16, SpiTransfer16);
-    
+    ADIS16375_Init(&myIMU, cyclesdelay, IMU_CS, IMU_RST, init_spi16, SpiTransfer16);    
 #ifdef ENABLE_UART
     //UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
     //ADIS16375_write(&myIMU,ADIS16375_REG_GLOB_CMD,0x8000);  
@@ -565,6 +611,7 @@ main(void)
     ConfigureADIS16375Int();
     //status = GPIOIntStatus(IMU_IRQ_PORT_BASE, true);
     
+    // Clear interrupt flag just to be safe
     GPIOIntClear(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
     GPIOIntEnable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
     
@@ -573,6 +620,7 @@ main(void)
     //UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
 #endif
     
+    // Force Sensor Initialization
 #ifdef ENABLE_FORCE
     FORCESENSOR_Init(&myForce, cyclesdelay, FORCE_CS, init_spi, SpiTransfer);   
     ConfigureForceSensorInt();   
@@ -580,6 +628,7 @@ main(void)
     GPIOIntEnable(FORCE_IRQ_PORT_BASE, FORCE_IRQ_PIN);
 #endif
     
+    // Configure 5 KHz tier for encoder count acquisition
 #ifdef ENABLE_MOTOR   
     SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
     TimerConfigure(TIMER0_BASE, TIMER_CFG_PERIODIC);
@@ -589,9 +638,11 @@ main(void)
     TimerEnable(TIMER0_BASE, TIMER_A);
 #endif
     
+    // Application Main Loop
     while(1)
     {
 #ifdef ENABLE_FORCE
+      // If data ready from force sensor output the data
       if(forceDataReady == 1)
       {
         forceDataReady = 0;
@@ -602,26 +653,37 @@ main(void)
       }
 #endif
 #ifdef ENABLE_IMU
+      // If data ready from IMU output the data
+      // On first interrupt only we check the product ID
+      // and are able to set the configuration for proper delta angle calculation
       if(imuDataReady == 1)
       {
         if(!firstIMU)
         {
           firstIMU = 1;
           UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
+          // Resore factory calibration on strat-up
           ADIS16375_write(&myIMU, ADIS16375_REG_GLOB_CMD, 0x4000);
+          // Configure the ADIS16375 IMU
           //MAP_SysCtlDelay(40000*100);
+          
+          // Set the decimation coefficient
           //ADIS16375_write(&myIMU, ADIS16375_REG_DEC_RATE, DECIMATION_COEF);
+          
+          // Set configuration for the BIAS estimator
           //ADIS16375_write(&myIMU, ADIS16375_REG_NULL_CFG, 0x0A07);
+          
+          // Load values for bias correction (BIAS NULL command)
           //ADIS16375_write(&myIMU, ADIS16375_REG_GLOB_CMD, 0x0100);
+          
           //GPIOIntDisable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
           imuDataReady = 0;  
           deltaAccX = deltaAccY = deltaAccZ = 0.0;
         }
         else
         {
-          //GPIOIntDisable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
-          //imuDataReady = 2;
           imuDataReady = 0;
+          // Handle the recieved IMU measrements
 #ifdef ENABLE_UART
           /*UARTprintf("ACC_X_OUT : %d 0x%X\n",accel_x,accel_x);
           UARTprintf("ACC_Y_OUT : %d 0x%X\n",accel_y,accel_y);
@@ -677,14 +739,8 @@ main(void)
         }
 #endif
       }
-      /*if((UART_TX_BUFFER_SIZE == UARTTxBytesFree()) && (imuDataReady == 2))
-      {
-        imuDataReady = 3;
-        status = GPIOIntStatus(IMU_IRQ_PORT_BASE, true);
-        GPIOIntClear(IMU_IRQ_PORT_BASE, status);
-        GPIOIntEnable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
-      }*/
 #endif
+      // UART command interface for debugging
 #ifdef ENABLE_UART
 #ifdef UART_BUFFERED
       if(UARTRxBytesAvail()>0)
@@ -697,9 +753,11 @@ main(void)
       {
 #ifdef ENABLE_IMU
       case '1' : 
+        // Get IMU product ID
         UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
         break;
       case '2': 
+        // Reset IMU measurement data
         imuDataReady = 0;
         accel_x = accel_y = accel_z = 0;
         deltaAccX = deltaAccY = deltaAccZ = 0.0;
@@ -708,6 +766,7 @@ main(void)
         GPIOIntEnable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
         break;
       case '3': 
+        // Get data directly from IMU without waiting for interrupt
         /*accel_x = ADIS16375_read(&myIMU, 16, ADIS16375_REG_X_ACCEL_OUT);
         accel_y = ADIS16375_read(&myIMU, 16, ADIS16375_REG_Y_ACCEL_OUT);
         accel_z = ADIS16375_read(&myIMU, 16, ADIS16375_REG_Z_ACCEL_OUT);*/
@@ -769,7 +828,8 @@ main(void)
         sprintf(charUART, "DELTA VEL Z : %lf\n", dval_z);
         UARTprintf("%s",charUART);
         break;
-      case '4' : 
+      case '4' :
+        // Output received IMU data 
         dval_x = (gyro_x*1.0)*0.013108;
         dval_y = (gyro_y*1.0)*0.013108;
         dval_z = (gyro_z*1.0)*0.013108;
@@ -793,12 +853,14 @@ main(void)
         UARTprintf("%s",charUART);
         break;
       case '5' : 
+        // Read and display IMU internal temperature
         temp_out = ADIS16375_temp(&myIMU);
         temp = (temp_out*1.0)*0.00565 + 25.0;
         sprintf(charUART, "%lf", temp);
         UARTprintf("Temp : 0x%X %s\n",temp_out,charUART);
         break;
       case '6' :
+        // Output bias coefficients
         UARTprintf("X_GYRO_OFF_L : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_X_GYRO_OFF_L));
         UARTprintf("X_GYRO_OFF_H : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_X_GYRO_OFF_H));
         UARTprintf("Y_GYRO_OFF_L : 0x%X\n",ADIS16375_read(&myIMU, 16, ADIS16375_REG_Y_GYRO_OFF_L));
@@ -822,9 +884,11 @@ main(void)
         UARTprintf("DEC_RATE : 0x%X\n",(ADIS16375_read(&myIMU, 16, ADIS16375_REG_DEC_RATE) & 0x07FF));
         break;
       case '7':
+        // Load calibration values
         ADIS16375_write(&myIMU, ADIS16375_REG_GLOB_CMD, 0x0100);
         break;
       case '8': 
+        // Output delta angle from stored accumulated data
         sprintf(charUART, "DELTA X : %lf\n", deltaAccX);
         UARTprintf("%s",charUART);
         sprintf(charUART, "DELTA Y : %lf\n", deltaAccY);
@@ -833,6 +897,7 @@ main(void)
         UARTprintf("%s",charUART);
         break;
       case 'w':
+        // IMU wakeup
         ADIS16375_wake(&myIMU);
         break;
 #endif
@@ -842,6 +907,7 @@ main(void)
 #endif
       
 #ifdef ENABLE_MOTOR
+      // If we received a PWM command set the corresponding PWM duty cyle and direction
       if(setPWMvalue == true)
       {
         //UARTprintf("Setting pwm to %d\n",pwmValue);
@@ -852,6 +918,7 @@ main(void)
         udp_send_data((void*)sendUDP,2);*/
       }
       
+      // If send encoder value event occurs, send data via UDP
       if(sendEncoder == true)
       {
         //sends++;
@@ -874,18 +941,21 @@ main(void)
 
 #ifdef ENABLE_ETHERNET
 
+// Initializze the UDP receive pcb
 struct udp_pcb * udp_init_r(void)
 {
   //err_t err;
   struct udp_pcb *pcb_r;
   pcb_r = udp_new();
 
+  // Bind to given port , receive from any IP
   udp_bind(pcb_r, IP_ADDR_ANY, PORT_R);
 
 #ifdef ENABLE_UART
   UARTprintf("UDP to receive at port %d...\n", PORT_R);
 #endif
   
+  // Set the receive data callback
   udp_recv(pcb_r, udp_receive_data, NULL);
 
   return pcb_r;
@@ -913,6 +983,8 @@ void udp_receive_data(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_
       {
     	  udp_send_data((void*)pData, 68);
       }*/
+      // If we received PWM commnad (0x31 command byte)
+      // extract the transmitted value
       if(pPointer[0] == 0x31)
       {
         pwmValue = pPointer[1];
@@ -928,6 +1000,7 @@ void udp_receive_data(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_
     }
 }
 
+// Send data over UDP to the defined port
 void udp_send_data(void* sbuf, u16_t len)
 {
   struct pbuf *p;

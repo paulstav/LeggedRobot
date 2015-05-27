@@ -8,6 +8,8 @@
 //#define BOARD_BL
 #define BOARD_BR
 
+// Definition of UDP SEnd/Receive ports depending on board
+
 #if defined(BOARD_FL)
 #define PORT_S 2014
 #define PORT_R 2013

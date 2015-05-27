@@ -10,6 +10,7 @@
 
 extern uint8_t imuDataReady;
 
+// Wake-up sequence implementation
 void ADIS16375_wake(ADIS16375 *this){
     this->_cs(LOW);
     this->_delay_cycle(2400);
@@ -17,6 +18,7 @@ void ADIS16375_wake(ADIS16375 *this){
     this->_delay_cycle(60000);
 }
 
+// Converts a number into double based on bit percision
 double ADIS16375_signed_double(unsigned char nbits, unsigned int num){
   unsigned int mask, padding;
   // select correct mask
@@ -27,6 +29,7 @@ double ADIS16375_signed_double(unsigned char nbits, unsigned int num){
   return (num & mask)?( -1.0 * (~(num | 0xFF << nbits)  + 1) ):( 1.0 * num );
 }
 
+// Return the two's complement of a number
 unsigned int ADIS16375_twos_comp(double num){
   unsigned int raw;
   
@@ -38,23 +41,28 @@ unsigned int ADIS16375_twos_comp(double num){
   return raw;
 }
 
+// Reutrns the device ID
 int16_t ADIS16375_device_id(ADIS16375 *this)
 {
   return ADIS16375_read(this, 16, ADIS16375_REG_PROD_ID);
 }
 
+// Return the device status
 int16_t ADIS16375_status(ADIS16375 *this)
 {
   return ADIS16375_read(this, 16, ADIS16375_REG_SYS_E_FLA);
 }
 
+// Return the device's internal temperature
 int16_t ADIS16375_temp(ADIS16375 *this)
 {
   return ADIS16375_read(this, 16, ADIS16375_REG_TEMP_OUT);
 }
 
+// ADIS16375 Initializaztion sequence
 void ADIS16375_Init(ADIS16375 *this, void (* _delay_cycle)(unsigned long), void (* _cs)(unsigned char), void (* _rst)(unsigned char), void (* _spi_setup)(), int16_t (* _spi_write)(int16_t))
 {
+        // Set function pointers to struct and set current page to 0
 	this->_cs = _cs;
         this->_rst = _rst;
 	this->_spi_setup = _spi_setup;
@@ -81,12 +89,15 @@ void ADIS16375_Init(ADIS16375 *this, void (* _delay_cycle)(unsigned long), void 
         // Wake device up, incase it's sleeping
 	//ADIS16375_wake(this);
         
+        // Set the decimation coefficient and auto-bias 
         //ADIS16375_write(this, ADIS16375_REG_NULL_CFG, 0x0A07);
         //ADIS16375_write(this, ADIS16375_REG_DEC_RATE, 0x1800);
         
         imuDataReady = 0;
 }
 
+// Checks if we need to change page in order to access the given register
+// If Page change is needed we send the appropriate commands to the IMU
 void ADIS16375_CheckPageChange(ADIS16375 *this, int16_t reg)
 {
   int16_t page2go = 0;
@@ -106,6 +117,7 @@ void ADIS16375_CheckPageChange(ADIS16375 *this, int16_t reg)
   }
 }
 
+// Returns the gyroscope data from the IMU registers 
 void ADIS16375_readGyroData(ADIS16375 *this, int16_t* gyroX, int16_t* gyroY, int16_t* gyroZ)
 {
   int16_t reg = 0;
@@ -141,6 +153,7 @@ void ADIS16375_readGyroData(ADIS16375 *this, int16_t* gyroX, int16_t* gyroY, int
   this->_cs(HIGH);
 }
 
+// Returns the acceleration data from the IMU registers
 void ADIS16375_readAccData(ADIS16375 *this, int16_t* accX, int16_t* accY, int16_t* accZ)
 {
   int16_t reg = 0;
@@ -176,6 +189,7 @@ void ADIS16375_readAccData(ADIS16375 *this, int16_t* accX, int16_t* accY, int16_
   this->_cs(HIGH);
 }
 
+// Returns the delta angle displacement data from the IMU registers
 void ADIS16375_readDeltaAngle(ADIS16375 *this, int16_t* deltaX, int16_t* deltaY, int16_t* deltaZ)
 {
   int16_t reg = 0;
@@ -210,7 +224,7 @@ void ADIS16375_readDeltaAngle(ADIS16375 *this, int16_t* deltaX, int16_t* deltaY,
   this->_delay_cycle(1);
   this->_cs(HIGH);
 }
-
+// Returns the delta velocity data from the IMU registers
 void ADIS16375_readDeltaVel(ADIS16375 *this, int16_t* deltaX, int16_t* deltaY, int16_t* deltaZ)
 {
   int16_t reg = 0;
@@ -246,6 +260,7 @@ void ADIS16375_readDeltaVel(ADIS16375 *this, int16_t* deltaX, int16_t* deltaY, i
   this->_cs(HIGH);
 }
 
+// Read the value of a register (nbits should always be 16 for ADIS16375)
 int16_t ADIS16375_read(ADIS16375 *this, unsigned char nbits, int16_t reg){
   // initialize variables
   int16_t rshort/*, mask, measure*/; 
@@ -276,6 +291,7 @@ int16_t ADIS16375_read(ADIS16375 *this, unsigned char nbits, int16_t reg){
   return rshort;
 }
 
+// Write a value to the given register
 void ADIS16375_write(ADIS16375 *this, int16_t reg, int16_t value)
 {
   int16_t write_val1 = 0 , write_val2 = 0;
