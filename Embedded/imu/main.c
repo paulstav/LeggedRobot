@@ -486,6 +486,10 @@ int main(void)
     // // 192.168.1.13
     device_ip = 0xC0A8010D;
     IP4_ADDR(&board_ip, 0xC0,0xA8,0x01,0x0D);
+#elif defined(BOARD_IMU)
+    // // 192.168.1.14
+    device_ip = 0xC0A8010E;
+    IP4_ADDR(&board_ip, 0xC0,0xA8,0x01,0x0E);
 #else
     // // 192.168.1.10
     device_ip = 0xC0A8010A;
@@ -671,7 +675,7 @@ int main(void)
           //ADIS16375_write(&myIMU, ADIS16375_REG_DEC_RATE, DECIMATION_COEF);
           
           // Set configuration for the BIAS estimator
-          //ADIS16375_write(&myIMU, ADIS16375_REG_NULL_CFG, 0x0A07);
+          ADIS16375_write(&myIMU, ADIS16375_REG_NULL_CFG, 0x0A07);
           
           // Load values for bias correction (BIAS NULL command)
           //ADIS16375_write(&myIMU, ADIS16375_REG_GLOB_CMD, 0x0100);
@@ -683,6 +687,14 @@ int main(void)
         else
         {
           imuDataReady = 0;
+          sendUDP[0] = 0x43;
+          memcpy(&sendUDP[1],(uint8_t*)(&accel_x),2);
+          memcpy(&sendUDP[3],(uint8_t*)(&accel_y),2);
+          memcpy(&sendUDP[5],(uint8_t*)(&accel_z),2);
+          memcpy(&sendUDP[7],(uint8_t*)(&gyro_x),2);
+          memcpy(&sendUDP[9],(uint8_t*)(&gyro_y),2);
+          memcpy(&sendUDP[11],(uint8_t*)(&gyro_z),2);
+          udp_send_data((void*)sendUDP,13);
           // Handle the recieved IMU measrements
 #ifdef ENABLE_UART
           /*UARTprintf("ACC_X_OUT : %d 0x%X\n",accel_x,accel_x);

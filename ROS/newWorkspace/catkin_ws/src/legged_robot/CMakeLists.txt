@@ -50,6 +50,7 @@ add_message_files(
    PWM.msg
    Encoder.msg
    Position.msg
+   AccGyro.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -136,6 +137,10 @@ add_dependencies(BR_motor_interface legged_robot_generate_messages_cpp)
 add_executable(BR_motor_pid src/BR_motor_pid.cpp)
 target_link_libraries(BR_motor_pid ${catkin_LIBRARIES})
 add_dependencies(BR_motor_pid legged_robot_generate_messages_cpp)
+
+add_executable(IMU_interface src/IMU_interface.cpp)
+target_link_libraries(IMU_interface ${catkin_LIBRARIES})
+add_dependencies(IMU_interface legged_robot_generate_messages_cpp)
 
 ## Declare a cpp executable
 # add_executable(legged_robot_node src/legged_robot_node.cpp)

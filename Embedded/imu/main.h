@@ -6,7 +6,8 @@
 //#define BOARD_FL
 //#define BOARD_FR
 //#define BOARD_BL
-#define BOARD_BR
+//#define BOARD_BR
+//#define BOARD_IMU
 
 // Definition of UDP SEnd/Receive ports depending on board
 
@@ -22,6 +23,9 @@
 #elif defined(BOARD_BR)
 #define PORT_S 2020
 #define PORT_R 2019
+#elif defined(BOARD_IMU)
+#define PORT_S 2022
+#define PORT_R 2021
 #else
 #define PORT_S 2012
 #define PORT_R 2011
