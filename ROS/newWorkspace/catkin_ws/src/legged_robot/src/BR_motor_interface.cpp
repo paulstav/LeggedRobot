@@ -12,12 +12,17 @@
 #include <stdint.h>
 #include <inttypes.h>
 
+// UDP buffer length
 #define BUFLEN 512
+// UDP port to receive from
 #define PORT 2020
 
+// Asynchronous UDP communication
 #define ASYNC
 
+// UDP port to send data to
 #define PORT_BRD 2019
+// Tiva Back Right Leg board IP
 #define BRD_IP "192.168.1.13"
 
 #include "ros/ros.h"
@@ -26,21 +31,31 @@
 
 #include <sstream>
 
-bool gotMsg = false;
-int sock;
-int32_t encoderPos = 0;
-int msgs = 0;
-struct sockaddr_in si_pwm;
-ssize_t SendPWMBytes = 2;
-char SendBufferPWM[6];
-int broad, slen=sizeof(si_pwm);
+/*
 
+	Back Right Leg ROS node that reads encoder position in counts via UDP from the Tiva board, publishes the received data to the BR_encoder_feedback topic and listens for published data on the BR_pwm_feedback topic. Once a PWM command message is received it transmits the corresponding command to the Tiva board via UDP.
+
+*/
+
+// Global variables
+bool gotMsg = false; // Flag set high when message is received from UDP
+int sock; // The socket identifier for UDP Rx communication
+uint32_t encoderPos = 0;  // Place the received encoder value here
+int msgs = 0; // Incoming message counter
+struct sockaddr_in si_pwm;  // Struct for UDP send data socket
+ssize_t SendPWMBytes = 2;  // Number of bytes to send for PWM command
+char SendBufferPWM[6];  // UDP Send Buffer
+int broad;	// The socket identifier for UDP Tx communication
+int slen=sizeof(si_pwm);  // Size of sockaddr_in strut
+
+// Generic error function
 void error(char *s)
 {
     perror(s);
     exit(1);
 }
 
+// Signal handler for asynchronous UDP
 void sigio_handler(int sig)
 {
    char buffer[BUFLEN]="";
@@ -49,27 +64,26 @@ void sigio_handler(int sig)
    unsigned int slen=sizeof(si_other);
    ssize_t rcvbytes = 0;
 
+   // Receive available bytes from UDP socket
    if ((rcvbytes = recvfrom(sock, &buffer, BUFLEN, 0, (struct sockaddr *)&si_other, &slen))==-1)
        error("recvfrom()");
    else
    {
+	 // Parse data , 1 int32 value
      if(buffer[0] == 0x42)
      {
 	   val[3] = (unsigned char)buffer[4];
 	   val[2] = (unsigned char)buffer[3];
 	   val[1] = (unsigned char)buffer[2];
 	   val[0] = (unsigned char)buffer[1];
-       /*encoderPos = buffer[2];
-       encoderPos = (encoderPos << 8) | buffer[1];*/
-	   /*encoderPos = val[0];
-	   encoderPos = (encoderPos & 0x000000FF);
-       encoderPos = ((encoderPos << 8) & 0xFF00) | val[1];*/
 	   memcpy(&encoderPos, &val, 4);
+	   // Raise flag that we received a message
        gotMsg = true;
      }
    }
 }
 
+// Function to enable asynchronous UDP communication
 int enable_asynch(int sock)
 {
   int stat = -1;
@@ -94,11 +108,14 @@ int enable_asynch(int sock)
   return 0;
 }
 
+// Callback function for reception of PWM message from topic
 void pwmCallback(const legged_robot::PWM::ConstPtr& msg)
 {
+	// Extract the duty cycle value and send it to the Tiva board via UDP
 	SendBufferPWM[1] = (int8_t)msg->pwm_duty;
 	if (sendto(broad, SendBufferPWM, SendPWMBytes, 0, (struct sockaddr *)&si_pwm, slen)==-1)
 		error("sendto()");
+	// Print-out for debugging
 	msgs++;
 	if(msgs == 5000)
 	{
@@ -107,6 +124,7 @@ void pwmCallback(const legged_robot::PWM::ConstPtr& msg)
 	}
 }
 
+// Main Function
 int main(int argc, char **argv)
 {
   struct sockaddr_in si_me, si_other;
@@ -116,6 +134,7 @@ int main(int argc, char **argv)
   msg_count = 0;
   memset(SendBufferPWM, 0, 6);
   
+  // Initialize UDP socket for data transmission
   if ((broad=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP))==-1)
        error("socket");
 	   
@@ -130,14 +149,19 @@ int main(int argc, char **argv)
   
   SendBufferPWM[0] = 0x31;
 
+  // Initialize ROS node
   ros::init(argc, argv, "BR_motor_interface");
   ros::NodeHandle n;
+  // Initialize the publisher for Encoder data post
   ros::Publisher motor_interface_pub = n.advertise<legged_robot::Encoder>("BR_encoder_feedback", 1000);
+  // Initialize the subscriber for PWM data reception
   ros::Subscriber motor_pid_sub = n.subscribe("BR_pwm_feedback", 1000, pwmCallback);
   ros::Rate loop_rate(10000);
 
+  // Wait for ROS node to initialize
   while (!ros::ok());
   
+  // Initialize UDP socket for data reception
   if ((sock=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP))==-1)
      error("socket");
 
@@ -153,20 +177,11 @@ int main(int argc, char **argv)
   ROS_INFO("Staring communication with BR Tiva board.");
   while (ros::ok())
   {
-    /**
-     * This is a message object. You stuff it with data, and then publish it.
-     */
+    // Initialize ROS message values
     legged_robot::Encoder encoder_msg;
     encoder_msg.encoder = 0;
 
-    //ROS_INFO("%d", encoder_msg.encoder);
-
-    /**
-     * The publish() function is how you send messages. The parameter
-     * is the message object. The type of this object must agree with the type
-     * given as a template parameter to the advertise<>() call, as was done
-     * in the constructor above.
-     */
+    // If we got a new message, publish to topic and print values every 5000 messages
     if(gotMsg){
 	  msg_count++;
       encoder_msg.encoder = encoderPos;
@@ -174,9 +189,7 @@ int main(int argc, char **argv)
 	  if(msg_count >= 5000)
 	  {
 		msg_count = 0;
-		//sprintf(strout,"%d",(uint32_t)encoder_msg.encoder);
-		//ROS_INFO("%s", strout);
-		ROS_INFO("%d", (uint32_t)encoder_msg.encoder);
+		ROS_INFO("%u", (uint32_t)encoder_msg.encoder);
 	  }
       gotMsg = false;
     }

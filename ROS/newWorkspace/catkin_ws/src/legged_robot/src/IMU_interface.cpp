@@ -12,11 +12,15 @@
 #include <stdint.h>
 #include <inttypes.h>
 
+// UDP buffer length
 #define BUFLEN 512
+// UDP port to receive from
 #define PORT 2022
 
+// Asynchronous UDP communication
 #define ASYNC
 
+// Tiva IMU board IP
 #define BRD_IP "192.168.1.14"
 
 #include "ros/ros.h"
@@ -24,18 +28,30 @@
 
 #include <sstream>
 
-bool gotMsg = false;
-int sock;
-int msgs = 0;
-int16_t acc[3] = {0,0,0};
-int16_t gyro[3] = {0,0,0};
+/*
 
+	ROS node that reads IMU data (accelerometer and gyroscope x,y,z) via UDP from the Tiva board
+	and publishes the received data to the IMU_feedback topic.
+	
+	This node was used for debugging PID controller and should not be run otherwise.
+
+*/
+
+// Global variables
+bool gotMsg = false;   // Flag set high when message is received from UDP
+int sock;   // The socket identifier for UDP communication
+int msgs = 0;  // Incoming message counter
+int16_t acc[3] = {0,0,0};  // Place raw accelerometer data here
+int16_t gyro[3] = {0,0,0};  // Place raw gyroscope data here
+
+// Generic error function
 void error(char *s)
 {
     perror(s);
     exit(1);
 }
 
+// Signal handler for asynchronous UDP
 void sigio_handler(int sig)
 {
    char buffer[BUFLEN]="";
@@ -44,10 +60,13 @@ void sigio_handler(int sig)
    unsigned int slen=sizeof(si_other);
    ssize_t rcvbytes = 0;
 
+   // Receive available bytes from UDP socket
    if ((rcvbytes = recvfrom(sock, &buffer, BUFLEN, 0, (struct sockaddr *)&si_other, &slen))==-1)
        error("recvfrom()");
    else
    {
+     //ROS_INFO("%d bytes");
+	 // Parse data , 6 int16 values
      if(buffer[0] == 0x43 && rcvbytes == 13)
      {
 	   val[1] = (unsigned char)buffer[2];
@@ -68,11 +87,13 @@ void sigio_handler(int sig)
 	   val[1] = (unsigned char)buffer[12];
 	   val[0] = (unsigned char)buffer[11];
 	   memcpy(&gyro[2], &val, 2);
+	   // Raise flag that we received a message
        	   gotMsg = true;
      }
    }
 }
 
+// Function to enable asynchronous UDP communication
 int enable_asynch(int sock)
 {
   int stat = -1;
@@ -97,6 +118,7 @@ int enable_asynch(int sock)
   return 0;
 }
 
+// Main Function
 int main(int argc, char **argv)
 {
   struct sockaddr_in si_me, si_other;
@@ -108,13 +130,17 @@ int main(int argc, char **argv)
   msg_count = 0;
   
 
+  // Initialize ROS node
   ros::init(argc, argv, "IMU_interface");
   ros::NodeHandle n;
+  // Initialize the publisher for Accelerometer and Gyroscope data post
   ros::Publisher imu_interface_pub = n.advertise<legged_robot::AccGyro>("IMU_feedback", 1000);
   ros::Rate loop_rate(10000);
 
+  // Wait for ROS node to initialize
   while (!ros::ok());
   
+  // Initialize UDP communication
   if ((sock=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP))==-1)
      error("socket");
 
@@ -130,9 +156,7 @@ int main(int argc, char **argv)
   ROS_INFO("Staring communication with IMU Tiva board.");
   while (ros::ok())
   {
-    /**
-     * This is a message object. You stuff it with data, and then publish it.
-     */
+	// Initialize ROS message values
     accgyro_msg.accX = 0;
     accgyro_msg.accY = 0;
     accgyro_msg.accZ = 0;
@@ -140,13 +164,7 @@ int main(int argc, char **argv)
     accgyro_msg.gyroY = 0;
     accgyro_msg.gyroZ = 0;
 
-
-    /**
-     * The publish() function is how you send messages. The parameter
-     * is the message object. The type of this object must agree with the type
-     * given as a template parameter to the advertise<>() call, as was done
-     * in the constructor above.
-     */
+	// If we got a new message, publish to topic and print values every 500 messages
     if(gotMsg){
 	  msg_count++;
           accgyro_msg.accX = acc[0];

@@ -7,24 +7,35 @@
 #include "ros/ros.h"
 #include "legged_robot/Encoder.h"
 #include "legged_robot/PWM.h"
+#include "legged_robot/Position.h"
 
 #include <sstream>
 
 #define GEAR_RATIO 51
 #define SATURATION_POS 10*GEAR_RATIO
 
-int16_t acc_error, prev_error;
-double moveVelocity;
-int32_t desiredPos;
-int msgs = 0;
-bool sendMsg = false;
-legged_robot::PWM pwm_msg;
+/*
 
+	Back Left Leg ROS node that reads encoder position in counts from BL_encoder_feedback topic and based on the desired position read from the BL_Position topic, runs a PID controller to calculate the PWM command. The calculated command is published to the BL_pwm_feedback topic.
+
+*/
+
+// Global variables
+int16_t acc_error, prev_error; // Acceleration and previous error values
+double moveVelocity; // The maximum velocity of movement
+int32_t desiredPos;  // Holds the desired position
+bool sendMsg = false; // Flag set high when we want to transmit a message via UDP
+legged_robot::PWM pwm_msg;  // PWM message for topic
+
+// PID error initialization function
 void InitErrors()
 {
 	acc_error = prev_error = 0;
 }
 
+// The PID controller function 
+// Input : P,I,D gains, saturation , reference point(desired) and current point (Enc_value)
+// Output : PWM duty cycle
 int8_t PID_controller (double P_Gain, double I_Gain, double D_Gain, double saturation, int32_t Ref_point, int32_t Enc_value) 
 {
 	int8_t output = 0;
@@ -60,17 +71,19 @@ int8_t PID_controller (double P_Gain, double I_Gain, double D_Gain, double satur
 	return output;
 }
 
+// Callback function for reception of Encoder value message from topic
 void encoderCallback(const legged_robot::Encoder::ConstPtr& msg)
 {
- //ROS_INFO("I heard: [%u]", msg->encoder);
- //msgs++;
- pwm_msg.pwm_duty = PID_controller (0.05, 0.0, 0.0, moveVelocity, desiredPos, (int32_t)msg->encoder);
+ // Calculate the PWM duty cycle from the PID function and raise flag to send PWM command message
+ pwm_msg.pwm_duty = PID_controller (1.5, 0.2, 0.1, moveVelocity, desiredPos, (int32_t)msg->encoder);
  sendMsg = true;
- //if(msgs == 1000)
- //{
-	 //ROS_INFO("PWM: [%d]", pwm_msg.pwm_duty);
-	 //msgs = 0;
- //}
+}
+
+// Callback function for reception of desired position message from topic
+void positionCallback(const legged_robot::Position::ConstPtr& msg)
+{
+ // Extract the value and set it to the corresponding variable
+ desiredPos = (int32_t)msg->desiredPos;
 }
 
 int main(int argc, char **argv)
@@ -84,15 +97,20 @@ int main(int argc, char **argv)
   
   InitErrors();
 
+  // Initialize ROS node
   ros::init(argc, argv, "BL_motor_pid");
   ros::NodeHandle n;
+  // Initialize the publisher for PWM data post
   ros::Publisher motor_pid_pub = n.advertise<legged_robot::PWM>("BL_pwm_feedback", 1000);
+  // Initialize the subscribers for Encoder data reception and desired position reception
   ros::Subscriber motor_interface_sub = n.subscribe("BL_encoder_feedback", 1000, encoderCallback);
+  ros::Subscriber motor_position_sub = n.subscribe("BL_Position", 1000, positionCallback);
   ros::Rate loop_rate(12000);
   
   ROS_INFO("Staring communication with BL Motor Controller node.");
   while (ros::ok())
   {
+	// If a PWM command has been calculated publish it to the topic
 	if(sendMsg)
 	{
 		sendMsg = false;
