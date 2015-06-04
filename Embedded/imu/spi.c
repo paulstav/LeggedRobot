@@ -113,7 +113,7 @@ void init_spi()
   //HWREG(SSI0_BASE + SSI_O_CC) = SSI_CLOCK_SYSTEM;
 
   // SPI configuration - Mode 0, 1 MHz, 8 bit word length
-  MAP_SSIConfigSetExpClk(FORCE_SPI_SSI_BASE, g_ui32SysClock, SSI_FRF_MOTO_MODE_0, SSI_MODE_MASTER, 1000000, 8);
+  MAP_SSIConfigSetExpClk(FORCE_SPI_SSI_BASE, g_ui32SysClock, SSI_FRF_MOTO_MODE_1, SSI_MODE_MASTER, 1000000, 8);
 
   // Enable the SPI module
   MAP_SSIEnable(FORCE_SPI_SSI_BASE);
