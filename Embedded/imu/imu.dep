@@ -2,7 +2,7 @@
 
 <project>
   <fileVersion>2</fileVersion>
-  <fileChecksum>2411483878</fileChecksum>
+  <fileChecksum>2847148206</fileChecksum>
   <configuration>
     <name>Debug</name>
     <outputs>
@@ -624,7 +624,11 @@
       <file>$PROJ_DIR$\..\..\..\..\utils\lwiplib.h</file>
       <file>$TOOLKIT_DIR$\inc\c\stdarg.h</file>
       <file>$PROJ_DIR$\..\..\..\..\utils\uartstdio.h</file>
+      <file>$PROJ_DIR$\FORCE\Obj\ADIS16364.o</file>
+      <file>$PROJ_DIR$\FORCE\Obj\ADIS16364.pbi</file>
       <file>$PROJ_DIR$\FORCE\Obj\imu.pbd</file>
+      <file>$PROJ_DIR$\ADIS16364.c</file>
+      <file>$PROJ_DIR$\ADIS16364.h</file>
     </outputs>
     <file>
       <name>$PROJ_DIR$\ForceSensor.c</name>
@@ -710,7 +714,7 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 139 71 90 17 135 47 12 149 24 172 74 150 158 168 145 171 152 129 180 160 58 79 56 33 82 147 186 185 34 134 130 184 65 25 133 157 153 148 137 132 84 63 78 92 174 155 140 87 70 88 175 45 181 49 69 15 72 136 13 14 57 35 156 176 5 1 27</file>
+          <file> 139 71 90 17 135 47 12 149 24 172 74 150 158 168 145 171 152 129 180 160 58 79 56 33 82 147 186 185 34 134 130 184 65 25 133 157 153 148 137 132 84 63 78 92 174 155 140 87 70 88 175 45 181 49 69 15 72 136 13 14 57 35 156 176 191 1 27</file>
         </tool>
         <tool>
           <name>ICCARM</name>
@@ -861,6 +865,65 @@
         </tool>
       </outputs>
     </file>
+    <file>
+      <name>$PROJ_DIR$\ADIS16364.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 188</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 187</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 139 71 90 17 135 47 12 149 24 191 27 186 185</file>
+        </tool>
+      </inputs>
+    </file>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\ForceSensor.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\..\..\..\..\utils\lwiplib.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\ADIS16375.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\main.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\..\..\..\..\utils\ustdlib.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\startup_ewarm.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\..\..\..\..\utils\uartstdio.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\..\drivers\pinout.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\spi.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
+    <forcedrebuild>
+      <name>$PROJ_DIR$\ADIS16364.c</name>
+      <tool>ICCARM</tool>
+    </forcedrebuild>
     <forcedrebuild>
       <name>[MULTI_TOOL]</name>
       <tool>ILINK</tool>

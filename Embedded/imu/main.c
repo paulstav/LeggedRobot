@@ -542,6 +542,10 @@ int main(void)
     // // 192.168.1.14
     device_ip = 0xC0A8010E;
     IP4_ADDR(&board_ip, 0xC0,0xA8,0x01,0x0E);
+#elif defined(BOARD_FORCE)
+    // // 192.168.1.15
+    device_ip = 0xC0A8010F;
+    IP4_ADDR(&board_ip, 0xC0,0xA8,0x01,0x0F);
 #else
     // // 192.168.1.10
     device_ip = 0xC0A8010A;
@@ -725,7 +729,11 @@ int main(void)
       if(forceDataReady == 1)
       {
         forceDataReady = 0;
-        
+#ifdef ENABLE_ETHERNET
+          sendUDP[0] = 0x47;
+          memcpy(&sendUDP[1],(uint8_t*)forceValues,12);
+          udp_send_data((void*)sendUDP,13);
+#endif
 #ifdef ENABLE_UART
         UARTprintf("Read : %u %u %u %u %u %u\n",forceValues[0],forceValues[1],forceValues[2],forceValues[3],forceValues[4],forceValues[5]);
 #endif    

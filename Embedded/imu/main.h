@@ -8,6 +8,7 @@
 //#define BOARD_BL
 //#define BOARD_BR
 //#define BOARD_IMU
+//#define BOARD_FORCE
 
 //#define DEV_ADIS16375
 #define DEV_ADIS16364
@@ -29,6 +30,9 @@
 #elif defined(BOARD_IMU)
 #define PORT_S 2022
 #define PORT_R 2021
+#elif defined(BOARD_FORCE)
+#define PORT_S 2024
+#define PORT_R 2023
 #else
 #define PORT_S 2012
 #define PORT_R 2011
