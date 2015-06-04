@@ -35,44 +35,58 @@ void ReadForceValues(FORCESENSOR *this, uint16_t *_values)
   uint8_t * cVal = (uint8_t*)_values;
   
   this->_cs(LOW);
+  this->_delay_cycle(100);
   // Send the data retrieve command
-  this->_spi_write(cTemp);
+  cTemp = this->_spi_write(cTemp);
   cTemp = 0;
   
   // Get first measurement
+  this->_delay_cycle(100);
   *cVal = this->_spi_write(cTemp);
   cVal++;
+  this->_delay_cycle(100);
   *cVal = this->_spi_write(cTemp);
   cVal++;
   
   // Get second measurement
+  this->_delay_cycle(100);
   *cVal = this->_spi_write(cTemp);
   cVal++;
+  this->_delay_cycle(100);
   *cVal = this->_spi_write(cTemp);
   cVal++;
   
   // Get third measurement
+  this->_delay_cycle(100);
   *cVal = this->_spi_write(cTemp);
   cVal++;
+  this->_delay_cycle(100);
   *cVal = this->_spi_write(cTemp);
   cVal++;
   
   // Get fourth measurement
+  this->_delay_cycle(100);
   *cVal = this->_spi_write(cTemp);
   cVal++;
+  this->_delay_cycle(100);
   *cVal = this->_spi_write(cTemp);
   cVal++;
   
   // Get fifth measurement
+  this->_delay_cycle(100);
   *cVal = this->_spi_write(cTemp);
   cVal++;
+  this->_delay_cycle(100);
   *cVal = this->_spi_write(cTemp);
   cVal++;
   
   // Get sixth measurement
+  this->_delay_cycle(100);
   *cVal = this->_spi_write(cTemp);
   cVal++;
+  this->_delay_cycle(100);
   *cVal = this->_spi_write(cTemp);
+  this->_delay_cycle(100);
 
   this->_cs(HIGH);
 }

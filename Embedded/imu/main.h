@@ -9,6 +9,9 @@
 //#define BOARD_BR
 //#define BOARD_IMU
 
+//#define DEV_ADIS16375
+#define DEV_ADIS16364
+
 // Definition of UDP SEnd/Receive ports depending on board
 
 #if defined(BOARD_FL)

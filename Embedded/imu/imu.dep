@@ -2,7 +2,7 @@
 
 <project>
   <fileVersion>2</fileVersion>
-  <fileChecksum>3581965126</fileChecksum>
+  <fileChecksum>2411483878</fileChecksum>
   <configuration>
     <name>Debug</name>
     <outputs>
@@ -429,6 +429,10 @@
       <name>$PROJ_DIR$\main.c</name>
       <tool>ICCARM</tool>
     </forcedrebuild>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>ILINK</tool>
+    </forcedrebuild>
   </configuration>
   <configuration>
     <name>FORCE</name>
@@ -620,6 +624,7 @@
       <file>$PROJ_DIR$\..\..\..\..\utils\lwiplib.h</file>
       <file>$TOOLKIT_DIR$\inc\c\stdarg.h</file>
       <file>$PROJ_DIR$\..\..\..\..\utils\uartstdio.h</file>
+      <file>$PROJ_DIR$\FORCE\Obj\imu.pbd</file>
     </outputs>
     <file>
       <name>$PROJ_DIR$\ForceSensor.c</name>
@@ -852,10 +857,14 @@
       <outputs>
         <tool>
           <name>ILINK</name>
-          <file> 111 109</file>
+          <file> 109 111</file>
         </tool>
       </outputs>
     </file>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>ILINK</tool>
+    </forcedrebuild>
   </configuration>
   <configuration>
     <name>IMU</name>
@@ -1051,6 +1060,10 @@
       <file>$TOOLKIT_DIR$\inc\c\stdarg.h</file>
       <file>$PROJ_DIR$\..\..\..\..\utils\uartstdio.h</file>
       <file>$PROJ_DIR$\IMU\Obj\imu.pbd</file>
+      <file>$PROJ_DIR$\IMU\Obj\ADIS16364.pbi</file>
+      <file>$PROJ_DIR$\ADIS16364.c</file>
+      <file>$PROJ_DIR$\ADIS16364.h</file>
+      <file>$PROJ_DIR$\IMU\Obj\ADIS16364.o</file>
     </outputs>
     <file>
       <name>$PROJ_DIR$\ForceSensor.c</name>
@@ -1136,11 +1149,11 @@
       <inputs>
         <tool>
           <name>BICOMP</name>
-          <file> 142 71 90 17 138 47 12 152 24 175 74 153 161 171 148 174 155 132 183 163 58 79 56 33 82 150 189 188 34 137 133 187 65 25 136 160 156 151 140 135 84 63 78 92 177 158 143 87 70 88 178 45 184 49 69 15 72 139 13 14 57 35 159 179 5 1 27</file>
+          <file> 142 71 90 17 138 47 12 152 24 175 74 153 161 171 148 174 155 132 183 163 58 79 56 33 82 150 189 188 34 137 133 187 65 25 136 160 156 151 140 135 84 63 78 92 177 158 143 87 70 88 178 45 184 49 69 15 72 139 13 14 57 35 159 179 193 1 27</file>
         </tool>
         <tool>
           <name>ICCARM</name>
-          <file> 8 142 71 90 17 138 47 12 152 24 175 74 153 161 171 148 174 155 132 183 163 58 79 56 33 82 150 189 34 137 133 187 65 25 136 160 156 151 140 135 84 63 78 92 177 158 143 87 70 88 178 45 184 49 69 15 72 139 13 14 57 35 159 179 5 1 27</file>
+          <file> 8 142 71 90 17 138 47 12 152 24 175 74 153 161 171 148 174 155 132 183 163 58 79 56 33 82 150 189 34 137 133 187 65 25 136 160 156 151 140 135 84 63 78 92 177 158 143 87 70 88 178 45 184 49 69 15 72 139 13 14 57 35 159 179 193 1 27</file>
         </tool>
       </inputs>
     </file>
@@ -1274,7 +1287,7 @@
       <inputs>
         <tool>
           <name>ILINK</name>
-          <file> 18 111 3 115 129 122 107 113 121 124 128 62 53 93 61</file>
+          <file> 18 194 111 3 115 129 122 107 113 121 124 128 62 53 93 61</file>
         </tool>
       </inputs>
     </file>
@@ -1309,6 +1322,29 @@
           <file> 119 114</file>
         </tool>
       </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\ADIS16364.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 191</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 194</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 142 71 90 17 138 47 12 152 24 193 27 189 188</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 8 142 71 90 17 138 47 12 152 24 193 27 189</file>
+        </tool>
+      </inputs>
     </file>
   </configuration>
   <configuration>
@@ -1738,6 +1774,10 @@
         </tool>
       </outputs>
     </file>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>ILINK</tool>
+    </forcedrebuild>
   </configuration>
 </project>
 

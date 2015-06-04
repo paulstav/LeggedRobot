@@ -43,6 +43,7 @@ int sock;   // The socket identifier for UDP communication
 int msgs = 0;  // Incoming message counter
 int16_t acc[3] = {0,0,0};  // Place raw accelerometer data here
 int16_t gyro[3] = {0,0,0};  // Place raw gyroscope data here
+int imu_dev = 0; // 1 - ADIS16375 , 2 - ADIS16364
 
 // Generic error function
 void error(char *s)
@@ -69,6 +70,31 @@ void sigio_handler(int sig)
 	 // Parse data , 6 int16 values
      if(buffer[0] == 0x43 && rcvbytes == 13)
      {
+	   imu_dev = 1;
+	   val[1] = (unsigned char)buffer[2];
+	   val[0] = (unsigned char)buffer[1];
+	   memcpy(&acc[0], &val, 2);
+           val[1] = (unsigned char)buffer[4];
+	   val[0] = (unsigned char)buffer[3];
+	   memcpy(&acc[1], &val, 2);
+	   val[1] = (unsigned char)buffer[6];
+	   val[0] = (unsigned char)buffer[5];
+	   memcpy(&acc[2], &val, 2);
+	   val[1] = (unsigned char)buffer[8];
+	   val[0] = (unsigned char)buffer[7];
+	   memcpy(&gyro[0], &val, 2);
+	   val[1] = (unsigned char)buffer[10];
+	   val[0] = (unsigned char)buffer[9];
+	   memcpy(&gyro[1], &val, 2);
+	   val[1] = (unsigned char)buffer[12];
+	   val[0] = (unsigned char)buffer[11];
+	   memcpy(&gyro[2], &val, 2);
+	   // Raise flag that we received a message
+       	   gotMsg = true;
+     }
+	 if(buffer[0] == 0x44 && rcvbytes == 13)
+     {
+	   imu_dev = 2;
 	   val[1] = (unsigned char)buffer[2];
 	   val[0] = (unsigned char)buffer[1];
 	   memcpy(&acc[0], &val, 2);
@@ -174,18 +200,30 @@ int main(int argc, char **argv)
           accgyro_msg.gyroY = gyro[1];
           accgyro_msg.gyroZ = gyro[2];
           imu_interface_pub.publish(accgyro_msg);
-	  if(msg_count >= 500)
+	  if(msg_count >= 819)
 	  {
 		msg_count = 0;
-		realAcc[0] = (accgyro_msg.accX*1.0)*0.8192;
-                realAcc[1] = (accgyro_msg.accY*1.0)*0.8192;
-                realAcc[2] = (accgyro_msg.accZ*1.0)*0.8192;
-                realGyro[0] = (accgyro_msg.gyroX*1.0)*0.013108;
-                realGyro[1] = (accgyro_msg.gyroY*1.0)*0.013108;
-                realGyro[2] = (accgyro_msg.gyroZ*1.0)*0.013108;
+		if(imu_dev == 1)
+		{
+			realAcc[0] = (accgyro_msg.accX*1.0)*0.8192;
+			realAcc[1] = (accgyro_msg.accY*1.0)*0.8192;
+			realAcc[2] = (accgyro_msg.accZ*1.0)*0.8192;
+			realGyro[0] = (accgyro_msg.gyroX*1.0)*0.013108;
+			realGyro[1] = (accgyro_msg.gyroY*1.0)*0.013108;
+			realGyro[2] = (accgyro_msg.gyroZ*1.0)*0.013108;
+		}
+		if(imu_dev == 2)
+		{
+			realAcc[0] = (accgyro_msg.accX*1.0);
+			realAcc[1] = (accgyro_msg.accY*1.0);
+			realAcc[2] = (accgyro_msg.accZ*1.0);
+			realGyro[0] = (accgyro_msg.gyroX*1.0)*0.05;
+			realGyro[1] = (accgyro_msg.gyroY*1.0)*0.05;
+			realGyro[2] = (accgyro_msg.gyroZ*1.0)*0.05;
+		}
 		ROS_INFO("ACC : %d %d %d", (int16_t)accgyro_msg.accX,(int16_t)accgyro_msg.accY,(int16_t)accgyro_msg.accZ);
 		ROS_INFO("ACC real : %f %f %f", realAcc[0],realAcc[1],realAcc[2]);
-                ROS_INFO("GYRO : %d %d %d", (int16_t)accgyro_msg.gyroX,(int16_t)accgyro_msg.gyroY,(int16_t)accgyro_msg.gyroZ);
+        ROS_INFO("GYRO : %d %d %d", (int16_t)accgyro_msg.gyroX,(int16_t)accgyro_msg.gyroY,(int16_t)accgyro_msg.gyroZ);
 		ROS_INFO("GYRO real : %f %f %f", realGyro[0],realGyro[1],realGyro[2]);
 	  }
       gotMsg = false;

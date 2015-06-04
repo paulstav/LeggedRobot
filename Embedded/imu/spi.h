@@ -57,6 +57,7 @@
 
 // SPI implmentation 8 bit width
 void init_spi();
+void init_spi_imu();
 uint8_t SpiTransfer(uint8_t _byte);
 
 // SPI implmentation 16 bit width

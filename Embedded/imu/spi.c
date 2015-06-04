@@ -124,6 +124,58 @@ void init_spi()
   }
 }
 
+void init_spi_imu()
+{
+  unsigned long tmpC = 0;
+  
+  // Enable and Reset the involved peripherals
+  MAP_SysCtlPeripheralEnable(FORCE_SPI_PERIPH);
+
+  MAP_SysCtlPeripheralEnable(FORCE_CS_PERIPH);
+  
+  MAP_SysCtlPeripheralEnable(FORCE_SPI_PORT_PERIPH);
+
+  SysCtlPeripheralReset(FORCE_SPI_PERIPH); 
+
+  SysCtlPeripheralReset(FORCE_CS_PERIPH);
+  
+  // CS Setup
+  MAP_GPIOPinTypeGPIOOutput(FORCE_CS_PORT_BASE, FORCE_CS_PIN);
+  MAP_GPIOPadConfigSet(FORCE_CS_PORT_BASE, FORCE_CS_PIN, GPIO_STRENGTH_8MA,
+                                GPIO_PIN_TYPE_STD_WPU);
+  MAP_GPIOPinWrite(FORCE_CS_PORT_BASE, FORCE_CS_PIN, FORCE_CS_PIN);
+  
+  // Set proper drive strength and internal pull-down resistor to CLK pin
+  MAP_GPIOPadConfigSet(FORCE_SPI_PORT_BASE, FORCE_SPI_CLK_PIN, GPIO_STRENGTH_8MA,
+                                GPIO_PIN_TYPE_STD_WPD);
+  // Set proper drive strength and set RX pin as Open-Drain
+  MAP_GPIOPadConfigSet(FORCE_SPI_PORT_BASE, FORCE_SPI_RX_PIN, GPIO_STRENGTH_8MA,
+                                GPIO_PIN_TYPE_OD);
+
+  // SPI pin Configuration
+  GPIOPinConfigure(FORCE_SPI_CLK_MUX);
+  GPIOPinConfigure(FORCE_SPI_RX_MUX);
+  GPIOPinConfigure(FORCE_SPI_TX_MUX);
+
+  MAP_GPIOPinTypeSSI(FORCE_SPI_PORT_BASE, FORCE_SPI_TX_PIN | FORCE_SPI_RX_PIN | FORCE_SPI_CLK_PIN);
+  
+  // Disable SSI module before configuration
+  MAP_SSIDisable(FORCE_SPI_SSI_BASE);
+  //SSIClockSourceSet(SSI0_BASE, SSI_CLOCK_SYSTEM);
+  //HWREG(SSI0_BASE + SSI_O_CC) = SSI_CLOCK_SYSTEM;
+
+  // SPI configuration - Mode 0, 1 MHz, 8 bit word length
+  MAP_SSIConfigSetExpClk(FORCE_SPI_SSI_BASE, g_ui32SysClock, SSI_FRF_MOTO_MODE_3, SSI_MODE_MASTER, 1000000, 8);
+
+  // Enable the SPI module
+  MAP_SSIEnable(FORCE_SPI_SSI_BASE);
+  
+  // Flush the SPI Rx buffer
+  while(MAP_SSIDataGetNonBlocking(FORCE_SPI_SSI_BASE, &tmpC))
+  {
+  }
+}
+
 // SPI initializaztion function for 16 bit word length
 void init_spi16()
 {

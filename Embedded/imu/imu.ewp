@@ -2092,9 +2092,9 @@
           <name>CCDefines</name>
           <state>ewarm</state>
           <state>UART_BUFFERED</state>
+          <state>ENABLE_ETHERNET</state>
           <state>ENABLE_UART</state>
           <state>ENABLE_IMU</state>
-          <state>ENABLE_ETHERNET</state>
           <state>BOARD_IMU</state>
           <state>PART_TM4C1294NCPDT</state>
           <state>TARGET_IS_TM4C129_RA0</state>
@@ -3854,6 +3854,12 @@
   </group>
   <group>
     <name>Source</name>
+    <file>
+      <name>$PROJ_DIR$\ADIS16364.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\ADIS16364.h</name>
+    </file>
     <file>
       <name>$PROJ_DIR$\ADIS16375.c</name>
     </file>

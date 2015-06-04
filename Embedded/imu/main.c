@@ -26,7 +26,12 @@
 #include "driverlib/qei.h"
 #include "driverlib/timer.h"
 
+#ifdef DEV_ADIS16375
 #include "ADIS16375.h"
+#endif
+#ifdef DEV_ADIS16364
+#include "ADIS16364.h"
+#endif
 #include "ForceSensor.h"
 #include "spi.h"
 
@@ -90,11 +95,22 @@ bool sendEncoder, setPWMvalue;
 // Variable for received PWM command
 int8_t pwmValue;
 
-#ifdef ENABLE_IMU    
+#ifdef ENABLE_IMU   
+
+#ifdef DEV_ADIS16375
 // Function that configures the interrupt detection of ADIS16375 IMU
 void ConfigureADIS16375Int(void);
 // ADIS16375 object
 ADIS16375 myIMU;
+#endif
+
+#ifdef DEV_ADIS16364
+// Function that configures the interrupt detection of ADIS16364 IMU
+void ConfigureADIS16364Int(void);
+// ADIS16364 object
+ADIS16364 myIMU;
+#endif
+
 // Flag for IMU Data ready on interrupt
 uint8_t imuDataReady = 0;
 // Variables that hold the measurements received from the IMU
@@ -359,6 +375,8 @@ Timer0IntHandler(void)
 #endif
 
 #ifdef ENABLE_IMU
+
+#ifdef DEV_ADIS16375
 // ADIS16375 Interrupt handler
 void IntADIS16375(void)
 {
@@ -401,6 +419,39 @@ void ConfigureADIS16375Int(void)
 }
 #endif
 
+#ifdef DEV_ADIS16364
+// ADIS16364 Interrupt handler
+void IntADIS16364(void)
+{
+  uint32_t status;
+  
+  // Clear the interrupt flag
+  status = GPIOIntStatus(IMU_IRQ_PORT_BASE, true);
+  
+  // Set the appropriate flag
+  imuDataReady = 1;
+  
+  // Read the desired data from the IMU
+  ADIS16364_readAccData(&myIMU, &accel_x, &accel_y, &accel_z);
+  ADIS16364_readGyroData(&myIMU, &gyro_x, &gyro_y, &gyro_z);
+  
+  GPIOIntClear(IMU_IRQ_PORT_BASE, status);
+}
+
+// Configure the ADIS16364 interrupt pin 
+void ConfigureADIS16364Int(void)
+{
+  SysCtlPeripheralEnable(IMU_IRQ_PERIPH);
+  GPIOPinTypeGPIOInput(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
+  GPIOIntTypeSet(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN, GPIO_RISING_EDGE);
+  GPIOIntRegister(IMU_IRQ_PORT_BASE, IntADIS16364);
+  //GPIOIntEnable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
+  IntEnable(IMU_IRQ_INT);
+}
+#endif
+
+#endif
+
 #ifdef ENABLE_FORCE
 // Force Sensor data ready interrupt handler
 void IntForceSensor(void)
@@ -435,6 +486,7 @@ void ConfigureForceSensorInt(void)
 int main(void)
 {
    uint32_t status;
+   uint8_t printIMU = 0;
    // UART buffer
    uint8_t charUART[256];
    // The first time the IMU gives an interrupt we can set the BIAS NULL
@@ -606,6 +658,8 @@ int main(void)
 
     // IMU Initializaztion
 #ifdef ENABLE_IMU
+    
+#ifdef DEV_ADIS16375
     ADIS16375_Init(&myIMU, cyclesdelay, IMU_CS, IMU_RST, init_spi16, SpiTransfer16);    
 #ifdef ENABLE_UART
     //UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
@@ -622,6 +676,27 @@ int main(void)
     //ADIS16375_wake(&myIMU);
     //init_spi16();
     //UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
+#endif
+    
+#ifdef DEV_ADIS16364
+    ADIS16364_Init(&myIMU, cyclesdelay, IMU_CS, init_spi_imu, SpiTransfer);    
+#ifdef ENABLE_UART
+    //UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
+    //ADIS16375_write(&myIMU,ADIS16375_REG_GLOB_CMD,0x8000);  
+#endif
+    //ADIS16375_debug(&myIMU);
+    ConfigureADIS16364Int();
+    //status = GPIOIntStatus(IMU_IRQ_PORT_BASE, true);
+    
+    // Clear interrupt flag just to be safe
+    GPIOIntClear(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
+    GPIOIntEnable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
+    
+    ADIS16364_wake(&myIMU);
+    //init_spi16();
+    //UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
+#endif
+    
 #endif
     
     // Force Sensor Initialization
@@ -665,7 +740,17 @@ int main(void)
         if(!firstIMU)
         {
           firstIMU = 1;
+#ifdef DEV_ADIS16375
           UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
+#endif
+          
+#ifdef DEV_ADIS16364
+          ADIS16364_wake(&myIMU);
+          UARTprintf("Prod ID : 0x%X\n",ADIS16364_device_id(&myIMU));
+          ADIS16364_factory_reset(&myIMU);
+#endif
+          
+#ifdef DEV_ADIS16375
           // Resore factory calibration on strat-up
           ADIS16375_write(&myIMU, ADIS16375_REG_GLOB_CMD, 0x4000);
           // Configure the ADIS16375 IMU
@@ -681,13 +766,20 @@ int main(void)
           //ADIS16375_write(&myIMU, ADIS16375_REG_GLOB_CMD, 0x0100);
           
           //GPIOIntDisable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
+#endif
           imuDataReady = 0;  
           deltaAccX = deltaAccY = deltaAccZ = 0.0;
         }
         else
         {
           imuDataReady = 0;
+#ifdef ENABLE_ETHERNET
+#ifdef DEV_ADIS16375
           sendUDP[0] = 0x43;
+#endif
+#ifdef DEV_ADIS16364
+          sendUDP[0] = 0x44;
+#endif
           memcpy(&sendUDP[1],(uint8_t*)(&accel_x),2);
           memcpy(&sendUDP[3],(uint8_t*)(&accel_y),2);
           memcpy(&sendUDP[5],(uint8_t*)(&accel_z),2);
@@ -695,59 +787,98 @@ int main(void)
           memcpy(&sendUDP[9],(uint8_t*)(&gyro_y),2);
           memcpy(&sendUDP[11],(uint8_t*)(&gyro_z),2);
           udp_send_data((void*)sendUDP,13);
+#endif
           // Handle the recieved IMU measrements
 #ifdef ENABLE_UART
-          /*UARTprintf("ACC_X_OUT : %d 0x%X\n",accel_x,accel_x);
-          UARTprintf("ACC_Y_OUT : %d 0x%X\n",accel_y,accel_y);
-          UARTprintf("ACC_Z_OUT : %d 0x%X\n",accel_z,accel_z);
-          
-          UARTprintf("GYRO_X_OUT : %d 0x%X\n",gyro_x,gyro_x);
-          UARTprintf("GYRO_Y_OUT : %d 0x%X\n",gyro_y,gyro_y);
-          UARTprintf("GYRO_Z_OUT : %d 0x%X\n",gyro_z,gyro_z);*/
-          
-          /*dval_x = (gyro_x*1.0)*0.013108;
-          dval_y = (gyro_y*1.0)*0.013108;
-          dval_z = (gyro_z*1.0)*0.013108;
-          
-          sprintf(charUART, "GYRO X : %lf\n", dval_x);
-          UARTprintf("%s",charUART);
-          sprintf(charUART, "GYRO Y : %lf\n", dval_y);
-          UARTprintf("%s",charUART);
-          sprintf(charUART, "GYRO Z : %lf\n", dval_z);
-          UARTprintf("%s",charUART);
-          
-          dval_x = (accel_x*1.0)*0.8192;
-          dval_y = (accel_y*1.0)*0.8192;
-          dval_z = (accel_z*1.0)*0.8192;
-          
-          sprintf(charUART, "ACC X : %lf\n", dval_x);
-          UARTprintf("%s",charUART);
-          sprintf(charUART, "ACC Y : %lf\n", dval_y);
-          UARTprintf("%s",charUART);
-          sprintf(charUART, "ACC Z : %lf\n", dval_z);
-          UARTprintf("%s",charUART);*/
-          
-          /*dval_x = (delta_x*1.0)*0.005493;
-          dval_y = (delta_y*1.0)*0.005493;
-          dval_z = (delta_z*1.0)*0.005493;
-          
-          sprintf(charUART, "DELTA X : 0x%X %lf\n", delta_x, dval_x);
-          UARTprintf("%s",charUART);
-          sprintf(charUART, "DELTA Y : 0x%X %lf\n", delta_y, dval_y);
-          UARTprintf("%s",charUART);
-          sprintf(charUART, "DELTA Z : 0x%X %lf\n", delta_z, dval_z);
-          UARTprintf("%s",charUART);
-          
-          dval_x = (dv_x*1.0)*3.0518;
-          dval_y = (dv_y*1.0)*3.0518;
-          dval_z = (dv_z*1.0)*3.0518;
-          
-          sprintf(charUART, "DELTA VEL X : %lf\n", dval_x);
-          UARTprintf("%s",charUART);
-          sprintf(charUART, "DELTA VEL Y : %lf\n", dval_y);
-          UARTprintf("%s",charUART);
-          sprintf(charUART, "DELTA VEL Z : %lf\n", dval_z);
-          UARTprintf("%s",charUART);*/
+          if(printIMU)
+          {
+            printIMU = 0;
+#ifdef DEV_ADIS16375
+            UARTprintf("ACC_X_OUT : %d 0x%X\n",accel_x,accel_x);
+            UARTprintf("ACC_Y_OUT : %d 0x%X\n",accel_y,accel_y);
+            UARTprintf("ACC_Z_OUT : %d 0x%X\n",accel_z,accel_z);
+            
+            UARTprintf("GYRO_X_OUT : %d 0x%X\n",gyro_x,gyro_x);
+            UARTprintf("GYRO_Y_OUT : %d 0x%X\n",gyro_y,gyro_y);
+            UARTprintf("GYRO_Z_OUT : %d 0x%X\n",gyro_z,gyro_z);
+            
+            dval_x = (gyro_x*1.0)*0.013108;
+            dval_y = (gyro_y*1.0)*0.013108;
+            dval_z = (gyro_z*1.0)*0.013108;
+            
+            sprintf(charUART, "GYRO X : %lf\n", dval_x);
+            UARTprintf("%s",charUART);
+            sprintf(charUART, "GYRO Y : %lf\n", dval_y);
+            UARTprintf("%s",charUART);
+            sprintf(charUART, "GYRO Z : %lf\n", dval_z);
+            UARTprintf("%s",charUART);
+            
+            dval_x = (accel_x*1.0)*0.8192;
+            dval_y = (accel_y*1.0)*0.8192;
+            dval_z = (accel_z*1.0)*0.8192;
+            
+            sprintf(charUART, "ACC X : %lf\n", dval_x);
+            UARTprintf("%s",charUART);
+            sprintf(charUART, "ACC Y : %lf\n", dval_y);
+            UARTprintf("%s",charUART);
+            sprintf(charUART, "ACC Z : %lf\n", dval_z);
+            UARTprintf("%s",charUART);
+            
+            /*dval_x = (delta_x*1.0)*0.005493;
+            dval_y = (delta_y*1.0)*0.005493;
+            dval_z = (delta_z*1.0)*0.005493;
+            
+            sprintf(charUART, "DELTA X : 0x%X %lf\n", delta_x, dval_x);
+            UARTprintf("%s",charUART);
+            sprintf(charUART, "DELTA Y : 0x%X %lf\n", delta_y, dval_y);
+            UARTprintf("%s",charUART);
+            sprintf(charUART, "DELTA Z : 0x%X %lf\n", delta_z, dval_z);
+            UARTprintf("%s",charUART);
+            
+            dval_x = (dv_x*1.0)*3.0518;
+            dval_y = (dv_y*1.0)*3.0518;
+            dval_z = (dv_z*1.0)*3.0518;
+            
+            sprintf(charUART, "DELTA VEL X : %lf\n", dval_x);
+            UARTprintf("%s",charUART);
+            sprintf(charUART, "DELTA VEL Y : %lf\n", dval_y);
+            UARTprintf("%s",charUART);
+            sprintf(charUART, "DELTA VEL Z : %lf\n", dval_z);
+            UARTprintf("%s",charUART);*/
+#endif
+            
+#ifdef DEV_ADIS16364
+            UARTprintf("ACC_X_OUT : %d 0x%X\n",accel_x,accel_x);
+            UARTprintf("ACC_Y_OUT : %d 0x%X\n",accel_y,accel_y);
+            UARTprintf("ACC_Z_OUT : %d 0x%X\n",accel_z,accel_z);
+            
+            UARTprintf("GYRO_X_OUT : %d 0x%X\n",gyro_x,gyro_x);
+            UARTprintf("GYRO_Y_OUT : %d 0x%X\n",gyro_y,gyro_y);
+            UARTprintf("GYRO_Z_OUT : %d 0x%X\n",gyro_z,gyro_z);
+            
+            dval_x = gyro_x*0.05;
+            dval_y = gyro_y*0.05;
+            dval_z = gyro_z*0.05;
+            
+            sprintf(charUART, "GYRO X : %lf\n", dval_x);
+            UARTprintf("%s",charUART);
+            sprintf(charUART, "GYRO Y : %lf\n", dval_y);
+            UARTprintf("%s",charUART);
+            sprintf(charUART, "GYRO Z : %lf\n", dval_z);
+            UARTprintf("%s",charUART);
+            
+            dval_x = accel_x*1.0;
+            dval_y = accel_y*1.0;
+            dval_z = accel_z*1.0;
+            
+            sprintf(charUART, "ACC X : %lf\n", dval_x);
+            UARTprintf("%s",charUART);
+            sprintf(charUART, "ACC Y : %lf\n", dval_y);
+            UARTprintf("%s",charUART);
+            sprintf(charUART, "ACC Z : %lf\n", dval_z);
+            UARTprintf("%s",charUART);
+#endif
+          }
         }
 #endif
       }
@@ -766,7 +897,12 @@ int main(void)
 #ifdef ENABLE_IMU
       case '1' : 
         // Get IMU product ID
+#ifdef DEV_ADIS16375
         UARTprintf("Prod ID : 0x%X\n",ADIS16375_device_id(&myIMU));
+#endif
+#ifdef DEV_ADIS16364
+        UARTprintf("Prod ID : 0x%X\n",ADIS16364_device_id(&myIMU));
+#endif
         break;
       case '2': 
         // Reset IMU measurement data
@@ -778,23 +914,13 @@ int main(void)
         GPIOIntEnable(IMU_IRQ_PORT_BASE, IMU_IRQ_PIN);
         break;
       case '3': 
-        // Get data directly from IMU without waiting for interrupt
-        /*accel_x = ADIS16375_read(&myIMU, 16, ADIS16375_REG_X_ACCEL_OUT);
-        accel_y = ADIS16375_read(&myIMU, 16, ADIS16375_REG_Y_ACCEL_OUT);
-        accel_z = ADIS16375_read(&myIMU, 16, ADIS16375_REG_Z_ACCEL_OUT);*/
-        
+        // Get data directly from IMU without waiting for interrupt  
+#ifdef DEV_ADIS16375
         ADIS16375_readAccData(&myIMU, &accel_x, &accel_y, &accel_z);
         ADIS16375_readGyroData(&myIMU, &gyro_x, &gyro_y, &gyro_z);
         ADIS16375_readDeltaAngle(&myIMU, &delta_x, &delta_y, &delta_z);
         ADIS16375_readDeltaVel(&myIMU, &dv_x, &dv_y, &dv_z);
-        
-        /*UARTprintf("ACC_X_OUT : %d 0x%X\n",accel_x,accel_x);
-        UARTprintf("ACC_Y_OUT : %d 0x%X\n",accel_y,accel_y);
-        UARTprintf("ACC_Z_OUT : %d 0x%X\n",accel_z,accel_z);
-        
-        UARTprintf("GYRO_X_OUT : %d 0x%X\n",gyro_x,gyro_x);
-        UARTprintf("GYRO_Y_OUT : %d 0x%X\n",gyro_y,gyro_y);
-        UARTprintf("GYRO_Z_OUT : %d 0x%X\n",gyro_z,gyro_z);*/
+#endif
         
         dval_x = (gyro_x*1.0)*0.013108;
         dval_y = (gyro_y*1.0)*0.013108;
@@ -818,7 +944,7 @@ int main(void)
         sprintf(charUART, "ACC Z : %lf\n", dval_z);
         UARTprintf("%s",charUART);
         
-        dval_x = (delta_x*1.0)*0.005493;
+        /*dval_x = (delta_x*1.0)*0.005493;
         dval_y = (delta_y*1.0)*0.005493;
         dval_z = (delta_z*1.0)*0.005493;
         
@@ -838,32 +964,13 @@ int main(void)
         sprintf(charUART, "DELTA VEL Y : %lf\n", dval_y);
         UARTprintf("%s",charUART);
         sprintf(charUART, "DELTA VEL Z : %lf\n", dval_z);
-        UARTprintf("%s",charUART);
+        UARTprintf("%s",charUART);*/
         break;
       case '4' :
         // Output received IMU data 
-        dval_x = (gyro_x*1.0)*0.013108;
-        dval_y = (gyro_y*1.0)*0.013108;
-        dval_z = (gyro_z*1.0)*0.013108;
-        
-        sprintf(charUART, "GYRO X : %lf\n", dval_x);
-        UARTprintf("%s",charUART);
-        sprintf(charUART, "GYRO Y : %lf\n", dval_y);
-        UARTprintf("%s",charUART);
-        sprintf(charUART, "GYRO Z : %lf\n", dval_z);
-        UARTprintf("%s",charUART);
-        
-        dval_x = (accel_x*1.0)*0.8192;
-        dval_y = (accel_y*1.0)*0.8192;
-        dval_z = (accel_z*1.0)*0.8192;
-        
-        sprintf(charUART, "ACC X : %lf\n", dval_x);
-        UARTprintf("%s",charUART);
-        sprintf(charUART, "ACC Y : %lf\n", dval_y);
-        UARTprintf("%s",charUART);
-        sprintf(charUART, "ACC Z : %lf\n", dval_z);
-        UARTprintf("%s",charUART);
+        printIMU = 1;
         break;
+#ifdef DEV_ADIS16375
       case '5' : 
         // Read and display IMU internal temperature
         temp_out = ADIS16375_temp(&myIMU);
@@ -908,9 +1015,15 @@ int main(void)
         sprintf(charUART, "DELTA Z : %lf\n", deltaAccZ);
         UARTprintf("%s",charUART);
         break;
+#endif
       case 'w':
         // IMU wakeup
+#ifdef DEV_ADIS16375
         ADIS16375_wake(&myIMU);
+#endif
+#ifdef DEV_ADIS16364
+        ADIS16364_wake(&myIMU);
+#endif
         break;
 #endif
       default : break;
