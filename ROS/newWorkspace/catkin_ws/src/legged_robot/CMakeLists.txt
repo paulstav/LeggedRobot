@@ -52,6 +52,9 @@ add_message_files(
    Position.msg
    AccGyro.msg
    Force.msg
+   RobotAngles.msg
+   RobotInertiaMeasurements.msg
+   RobotForces.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -113,10 +116,6 @@ add_dependencies(FL_motor_interface legged_robot_generate_messages_cpp)
 add_executable(FL_motor_pid src/FL_motor_pid.cpp)
 target_link_libraries(FL_motor_pid ${catkin_LIBRARIES})
 add_dependencies(FL_motor_pid legged_robot_generate_messages_cpp)
-add_executable(FL_Read_Position src/FL_Read_Position.cpp)
-target_link_libraries(FL_Read_Position ${catkin_LIBRARIES})
-add_dependencies(FL_Read_Position legged_robot_generate_messages_cpp)
-
 
 add_executable(FR_motor_interface src/FR_motor_interface.cpp)
 target_link_libraries(FR_motor_interface ${catkin_LIBRARIES})
@@ -124,9 +123,6 @@ add_dependencies(FR_motor_interface legged_robot_generate_messages_cpp)
 add_executable(FR_motor_pid src/FR_motor_pid.cpp)
 target_link_libraries(FR_motor_pid ${catkin_LIBRARIES})
 add_dependencies(FR_motor_pid legged_robot_generate_messages_cpp)
-add_executable(FR_Read_Position src/FR_Read_Position.cpp)
-target_link_libraries(FR_Read_Position ${catkin_LIBRARIES})
-add_dependencies(FR_Read_Position legged_robot_generate_messages_cpp)
 
 add_executable(BL_motor_interface src/BL_motor_interface.cpp)
 target_link_libraries(BL_motor_interface ${catkin_LIBRARIES})
@@ -149,6 +145,14 @@ add_dependencies(IMU_interface legged_robot_generate_messages_cpp)
 add_executable(Force_interface src/Force_interface.cpp)
 target_link_libraries(Force_interface ${catkin_LIBRARIES})
 add_dependencies(Force_interface legged_robot_generate_messages_cpp)
+
+add_executable(Read_Position src/Read_Position.cpp)
+target_link_libraries(Read_Position ${catkin_LIBRARIES})
+add_dependencies(Read_Position legged_robot_generate_messages_cpp)
+
+add_executable(RobotSensorPreprocess src/RobotSensorPreprocess.cpp)
+target_link_libraries(RobotSensorPreprocess ${catkin_LIBRARIES})
+add_dependencies(RobotSensorPreprocess legged_robot_generate_messages_cpp)
 
 ## Declare a cpp executable
 # add_executable(legged_robot_node src/legged_robot_node.cpp)

@@ -32,8 +32,6 @@
 
 	ROS node that reads IMU data (accelerometer and gyroscope x,y,z) via UDP from the Tiva board
 	and publishes the received data to the IMU_feedback topic.
-	
-	This node was used for debugging PID controller and should not be run otherwise.
 
 */
 
@@ -189,6 +187,7 @@ int main(int argc, char **argv)
     accgyro_msg.gyroX = 0;
     accgyro_msg.gyroY = 0;
     accgyro_msg.gyroZ = 0;
+	accgyro_msg.imu_dev = 0;
 
 	// If we got a new message, publish to topic and print values every 500 messages
     if(gotMsg){
@@ -199,8 +198,9 @@ int main(int argc, char **argv)
           accgyro_msg.gyroX = gyro[0];
           accgyro_msg.gyroY = gyro[1];
           accgyro_msg.gyroZ = gyro[2];
+		  accgyro_msg.imu_dev = imu_dev;
           imu_interface_pub.publish(accgyro_msg);
-	  if(msg_count >= 819)
+	  /*if(msg_count >= 819)
 	  {
 		msg_count = 0;
 		if(imu_dev == 1)
@@ -225,7 +225,7 @@ int main(int argc, char **argv)
 		ROS_INFO("ACC real : %f %f %f", realAcc[0],realAcc[1],realAcc[2]);
         ROS_INFO("GYRO : %d %d %d", (int16_t)accgyro_msg.gyroX,(int16_t)accgyro_msg.gyroY,(int16_t)accgyro_msg.gyroZ);
 		ROS_INFO("GYRO real : %f %f %f", realGyro[0],realGyro[1],realGyro[2]);
-	  }
+	  }*/
       gotMsg = false;
     }
 
