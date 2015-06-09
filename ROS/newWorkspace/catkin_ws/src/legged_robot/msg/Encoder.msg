@@ -1,1 +1,1 @@
-int32 encoder
+uint32 encoder
