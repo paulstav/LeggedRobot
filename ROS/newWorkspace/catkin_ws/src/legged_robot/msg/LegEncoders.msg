@@ -1,0 +1,4 @@
+uint32 encoder_hip
+uint32 encoder_knee
+uint32 encoder_heel
+uint32 encoder_spring
