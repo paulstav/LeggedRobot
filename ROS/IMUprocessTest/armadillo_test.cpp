@@ -32,6 +32,9 @@ using namespace arma;
 double factorial(uint16_t n);
 mat Skew(mat vIn);
 mat GAMMA(mat omega, double dt, double k);
+mat quaternion2Matrix(mat quat);
+mat measur(mat qk, mat pk1, mat pk2, mat rk);
+mat rot_vector2quaternion(mat vIn);
 
 // Main Function
 int main(int argc, char **argv)
@@ -60,23 +63,37 @@ int main(int argc, char **argv)
   }
   */ 
   
-  mat A(3,3, fill::zeros);
-  mat Vt(3,1);
-  Vt[0] = 1.0;
-  Vt[1] = 2.0;
-  Vt[2] = 3.0;
-  
+  //mat A(3,3, fill::zeros);
+  mat Vt(3,1), p1_es(3,1), p2_es(3,1), r_es(3,1);
+  mat q(4,1);
+  Vt[0] = q[0] = 1.0;
+  Vt[1] = q[1] = 2.0;
+  Vt[2] = q[2] = 3.0;
+  q[3] = 4.0;
+  p1_es[0] = 0.27;
+  p1_es[1] = 0.0;
+  p1_es[2] = 0.195;
+  p2_es[0] = 0.27;
+  p2_es[1] = 0.0;
+  p2_es[2] = -0.195;
+  r_es[0] = 0.0;
+  r_es[1] = 0.3;
+  r_es[2] = 0.0;
   
   
   cout << "Starting test" << endl;
   
-  A = Skew(Vt);
+  //mat A = Skew(Vt);
+  //mat A = GAMMA(Vt, 0.001, 2);
+  //mat A = quaternion2Matrix(q);
+  //mat A = measur(q, p1_es, p2_es, r_es);
+  mat A = rot_vector2quaternion(Vt);
   
   cout << "A" << endl << A << endl;
   
-  A = GAMMA(Vt, 0.001, 2);
+  //A = GAMMA(Vt, 0.001, 2);
   
-  cout << "A" << endl << A << endl;
+  //cout << "A" << endl << A << endl;
   
   return 0;
 }
@@ -181,4 +198,69 @@ mat GAMMA(mat omega, double dt, double k)
 	retM = (pow(dt, k)/factorial((uint16_t)k))*eye<mat>(3,3) + skew_gain*Skew(omega) + skew_sqr_gain*Skew(omega)*Skew(omega);
 	
 	return retM;
+}
+
+mat quaternion2Matrix(mat quat)
+{
+	mat q13(3,1);
+	mat M(3,3);
+	q13[0] = quat[0];
+	q13[1] = quat[1];
+	q13[2] = quat[2];
+	
+	
+	M = (2*quat[3]*quat[3] - 1)*eye<mat>(3,3) + 2*(q13*q13.t()) + 2*quat[3]*Skew(q13);
+	
+	return M.t();
+	
+}
+
+mat measur(mat qk, mat pk1, mat pk2, mat rk)
+{
+	mat H(6,18), H1(3,18), H2(3,18);
+	mat hz1(3,6), hz2(3,6), hz3(3,6), hz4(3,12);
+	
+	mat Cq = quaternion2Matrix(qk);
+	
+	hz1 = join_horiz(-Cq, zeros<mat>(3,3));
+	hz2 = join_horiz(Skew(Cq*(pk1-rk)), Cq);
+	hz3 = join_horiz(zeros<mat>(3,3), zeros<mat>(3,3));
+	hz4 = join_horiz(hz1, hz2);
+	H1 = join_horiz(hz4, hz3);
+	
+	hz1 = join_horiz(-Cq, zeros<mat>(3,3));
+	hz2 = join_horiz(Skew(Cq*(pk2-rk)), zeros<mat>(3,3));
+	hz3 = join_horiz(Cq, zeros<mat>(3,3));
+	hz4 = join_horiz(hz1, hz2);
+	H2 = join_horiz(hz4, hz3);
+	
+	H = join_vert(H1,H2);
+	
+	return H;
+}
+
+mat rot_vector2quaternion(mat vIn)
+{
+	mat M(1,4);
+	double q1, q2, q3, q4;
+	double norma = sqrt(vIn[0]*vIn[0] + vIn[1]*vIn[1] + vIn[2]*vIn[2]);
+	
+	if(norma > 0.1)
+	{
+		q1 = vIn[0]*sin(norma/2.0)/norma;
+		q2 = vIn[1]*sin(norma/2.0)/norma;
+		q3 = vIn[2]*sin(norma/2.0)/norma;
+		q4 = cos(norma/2.0);
+	}
+	else
+	{
+		q1 = vIn[0]/2.0;
+		q2 = vIn[1]/2.0;
+		q3 = vIn[2]/2.0;
+		q4 = 1.0;
+	}
+	
+	M << q1 << q2 << q3 << q4 << endr;
+	
+	return M.t();
 }

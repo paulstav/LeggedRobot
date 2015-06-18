@@ -17,7 +17,7 @@ if b == 0
         ser_prod = (norma*dt)^(2*n+1);
         sum = sum + sign*ser_prod/factorial(2*n+1);
     end
-    
+
     skew_gain = 1/(norma^(2*m+1))*(sinw+sum);
     
     sum = 0;
@@ -28,7 +28,7 @@ if b == 0
         ser_prod2 = (norma*dt)^(2*n);
         sum = sum + sign2*ser_prod2/factorial(2*n);
     end
-    
+
     skew_sqr_gain = 1/(norma^(2*m+1+1))*(cosw+sum);
     else
         skew_gain = (dt^(2*m+1))/factorial(2*m+1);
@@ -66,6 +66,7 @@ else
          skew_sqr_gain = 0;
      end
 end
+
 G = ((dt^(k))/(factorial(k)))*eye(3) + skew_gain*skew(omega) +......
     skew_sqr_gain*skew(omega)*skew(omega);
 

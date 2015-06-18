@@ -16,7 +16,7 @@
 
 /*
 
-	Front Left Leg ROS node that reads encoder position in counts from FL_encoders_feedback topic and based on the desired position read from the FL_Position topic, runs a PID controller to calculate the PWM commands. The calculated command is published to the FL_command_dispatch topic.
+	Back Left Leg ROS node that reads encoder position in counts from BL_encoders_feedback topic and based on the desired position read from the BL_Position topic, runs a PID controller to calculate the PWM commands. The calculated command is published to the BL_command_dispatch topic.
 
 */
 
@@ -136,13 +136,13 @@ int main(int argc, char **argv)
   InitErrors();
 
   // Initialize ROS node
-  ros::init(argc, argv, "FL_leg_control");
+  ros::init(argc, argv, "BL_leg_control");
   ros::NodeHandle n;
   // Initialize the publisher for command data post
-  ros::Publisher motor_pid_pub = n.advertise<legged_robot::LegCommand>("FL_command_dispatch", 1000);
+  ros::Publisher motor_pid_pub = n.advertise<legged_robot::LegCommand>("BL_command_dispatch", 1000);
   // Initialize the subscribers for Encoder data reception and desired position reception
-  ros::Subscriber motor_interface_sub = n.subscribe("FL_encoders_feedback", 1000, encoderCallback);
-  ros::Subscriber motor_position_sub = n.subscribe("FL_Position", 1000, positionCallback);
+  ros::Subscriber motor_interface_sub = n.subscribe("BL_encoders_feedback", 1000, encoderCallback);
+  ros::Subscriber motor_position_sub = n.subscribe("BL_Position", 1000, positionCallback);
   ros::Rate loop_rate(12000);
   
   ROS_INFO("Staring communication with FL leg interface node.");

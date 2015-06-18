@@ -1,0 +1,74 @@
+Wspring1_pos  : είναι η επιμήκυνση του ελατηρίου και είναι διάνυσμα 3x1.(Αντίστοιχα και για Wspring4_pos)
+
+touch, first_touch : Booleans που αναφέρονται στην επαφή με έδαφος. Βαθμωτό (1 η 0).
+
+wx wy wz ax ay az : είναι οι τιμές για τα γυροκόπεια και τα επιταχυνσιόμετρα.Είναι βαθμωτά μεγέθη που συνδυάζονται όλα μαζί σε ένα διάνυσμα 3x1.
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+Όσον αφορά τώρα την συνάρτηση έχουμε τα εξής διανύσματα:
+
+r : Θέση CoM διάνυσμα 3x1
+
+u :  Ταχύτητα CoM 3x1
+
+q : Orientation Quaternion  1x4
+
+p1 : Θέση  κάτω άκρου του ποδιού διάνυσμα 3x1 
+
+p2 : Θέση κάτω άκρου του ποδιού διάνυσμα 3x1
+
+b_w :  Gyroscope Bias διάνυσμα 3x1
+
+z_leg1 , z_leg2 :  Κινηματική των ποδιών.Πρόκεται για τη θέση των κάτω άκρων των ποδιών , διάνυσμα 3x1 . Εδώ θα χρειαστούν οι τιμές από encoder των αρθρώσεων των ποδιών , δηλαδή κινητήρες και ελατήρια.
+
+omega :Τιμές γυροσκοπείου διάνυσμα  3x1
+
+f : Τιμές επιταχυνσιόμετρου διάνυσμα 3x1
+
+dt: Ο χρόνος μεταξύ δύο δειγμάτων.Βαθμωτό
+
+ g : Η βαρύτητα , διάνυσμα  3x1 ( Για εμάς [ 0 0 9.81]' ή [0 0 -9.81]' ) .
+
+touched : Boolean 
+
+foot1pos : Η Θέση του κάτω άκρου του ποδιού. Διάνυσμα  3x1 ( Από gps ή κάμερα)
+
+foot2pos: Η Θέση του κάτω άκρου του ποδιού. Διάνυσμα  3x1 ( Από gps ή κάμερα)
+
+
+touch_first: Boolean
+
+dx : Διάνυσμα 18x1 (Μπορεί να αλλάζει ανάλογα με τα states)
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Βαθμωτά:
+
+sigmaf   Standard deviation of accelerometer noise
+
+sigmaw  Standard deviation of gyroscope noise
+ 
+sigmabw  Standar deviation of gyroscope bias noise
+
+sigmawp1 Standar deviation of footpoints noise
+
+sigmawp2  ^^^^^^
+
+
+
+Πίνακες
+
+
+P : 18x18 may change
+
+C : always 3x3
+
+G2 , G1 : always 3x3
+
+H : measument matrix that has no fixed dimenions, in this simulation 6x18
+
+Kal_Gain : changes based on the measurements, in this simulation 18*6
+
+S : changes depend on measurements . In this simulation 6x6

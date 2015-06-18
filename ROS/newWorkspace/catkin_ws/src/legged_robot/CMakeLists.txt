@@ -55,6 +55,9 @@ add_message_files(
    RobotAngles.msg
    RobotInertiaMeasurements.msg
    RobotForces.msg
+   LegCommand.msg
+   LegEncoders.msg
+   LegPosition.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -116,6 +119,9 @@ add_dependencies(FL_motor_interface legged_robot_generate_messages_cpp)
 add_executable(FL_motor_pid src/FL_motor_pid.cpp)
 target_link_libraries(FL_motor_pid ${catkin_LIBRARIES})
 add_dependencies(FL_motor_pid legged_robot_generate_messages_cpp)
+add_executable(FL_leg_control src/FL_leg_control.cpp)
+target_link_libraries(FL_leg_control ${catkin_LIBRARIES})
+add_dependencies(FL_leg_control legged_robot_generate_messages_cpp)
 
 add_executable(FR_motor_interface src/FR_motor_interface.cpp)
 target_link_libraries(FR_motor_interface ${catkin_LIBRARIES})
@@ -123,6 +129,9 @@ add_dependencies(FR_motor_interface legged_robot_generate_messages_cpp)
 add_executable(FR_motor_pid src/FR_motor_pid.cpp)
 target_link_libraries(FR_motor_pid ${catkin_LIBRARIES})
 add_dependencies(FR_motor_pid legged_robot_generate_messages_cpp)
+add_executable(FR_leg_control src/FR_leg_control.cpp)
+target_link_libraries(FR_leg_control ${catkin_LIBRARIES})
+add_dependencies(FR_leg_control legged_robot_generate_messages_cpp)
 
 add_executable(BL_motor_interface src/BL_motor_interface.cpp)
 target_link_libraries(BL_motor_interface ${catkin_LIBRARIES})
@@ -130,6 +139,9 @@ add_dependencies(BL_motor_interface legged_robot_generate_messages_cpp)
 add_executable(BL_motor_pid src/BL_motor_pid.cpp)
 target_link_libraries(BL_motor_pid ${catkin_LIBRARIES})
 add_dependencies(BL_motor_pid legged_robot_generate_messages_cpp)
+add_executable(BL_leg_control src/BL_leg_control.cpp)
+target_link_libraries(BL_leg_control ${catkin_LIBRARIES})
+add_dependencies(BL_leg_control legged_robot_generate_messages_cpp)
 
 add_executable(BR_motor_interface src/BR_motor_interface.cpp)
 target_link_libraries(BR_motor_interface ${catkin_LIBRARIES})
@@ -137,6 +149,9 @@ add_dependencies(BR_motor_interface legged_robot_generate_messages_cpp)
 add_executable(BR_motor_pid src/BR_motor_pid.cpp)
 target_link_libraries(BR_motor_pid ${catkin_LIBRARIES})
 add_dependencies(BR_motor_pid legged_robot_generate_messages_cpp)
+add_executable(BR_leg_control src/BR_leg_control.cpp)
+target_link_libraries(BR_leg_control ${catkin_LIBRARIES})
+add_dependencies(BR_leg_control legged_robot_generate_messages_cpp)
 
 add_executable(IMU_interface src/IMU_interface.cpp)
 target_link_libraries(IMU_interface ${catkin_LIBRARIES})

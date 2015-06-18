@@ -192,3 +192,121 @@ b_w = bias_w;
 r_es_p = r_es;
 
 end
+
+
+
+
+function [Fd, Qd] = Disc_Dynamics(f,omega,q,.......
+    wf, ww, wbw, wp1, wp2, dt)
+%returns the transition matrix and discrete covariance based on van loan's
+%method. the scalar part of the quaternion is at the end
+
+
+%Cq = quat2dcm([q(4) q(1) q(2) q(3)]);
+Cq = quaternion2Matrix(q);
+%Cq = 2*(scalar*scalar - 1)*eye(3) + 2*(q13*q13') - 2*scalar*skew(q13);
+
+   F = [zeros(3) eye(3) zeros(3) zeros(3) zeros(3)  zeros(3); .........
+    zeros(3) zeros(3) -Cq'*skew(f) zeros(3) -Cq'  zeros(3);......
+    zeros(3) zeros(3) -skew(omega) zeros(3) zeros(3) -eye(3);.......
+    zeros(3) zeros(3) zeros(3) zeros(3) zeros(3) zeros(3);.......
+    zeros(3) zeros(3) zeros(3) zeros(3) zeros(3) zeros(3);.......
+    zeros(3) zeros(3) zeros(3) zeros(3) zeros(3) zeros(3)];
+
+     G = [zeros(3) zeros(3) zeros(3) zeros(3)  zeros(3);........
+    -Cq' zeros(3) zeros(3) zeros(3)  zeros(3);.......
+    zeros(3) -eye(3) zeros(3) zeros(3) zeros(3);.....
+    zeros(3) zeros(3) Cq' zeros(3) zeros(3);......
+    zeros(3) zeros(3) zeros(3) Cq' zeros(3);......
+    zeros(3) zeros(3) zeros(3) zeros(3) eye(3)];
+    
+    W = [wf*eye(3) zeros(3) zeros(3) zeros(3) zeros(3);.......
+    zeros(3) ww*eye(3) zeros(3) zeros(3) zeros(3);.....
+    zeros(3) zeros(3) wp1*eye(3) zeros(3) zeros(3);.....
+    zeros(3) zeros(3) zeros(3)  wp2*eye(3) zeros(3);.......   
+    zeros(3) zeros(3) zeros(3) zeros(3) wbw*eye(3)];   
+    
+%Van Loan's discretization
+    M = [-F G*W*G'; zeros(18) F'];
+
+    B = expm(M*dt);
+    
+    Fd = B(19:36,19:36)';
+    Qd = Fd*B(1:18,19:36);  
+    
+    
+end
+
+
+
+function prod = quaternion_mult(q,p)
+%returns the quaternion product , quaternions scalar part in the end
+
+pr1 = q(4)*p(1) + q(3)*p(2) - q(2)*p(3) + q(1)*p(4);
+
+pr2 = -q(3)*p(1) + q(4)*p(2) + q(1)*p(3) + q(2)*p(4);
+
+pr3 = q(2)*p(1) - q(1)*p(2) + q(4)*p(3) + q(3)*p(4);
+
+pr4 = -q(1)*p(1) - q(2)*p(2) - q(3)*p(3) + q(4)*p(4);
+
+prod = [ pr1 pr2 pr3 pr4]';
+
+end
+
+
+
+function q = rot_vector2quaternion(vector)
+%returns the quaternion based on the rotation vector scalar part is at the
+%end
+
+norm = sqrt(vector(1)*vector(1)+.....
+    vector(2)*vector(2) +....
+    vector(3)*vector(3));
+
+if norm > 0.1
+
+q1 = vector(1)*sin(norm/2)/norm;
+q2 = vector(2)*sin(norm/2)/norm;
+q3 = vector(3)*sin(norm/2)/norm;
+q4 = cos(norm/2);
+else
+    q1 = vector(1)/2;
+    q2 = vector(2)/2;
+    q3 = vector(3)/2;
+    q4 = 1;
+end
+
+q = [q1 q2 q3 q4]';
+end
+
+
+function M = quaternion2Matrix(quat)
+%returns the rotation matrix based on a quaternion, quaternion's scalar
+%part must be last
+
+q13 = [quat(1) quat(2) quat(3)]';
+
+M = (2*(quat(4)*quat(4)) - 1)*eye(3) + 2*(q13*q13') - 2*quat(4)*skew(q13);
+
+
+end
+
+
+function H = measur(qk, pk1 , pk2, rk)
+%measurement matrix based on the error of the leg kinematics minus the
+%estimated position of the footpoins calculated by the difference C*(p-r)
+
+%Cq = quat2dcm([qk(4) qk(1) qk(2) qk(3)]);
+Cq = quaternion2Matrix(qk);
+
+
+%Cq = 2*(scalar*scalar - 1)*eye(3) + 2*q13*q13' - 2*scalar*skew(q13);
+
+H = [-Cq zeros(3) skew((Cq*(pk1-rk))) Cq zeros(3) zeros(3);
+     -Cq zeros(3) skew(Cq*(pk2-rk)) zeros(3) Cq zeros(3)];
+     %zeros(3) zeros(3) skew(Cq*(pk2-pk1)) -Cq Cq zeros(3)];
+       
+    
+end
+  
