@@ -106,7 +106,10 @@ catkin_package(
 # include_directories(include)
 include_directories(
   ${catkin_INCLUDE_DIRS}
+  /home/legged/Downloads/DM7820_Linux_v03.00.00_Prelim/include
 )
+
+#link_directories(/home/legged/Downloads/DM7820_Linux_v03.00.00_Prelim/lib)
 
 ## Declare a cpp library
 # add_library(legged_robot
@@ -122,6 +125,9 @@ add_dependencies(FL_motor_pid legged_robot_generate_messages_cpp)
 add_executable(FL_leg_control src/FL_leg_control.cpp)
 target_link_libraries(FL_leg_control ${catkin_LIBRARIES})
 add_dependencies(FL_leg_control legged_robot_generate_messages_cpp)
+add_executable(FL_leg_interface src/FL_leg_interface.cpp)
+target_link_libraries(FL_leg_interface ${catkin_LIBRARIES} pthread /home/legged/Downloads/DM7820_Linux_v03.00.00_Prelim/lib/librtd-dm7820.a)
+add_dependencies(FL_leg_interface legged_robot_generate_messages_cpp)
 
 add_executable(FR_motor_interface src/FR_motor_interface.cpp)
 target_link_libraries(FR_motor_interface ${catkin_LIBRARIES})
@@ -132,6 +138,9 @@ add_dependencies(FR_motor_pid legged_robot_generate_messages_cpp)
 add_executable(FR_leg_control src/FR_leg_control.cpp)
 target_link_libraries(FR_leg_control ${catkin_LIBRARIES})
 add_dependencies(FR_leg_control legged_robot_generate_messages_cpp)
+add_executable(FR_leg_interface src/FR_leg_interface.cpp)
+target_link_libraries(FR_leg_interface ${catkin_LIBRARIES} pthread /home/legged/Downloads/DM7820_Linux_v03.00.00_Prelim/lib/librtd-dm7820.a)
+add_dependencies(FR_leg_interface legged_robot_generate_messages_cpp)
 
 add_executable(BL_motor_interface src/BL_motor_interface.cpp)
 target_link_libraries(BL_motor_interface ${catkin_LIBRARIES})
@@ -142,6 +151,9 @@ add_dependencies(BL_motor_pid legged_robot_generate_messages_cpp)
 add_executable(BL_leg_control src/BL_leg_control.cpp)
 target_link_libraries(BL_leg_control ${catkin_LIBRARIES})
 add_dependencies(BL_leg_control legged_robot_generate_messages_cpp)
+add_executable(BL_leg_interface src/BL_leg_interface.cpp)
+target_link_libraries(BL_leg_interface ${catkin_LIBRARIES} pthread /home/legged/Downloads/DM7820_Linux_v03.00.00_Prelim/lib/librtd-dm7820.a)
+add_dependencies(BL_leg_interface legged_robot_generate_messages_cpp)
 
 add_executable(BR_motor_interface src/BR_motor_interface.cpp)
 target_link_libraries(BR_motor_interface ${catkin_LIBRARIES})
@@ -152,6 +164,9 @@ add_dependencies(BR_motor_pid legged_robot_generate_messages_cpp)
 add_executable(BR_leg_control src/BR_leg_control.cpp)
 target_link_libraries(BR_leg_control ${catkin_LIBRARIES})
 add_dependencies(BR_leg_control legged_robot_generate_messages_cpp)
+add_executable(BR_leg_interface src/BR_leg_interface.cpp)
+target_link_libraries(BR_leg_interface ${catkin_LIBRARIES} pthread /home/legged/Downloads/DM7820_Linux_v03.00.00_Prelim/lib/librtd-dm7820.a)
+add_dependencies(BR_leg_interface legged_robot_generate_messages_cpp)
 
 add_executable(IMU_interface src/IMU_interface.cpp)
 target_link_libraries(IMU_interface ${catkin_LIBRARIES})
